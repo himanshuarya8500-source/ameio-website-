@@ -1,181 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ================= META ================= -->
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AMEIO — Luxury Cosmetics | Launching Soon</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AMEIO Cosmetics — Coming Soon</title>
 
-  <meta name="description" content="AMEIO is an ultra-luxury cosmetics brand launching soon. Where artistry meets precision. Join the exclusive waitlist." />
-  <link rel="canonical" href="https://ameiocosmetics.com/" />
+<style>
+/* ===============================
+   ROOT + RESET
+================================ */
+:root{
+  --bg:#040404;
+  --glass:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.12);
+  --gold:#d4af37;
+  --text:#ffffff;
+  --muted:#b5b5b5;
+}
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="AMEIO — Luxury Cosmetics" />
-  <meta property="og:description" content="Ultra-luxury beauty. Limited. Intentional. Launching soon." />
-  <meta property="og:type" content="website" />
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
 
-  <!-- ================= FONTS ================= -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+body{
+  height:100vh;
+  background:radial-gradient(circle at top,#0e0e0e,#000);
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  perspective:1200px;
+}
 
-  <!-- ================= TAILWIND ================= -->
-  <script src="https://cdn.tailwindcss.com"></script>
+/* ===============================
+   AMBIENT LIGHT
+================================ */
+.ambient{
+  position:absolute;
+  width:700px;
+  height:700px;
+  background:radial-gradient(circle,rgba(212,175,55,0.18),transparent 65%);
+  animation:pulse 7s ease-in-out infinite alternate;
+  z-index:-1;
+}
 
-  <!-- ================= CUSTOM STYLES ================= -->
-  <style>
-    body {
-      background: #0b0b0b;
-      color: #f5f5f5;
-      font-family: 'Inter', sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
+@keyframes pulse{
+  from{transform:scale(0.9);opacity:0.5}
+  to{transform:scale(1.15);opacity:0.9}
+}
 
-    .font-serif { font-family: 'Playfair Display', serif; }
+/* ===============================
+   CARD
+================================ */
+.card{
+  width:min(92%,820px);
+  background:var(--glass);
+  backdrop-filter:blur(28px);
+  border:1px solid var(--border);
+  border-radius:32px;
+  padding:4.5rem 3rem;
+  text-align:center;
+  transform-style:preserve-3d;
+  box-shadow:0 40px 80px rgba(0,0,0,0.8);
+  animation:enter 1.4s cubic-bezier(.2,.8,.2,1) forwards;
+}
 
-    .gold-gradient {
-      background: linear-gradient(90deg, #f5e7c1, #c9a24d, #f5e7c1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+/* spotlight */
+.card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(
+    500px circle at var(--x,50%) var(--y,50%),
+    rgba(255,255,255,0.14),
+    transparent 45%
+  );
+  opacity:0;
+  transition:opacity .4s;
+  pointer-events:none;
+}
+.card:hover::after{opacity:1}
 
-    .glass {
-      background: rgba(255,255,255,0.04);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
+@keyframes enter{
+  from{opacity:0;transform:translateY(80px) scale(.95)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
 
-    .btn-gold {
-      background: linear-gradient(135deg, #d4af37, #f5e7c1);
-      color: #000;
-      transition: transform .3s ease, box-shadow .3s ease;
-    }
+/* ===============================
+   TEXT
+================================ */
+.brand{
+  letter-spacing:6px;
+  font-size:.9rem;
+  color:rgba(255,255,255,.6);
+  margin-bottom:1.2rem;
+  transform:translateZ(30px);
+}
 
-    .btn-gold:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 40px rgba(212,175,55,.35);
-    }
-  </style>
+h1{
+  font-size:clamp(2.8rem,6vw,4.5rem);
+  line-height:1.05;
+  margin-bottom:1.6rem;
+  font-weight:800;
+  background:linear-gradient(120deg,#fff,#cfcfcf,#8b8b8b);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  transform:translateZ(60px);
+}
+
+p{
+  max-width:620px;
+  margin:0 auto 3.2rem;
+  font-size:1.1rem;
+  color:var(--muted);
+  transform:translateZ(40px);
+}
+
+/* ===============================
+   EMAIL
+================================ */
+.form{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  transform:translateZ(55px);
+}
+
+input{
+  padding:16px 26px;
+  width:280px;
+  border-radius:50px;
+  border:1px solid #333;
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  outline:none;
+  font-size:.95rem;
+}
+
+input:focus{
+  border-color:var(--gold);
+  box-shadow:0 0 22px rgba(212,175,55,.25);
+}
+
+button{
+  padding:16px 38px;
+  border-radius:50px;
+  border:none;
+  cursor:pointer;
+  background:#fff;
+  color:#000;
+  font-weight:700;
+  letter-spacing:1px;
+  transition:.35s;
+}
+
+button:hover{
+  background:var(--gold);
+  color:#fff;
+  transform:scale(1.06);
+  box-shadow:0 0 28px rgba(212,175,55,.45);
+}
+
+/* ===============================
+   PARTICLES
+================================ */
+.dot{
+  position:absolute;
+  width:5px;
+  height:5px;
+  background:var(--gold);
+  border-radius:50%;
+  opacity:.6;
+  animation:float 6s ease-in-out infinite alternate;
+}
+
+@keyframes float{
+  from{transform:translateY(0) translateZ(40px)}
+  to{transform:translateY(-26px) translateZ(40px)}
+}
+
+/* ===============================
+   MOBILE
+================================ */
+@media(max-width:768px){
+  .form{flex-direction:column}
+  input{width:100%}
+  .card{padding:3rem 1.6rem}
+}
+</style>
 </head>
 
 <body>
 
-<!-- ================= NAV ================= -->
-<header class="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-xl border-b border-white/5">
-  <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-5">
-    <div class="text-2xl tracking-[0.35em] font-serif">AMEIO</div>
-    <button id="menuBtn" class="md:hidden text-sm uppercase tracking-widest">Menu</button>
-    <nav class="hidden md:flex space-x-10 text-xs tracking-widest uppercase">
-      <a href="#about" class="text-gray-400 hover:text-white">About</a>
-      <a href="#preview" class="text-gray-400 hover:text-white">Preview</a>
-      <a href="#notify" class="text-gray-400 hover:text-white">Notify</a>
-    </nav>
+<div class="ambient"></div>
+
+<div class="card" id="card">
+  <div class="brand">AMEIO COSMETICS</div>
+  <h1>Something<br>Extraordinary</h1>
+  <p>
+    A refined beauty experience is being crafted.
+    Where luxury formulation meets modern elegance.
+  </p>
+
+  <div class="form">
+    <input type="email" id="email" placeholder="Enter your email" />
+    <button id="btn">Notify Me</button>
   </div>
-</header>
 
-<!-- ================= HERO ================= -->
-<section class="min-h-screen flex items-center px-6 pt-32">
-  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-    
-    <div>
-      <span class="text-[10px] tracking-[0.5em] uppercase text-gray-500">Launching 2026</span>
-      <h1 class="mt-8 text-6xl md:text-8xl font-serif italic leading-tight">
-        <span class="gold-gradient">Dark</span><br/>Elegance
-      </h1>
-      <p class="mt-6 text-gray-400 max-w-md leading-relaxed">
-        AMEIO is an ultra-luxury cosmetics house built on restraint, precision, and intentional beauty.
-      </p>
-      <a href="#notify" class="inline-block mt-10 px-10 py-4 text-xs tracking-widest uppercase btn-gold">
-        Join Waitlist
-      </a>
-    </div>
+  <div class="dot" style="top:18%;left:14%"></div>
+  <div class="dot" style="bottom:22%;right:18%;width:7px;height:7px"></div>
+  <div class="dot" style="top:46%;right:6%"></div>
+</div>
 
-    <div class="relative">
-      <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=900&q=80"
-           alt="Luxury Cosmetics"
-           class="rounded-2xl border border-white/10 shadow-2xl" />
-    </div>
-  </div>
-</section>
-
-<!-- ================= COUNTDOWN ================= -->
-<section class="py-24 bg-black/50">
-  <div class="max-w-4xl mx-auto text-center">
-    <h2 class="text-4xl font-serif italic mb-12">Launching In</h2>
-    <div class="grid grid-cols-4 gap-6 text-center">
-      <div class="glass p-6"><div id="d" class="text-4xl font-serif">00</div><span class="text-xs text-gray-500">Days</span></div>
-      <div class="glass p-6"><div id="h" class="text-4xl font-serif">00</div><span class="text-xs text-gray-500">Hours</span></div>
-      <div class="glass p-6"><div id="m" class="text-4xl font-serif">00</div><span class="text-xs text-gray-500">Minutes</span></div>
-      <div class="glass p-6"><div id="s" class="text-4xl font-serif">00</div><span class="text-xs text-gray-500">Seconds</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= ABOUT ================= -->
-<section id="about" class="py-28 px-6">
-  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=80"
-         class="rounded-xl border border-white/10" />
-    <div>
-      <h3 class="text-4xl font-serif italic mb-6">Philosophy</h3>
-      <p class="text-gray-400 leading-relaxed">
-        AMEIO products are crafted in limited quantities using ethically sourced, high-performance ingredients.
-        No excess. No noise. Only intention.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ================= NOTIFY ================= -->
-<section id="notify" class="py-28 bg-gradient-to-b from-black to-[#0f0a06]">
-  <div class="max-w-xl mx-auto text-center px-6">
-    <h3 class="text-4xl font-serif italic mb-6">Exclusive Access</h3>
-    <p class="text-gray-400 mb-10">Join the private waitlist for early access.</p>
-
-    <form id="form" class="flex flex-col sm:flex-row gap-4">
-      <input required type="email" placeholder="Your email"
-             class="flex-1 px-6 py-4 bg-white/5 border border-white/10 text-white" />
-      <button class="btn-gold px-8 py-4 text-xs tracking-widest uppercase">
-        Notify Me
-      </button>
-    </form>
-
-    <p id="success" class="hidden mt-6 text-green-400 text-sm">
-      You are on the list.
-    </p>
-  </div>
-</section>
-
-<!-- ================= FOOTER ================= -->
-<footer class="py-12 text-center text-xs text-gray-600">
-  © 2026 AMEIO Cosmetics. All rights reserved.
-</footer>
-
-<!-- ================= JS ================= -->
 <script>
-  // Countdown
-  const launch = new Date("2026-01-01T00:00:00").getTime();
-  const ids = { d: "d", h: "h", m: "m", s: "s" };
+const card=document.getElementById("card");
+const btn=document.getElementById("btn");
+const email=document.getElementById("email");
 
-  setInterval(() => {
-    const now = Date.now();
-    const diff = launch - now;
+/* tilt + spotlight */
+document.addEventListener("mousemove",e=>{
+  const x=(window.innerWidth/2-e.clientX)/28;
+  const y=(window.innerHeight/2-e.clientY)/28;
+  card.style.transform=`rotateY(${x}deg) rotateX(${y}deg)`;
+  card.style.setProperty("--x",`${e.clientX}px`);
+  card.style.setProperty("--y",`${e.clientY}px`);
+});
 
-    const d = Math.max(0, Math.floor(diff / 86400000));
-    const h = Math.max(0, Math.floor((diff % 86400000) / 3600000));
-    const m = Math.max(0, Math.floor((diff % 3600000) / 60000));
-    const s = Math.max(0, Math.floor((diff % 60000) / 1000));
+/* reset */
+document.addEventListener("mouseleave",()=>{
+  card.style.transform="rotateX(0) rotateY(0)";
+});
 
-    document.getElementById(ids.d).textContent = d.toString().padStart(2, "0");
-    document.getElementById(ids.h).textContent = h.toString().padStart(2, "0");
-    document.getElementById(ids.m).textContent = m.toString().padStart(2, "0");
-    document.getElementById(ids.s).textContent = s.toString().padStart(2, "0");
-  }, 1000);
+/* email feedback */
+btn.onclick=()=>{
+  if(!email.value.includes("@")){
+    email.style.borderColor="red";
+  }else{
+    btn.innerText="Registered ✓";
+    btn.style.background="var(--gold)";
+    btn.style.color="#fff";
+  }
+};
 
-  // Form UX (demo)
-  document.getElementById("form").addEventListener("submit", e => {
-    e.preventDefault();
-    document.getElementById("success").classList.remove("hidden");
-    e.target.reset();
+/* mobile gyro */
+if(window.DeviceOrientationEvent){
+  window.addEventListener("deviceorientation",e=>{
+    card.style.transform=`rotateY(${e.gamma/6}deg) rotateX(${e.beta/6}deg)`;
   });
+}
 </script>
 
 </body>
