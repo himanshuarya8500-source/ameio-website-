@@ -6,232 +6,174 @@
 <title>AMEIO Cosmetics</title>
 
 <style>
-/* ===============================
-   RESET & VARIABLES
-================================ */
-:root {
-  --ivory: #f6f3ee;
-  --charcoal: #111111;
-  --nude: #d8cfc4;
-  --rose: #c8a9a3;
-  --stone: #bdb7b0;
-  --text-muted: #6e6e6e;
+/* ================= RESET ================= */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{
+  background:#0c0c0c;
+  color:#f2f2f2;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  overflow-x:hidden;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ================= SMOOTH SCROLL ================= */
+html{
+  scroll-behavior:smooth;
 }
 
-html, body {
-  width: 100%;
-  height: 100%;
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  color: var(--charcoal);
-  background: var(--ivory);
+/* ================= TYPOGRAPHY ================= */
+.serif{
+  font-family: "Georgia","Times New Roman",serif;
+}
+h1{
+  font-size:clamp(2.6rem,6vw,4.2rem);
+  font-weight:500;
+  line-height:1.05;
+}
+p{
+  color:#b5b5b5;
+  line-height:1.7;
+  font-size:1.05rem;
 }
 
-/* ===============================
-   GLOBAL LAYOUT
-================================ */
-section {
-  padding: clamp(4rem, 8vw, 8rem) 6vw;
+/* ================= HEADER ================= */
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(12,12,12,0.7);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1rem 6vw;
+}
+.logo{
+  letter-spacing:4px;
+  font-size:0.9rem;
+}
+.cart{
+  position:relative;
+  cursor:pointer;
+}
+.cart::after{
+  content:"2";
+  position:absolute;
+  top:-6px;
+  right:-8px;
+  background:#fff;
+  color:#000;
+  font-size:0.6rem;
+  padding:2px 6px;
+  border-radius:999px;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
+/* ================= SECTIONS ================= */
+section{
+  padding:10vh 6vw;
 }
 
-/* ===============================
-   TYPOGRAPHY
-================================ */
-h1, h2 {
-  font-family: "Georgia", "Times New Roman", serif;
-  font-weight: 500;
-  letter-spacing: -0.02em;
+/* ================= HERO ================= */
+.hero{
+  min-height:100svh;
+  display:grid;
+  align-items:center;
+}
+.hero h1{
+  max-width:700px;
+}
+.hero p{
+  max-width:520px;
+  margin-top:1.5rem;
 }
 
-h1 {
-  font-size: clamp(3rem, 6vw, 4.8rem);
-  line-height: 1.05;
+/* ================= PRODUCT LIST ================= */
+.products{
+  display:flex;
+  flex-direction:column;
+  gap:6rem;
 }
 
-h2 {
-  font-size: clamp(2.2rem, 4vw, 3rem);
-  margin-bottom: 1.5rem;
+.product-card{
+  display:flex;
+  flex-direction:column;
+  gap:1.5rem;
 }
 
-p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--text-muted);
+.product-image{
+  height:460px;
+  border-radius:22px;
+  overflow:hidden;
+}
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-/* ===============================
-   HEADER
-================================ */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 1.5rem 6vw;
-  background: rgba(246,243,238,0.85);
-  backdrop-filter: blur(10px);
-  z-index: 10;
+.badge{
+  position:absolute;
+  top:18px;
+  left:18px;
+  background:rgba(255,255,255,0.9);
+  color:#000;
+  font-size:0.65rem;
+  letter-spacing:2px;
+  padding:6px 12px;
 }
 
-.header-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.product-meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+}
+.product-category{
+  font-size:0.7rem;
+  letter-spacing:3px;
+  color:#999;
+}
+.product-name{
+  font-size:1.25rem;
+}
+.product-price{
+  font-size:1rem;
 }
 
-.logo {
-  letter-spacing: 4px;
-  font-size: 0.9rem;
+/* ================= CART DRAWER ================= */
+.cart-drawer{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:90%;
+  max-width:380px;
+  height:100vh;
+  background:#111;
+  z-index:50;
+  padding:2rem;
+  transition:0.4s ease;
+}
+.cart-drawer.open{
+  right:0;
+}
+.cart-drawer h2{
+  margin-bottom:2rem;
+}
+.cart-item{
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:1rem 0;
 }
 
-/* ===============================
-   HERO
-================================ */
-.hero {
-  min-height: 100vh;
-  display: grid;
-  align-items: center;
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 6vw;
-  align-items: center;
-}
-
-.hero-copy p {
-  margin-top: 1.5rem;
-  max-width: 420px;
-}
-
-.hero-visual {
-  background: linear-gradient(135deg, #ece7e1, #f9f7f4);
-  height: 520px;
-  border-radius: 24px;
-}
-
-/* ===============================
-   PHILOSOPHY
-================================ */
-.philosophy {
-  background: #ffffff;
-}
-
-.philosophy-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6vw;
-}
-
-.philosophy-visual {
-  background: #f2efea;
-  height: 420px;
-  border-radius: 20px;
-}
-
-/* ===============================
-   PRODUCTS
-================================ */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4vw;
-}
-
-.product-card {
-  text-align: center;
-}
-
-.product-image {
-  height: 360px;
-  background: #efeae3;
-  border-radius: 18px;
-  margin-bottom: 1.5rem;
-}
-
-.product-name {
-  font-size: 1rem;
-  letter-spacing: 0.05em;
-}
-
-/* ===============================
-   INGREDIENTS
-================================ */
-.ingredients {
-  background: #ffffff;
-}
-
-.ingredients-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6vw;
-}
-
-.ingredients-visual {
-  height: 380px;
-  background: #f3f0eb;
-  border-radius: 20px;
-}
-
-/* ===============================
-   TESTIMONIALS
-================================ */
-.testimonials {
-  background: var(--ivory);
-}
-
-.quote {
-  font-family: "Georgia", serif;
-  font-size: 1.4rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-/* ===============================
-   FOOTER
-================================ */
-footer {
-  padding: 4rem 6vw;
-  border-top: 1px solid #ddd;
-  font-size: 0.85rem;
-}
-
-.footer-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* ===============================
-   RESPONSIVE
-================================ */
-@media (max-width: 900px) {
-  .hero-grid,
-  .philosophy-grid,
-  .ingredients-grid {
-    grid-template-columns: 1fr;
+/* ================= RESPONSIVE ================= */
+@media(min-width:900px){
+  .product-card{
+    flex-direction:row;
+    align-items:center;
+    gap:4rem;
   }
-
-  .products-grid {
-    grid-template-columns: 1fr;
-  }
-
-  header {
-    position: relative;
+  .product-image{
+    flex:1;
   }
 }
 </style>
@@ -241,84 +183,89 @@ footer {
 
 <header>
   <div class="header-inner">
+    <div>☰</div>
     <div class="logo">AMEIO</div>
-    <div>Menu</div>
+    <div class="cart" onclick="toggleCart()">👜</div>
   </div>
 </header>
 
 <section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-copy">
-      <h1>Luxury That<br>Feels Like Skin</h1>
-      <p>
-        Elevated beauty designed with precision, restraint, and modern elegance.
-      </p>
-    </div>
-    <div class="hero-visual"></div>
-  </div>
-</section>
-
-<section class="philosophy">
-  <div class="container philosophy-grid">
-    <div>
-      <h2>Science, Refined</h2>
-      <p>
-        At AMEIO, advanced formulation meets editorial beauty.
-        Every product is crafted to perform effortlessly while feeling deeply personal.
-      </p>
-    </div>
-    <div class="philosophy-visual"></div>
-  </div>
+  <h1 class="serif">
+    Elevated Beauty.<br>Effortless Confidence.
+  </h1>
+  <p>
+    Advanced dermal-sync technology meets high-fashion artistry.
+    Luxury that feels like skin.
+  </p>
 </section>
 
 <section>
-  <div class="container">
-    <h2>Signature Essentials</h2>
-    <div class="products-grid">
-      <div class="product-card">
-        <div class="product-image"></div>
-        <div class="product-name">Skin Veil Foundation</div>
+  <div class="products">
+
+    <!-- PRODUCT 1 -->
+    <div class="product-card">
+      <div class="product-image">
+        <span class="badge">CLINICAL</span>
+        <img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?q=80&w=1200">
       </div>
-      <div class="product-card">
-        <div class="product-image"></div>
-        <div class="product-name">Soft Matte Lip</div>
-      </div>
-      <div class="product-card">
-        <div class="product-image"></div>
-        <div class="product-name">Daily Skin Elixir</div>
+      <div class="product-meta">
+        <div>
+          <div class="product-category">SKINCARE</div>
+          <div class="product-name">Dermal Recovery Serum</div>
+        </div>
+        <div class="product-price">$120.00</div>
       </div>
     </div>
+
+    <!-- PRODUCT 2 -->
+    <div class="product-card">
+      <div class="product-image">
+        <span class="badge">NEW SHADE</span>
+        <img src="https://images.unsplash.com/photo-1615396899839-c99c121888b0?q=80&w=1200">
+      </div>
+      <div class="product-meta">
+        <div>
+          <div class="product-category">COMPLEXION</div>
+          <div class="product-name">Velvet Silk Foundation</div>
+        </div>
+        <div class="product-price">$68.00</div>
+      </div>
+    </div>
+
+    <!-- PRODUCT 3 -->
+    <div class="product-card">
+      <div class="product-image">
+        <span class="badge">BESTSELLER</span>
+        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1200">
+      </div>
+      <div class="product-meta">
+        <div>
+          <div class="product-category">LIPS</div>
+          <div class="product-name">Lumière Satin Lipstick</div>
+        </div>
+        <div class="product-price">$42.00</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<section class="ingredients">
-  <div class="container ingredients-grid">
-    <div class="ingredients-visual"></div>
-    <div>
-      <h2>Thoughtful Ingredients</h2>
-      <p>
-        Dermatologically inspired formulas, carefully selected ingredients,
-        and uncompromising quality standards.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="testimonials">
-  <div class="container">
-    <div class="quote">
-      “A rare balance of performance and elegance.”
-    </div>
-    <p>— International Beauty Editor</p>
-  </div>
-</section>
-
-<footer>
-  <div class="footer-inner">
-    <div>© AMEIO Cosmetics</div>
-    <div>Instagram · Privacy · Contact</div>
-  </div>
+<footer style="padding:6rem 6vw;color:#888;font-size:0.85rem">
+  © AMEIO Cosmetics · Global Beauty House
 </footer>
+
+<!-- CART -->
+<div class="cart-drawer" id="cart">
+  <h2 class="serif">Your Bag</h2>
+  <div class="cart-item">Velvet Silk Foundation — $68</div>
+  <div class="cart-item">Lumière Satin Lipstick — $42</div>
+</div>
+
+<script>
+function toggleCart(){
+  document.getElementById("cart").classList.toggle("open");
+}
+</script>
 
 </body>
 </html>
