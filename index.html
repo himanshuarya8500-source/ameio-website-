@@ -1,140 +1,324 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./placeholder-model-1 (1_24_2026 10_59_12 PM)_files/style1.css">
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AMEIO Cosmetics</title>
+
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-*{
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-
-}
-html,body{
-    width: 100%;
-    height: 100%;
-    
-}
-.main{
-    width: 100%;
-    height: 100%;
+/* ===============================
+   RESET & VARIABLES
+================================ */
+:root {
+  --ivory: #f6f3ee;
+  --charcoal: #111111;
+  --nude: #d8cfc4;
+  --rose: #c8a9a3;
+  --stone: #bdb7b0;
+  --text-muted: #6e6e6e;
 }
 
-.nav{
-    width: 100%;
-    height: 10vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: rgb(218, 223, 177);
-
-}
-.nav a{
-    margin: 0 2rem;
-    text-decoration: none;
-    color: black;
-    font-family: "Roboto", serif;
-    font-weight: 400;
-    font-style: normal;
-
-}
-.home{
-width: 100%;
-height: 90%;
-background-color: bisque;
-display: flex;
-justify-content: center;
-flex-direction: column;
-align-items: center;
-
-}
-.aboutus{
-    width: 100%;
-    height: 90%;
-    background-color: rgb(156, 222, 210);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.contactus{
-    width: 100%;
-    height: 90%;
-    background-color: rgb(244, 208, 233);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: var(--charcoal);
+  background: var(--ivory);
 }
-.Login{
-    width: 100%;
-    height: 90%;
-    background-color: rgb(209, 208, 244);
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+
+/* ===============================
+   GLOBAL LAYOUT
+================================ */
+section {
+  padding: clamp(4rem, 8vw, 8rem) 6vw;
 }
-</style></head>
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ===============================
+   TYPOGRAPHY
+================================ */
+h1, h2 {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: clamp(3rem, 6vw, 4.8rem);
+  line-height: 1.05;
+}
+
+h2 {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  margin-bottom: 1.5rem;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+
+/* ===============================
+   HEADER
+================================ */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1.5rem 6vw;
+  background: rgba(246,243,238,0.85);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  letter-spacing: 4px;
+  font-size: 0.9rem;
+}
+
+/* ===============================
+   HERO
+================================ */
+.hero {
+  min-height: 100vh;
+  display: grid;
+  align-items: center;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 6vw;
+  align-items: center;
+}
+
+.hero-copy p {
+  margin-top: 1.5rem;
+  max-width: 420px;
+}
+
+.hero-visual {
+  background: linear-gradient(135deg, #ece7e1, #f9f7f4);
+  height: 520px;
+  border-radius: 24px;
+}
+
+/* ===============================
+   PHILOSOPHY
+================================ */
+.philosophy {
+  background: #ffffff;
+}
+
+.philosophy-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6vw;
+}
+
+.philosophy-visual {
+  background: #f2efea;
+  height: 420px;
+  border-radius: 20px;
+}
+
+/* ===============================
+   PRODUCTS
+================================ */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4vw;
+}
+
+.product-card {
+  text-align: center;
+}
+
+.product-image {
+  height: 360px;
+  background: #efeae3;
+  border-radius: 18px;
+  margin-bottom: 1.5rem;
+}
+
+.product-name {
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+
+/* ===============================
+   INGREDIENTS
+================================ */
+.ingredients {
+  background: #ffffff;
+}
+
+.ingredients-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6vw;
+}
+
+.ingredients-visual {
+  height: 380px;
+  background: #f3f0eb;
+  border-radius: 20px;
+}
+
+/* ===============================
+   TESTIMONIALS
+================================ */
+.testimonials {
+  background: var(--ivory);
+}
+
+.quote {
+  font-family: "Georgia", serif;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+footer {
+  padding: 4rem 6vw;
+  border-top: 1px solid #ddd;
+  font-size: 0.85rem;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 900px) {
+  .hero-grid,
+  .philosophy-grid,
+  .ingredients-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    position: relative;
+  }
+}
+</style>
+</head>
 
 <body>
-    <div class="main">
-<div class="nav">
-    <div class="left">
-<a href="http://127.0.0.1:5500/placeholder-model-1%20(1).html#Home">Home</a>
-<a href="http://127.0.0.1:5500/placeholder-model-1%20(1).html#Aboutus">Aboutus</a>
-    </div>
-    <div class="right">
-        <a href="http://127.0.0.1:5500/placeholder-model-1%20(1).html#Contactus">Contactus</a>
-<a href="http://127.0.0.1:5500/placeholder-model-1%20(1).html#Login">Login</a>
-    </div>
-</div>
-<div class="home" id="Home"><h1>Home</h1></div>
-<div class="aboutus" id="Aboutus"><h1>Aboutus</h1></div>
-<div class="contactus" id="Contactus"><h1>Contactus</h1></div>
-<div class="Login" id="Login"><h1>Login</h1></div>
-    </div>
-<script>
-	// <![CDATA[  <-- For SVG support
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
 
-</body></html>
+<header>
+  <div class="header-inner">
+    <div class="logo">AMEIO</div>
+    <div>Menu</div>
+  </div>
+</header>
 
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <h1>Luxury That<br>Feels Like Skin</h1>
+      <p>
+        Elevated beauty designed with precision, restraint, and modern elegance.
+      </p>
+    </div>
+    <div class="hero-visual"></div>
+  </div>
+</section>
+
+<section class="philosophy">
+  <div class="container philosophy-grid">
+    <div>
+      <h2>Science, Refined</h2>
+      <p>
+        At AMEIO, advanced formulation meets editorial beauty.
+        Every product is crafted to perform effortlessly while feeling deeply personal.
+      </p>
+    </div>
+    <div class="philosophy-visual"></div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Signature Essentials</h2>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="product-name">Skin Veil Foundation</div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="product-name">Soft Matte Lip</div>
+      </div>
+      <div class="product-card">
+        <div class="product-image"></div>
+        <div class="product-name">Daily Skin Elixir</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ingredients">
+  <div class="container ingredients-grid">
+    <div class="ingredients-visual"></div>
+    <div>
+      <h2>Thoughtful Ingredients</h2>
+      <p>
+        Dermatologically inspired formulas, carefully selected ingredients,
+        and uncompromising quality standards.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="container">
+    <div class="quote">
+      “A rare balance of performance and elegance.”
+    </div>
+    <p>— International Beauty Editor</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>© AMEIO Cosmetics</div>
+    <div>Instagram · Privacy · Contact</div>
+  </div>
+</footer>
+
+</body>
+</html>
