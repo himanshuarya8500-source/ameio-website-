@@ -1,330 +1,476 @@
+Haan bro bilkul! Yeh le complete code copy kar le:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AMEIO Cosmetics | Elevated Beauty</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<title>AMEIO Cosmetics</title>
 
 <style>
-/* ================= RESET & VARS ================= */
-:root {
-  --bg-color: #0c0c0c;
-  --text-main: #f2f2f2;
-  --text-muted: #b5b5b5;
-  --accent: #fff;
-}
-
+/* ================= RESET ================= */
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{
-  background: var(--bg-color);
-  color: var(--text-main);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  overflow-x: hidden;
-  font-weight: 300;
+  background:#f5f5f5;
+  color:#1a1a1a;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+  overflow-x:hidden;
+}
+
+/* ================= SMOOTH SCROLL ================= */
+html{
+  scroll-behavior:smooth;
 }
 
 /* ================= TYPOGRAPHY ================= */
-.serif {
-  font-family: 'Playfair Display', serif;
+.serif{
+  font-family: "Georgia","Times New Roman",serif;
 }
-
-h1 {
-  font-size: clamp(2.8rem, 7vw, 5rem);
-  font-weight: 400;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+h1{
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:400;
+  line-height:1.15;
 }
-
-p {
-  color: var(--text-muted);
-  line-height: 1.8;
-  font-size: 1.05rem;
+h2{
+  font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:400;
+  line-height:1.2;
+}
+p{
+  color:#666;
+  line-height:1.7;
+  font-size:1rem;
 }
 
 /* ================= HEADER ================= */
-header {
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(12, 12, 12, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+header{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:rgba(245,245,245,0.95);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(0,0,0,0.08);
 }
-
-.header-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 6vw;
-  height: 70px;
+.header-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:1.2rem 6vw;
+  max-width:1400px;
+  margin:0 auto;
 }
-
-.nav-btn {
-  cursor: pointer;
-  font-size: 1.2rem;
-  transition: opacity 0.3s;
+.menu-icon{
+  cursor:pointer;
+  font-size:1.3rem;
+  transition:transform 0.3s ease;
 }
-.nav-btn:hover { opacity: 0.7; }
-
-.logo {
-  letter-spacing: 5px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-transform: uppercase;
+.menu-icon:hover{
+  transform:rotate(90deg);
 }
-
-.cart {
-  position: relative;
-  cursor: pointer;
+.logo{
+  letter-spacing:6px;
+  font-size:0.95rem;
+  font-weight:400;
 }
-.cart-count {
-  position: absolute;
-  top: -5px;
-  right: -8px;
-  background: var(--accent);
-  color: #000;
-  font-size: 0.6rem;
-  font-weight: bold;
-  height: 16px;
-  width: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+.header-icons{
+  display:flex;
+  gap:1.5rem;
+  align-items:center;
 }
-
-/* ================= SECTIONS ================= */
-section {
-  padding: 12vh 6vw;
+.icon{
+  cursor:pointer;
+  font-size:1.3rem;
+  transition:transform 0.3s ease;
+}
+.icon:hover{
+  transform:scale(1.1);
+}
+.cart{
+  position:relative;
+}
+.cart-badge{
+  position:absolute;
+  top:-6px;
+  right:-8px;
+  background:#1a1a1a;
+  color:#fff;
+  font-size:0.6rem;
+  padding:2px 5px;
+  border-radius:10px;
+  min-width:16px;
+  text-align:center;
 }
 
 /* ================= HERO ================= */
-.hero {
-  min-height: 100svh; /* svh handles mobile browsers better */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+  padding:6vw;
+}
+.hero-content{
+  text-align:center;
+  max-width:800px;
+  z-index:2;
+  animation:fadeInUp 1s ease;
+}
+.hero-bg{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0.4;
+}
+.hero-tag{
+  font-size:0.75rem;
+  letter-spacing:4px;
+  color:#999;
+  margin-bottom:1.5rem;
+  text-transform:uppercase;
+}
+.hero h1{
+  margin-bottom:1.5rem;
+}
+.hero p{
+  font-size:1.1rem;
+  max-width:600px;
+  margin:0 auto 2.5rem;
+}
+.cta-button{
+  display:inline-block;
+  padding:1rem 3rem;
+  background:#1a1a1a;
+  color:#fff;
+  text-decoration:none;
+  font-size:0.75rem;
+  letter-spacing:3px;
+  transition:all 0.3s ease;
+  text-transform:uppercase;
+}
+.cta-button:hover{
+  background:#000;
+  transform:translateY(-2px);
+  box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
-.hero h1 {
-  max-width: 900px;
-  margin-bottom: 2rem;
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-.hero p {
-  max-width: 480px;
-  margin-bottom: 3rem;
+/* ================= SECTIONS ================= */
+section{
+  padding:8vh 6vw;
+  max-width:1400px;
+  margin:0 auto;
 }
 
-.cta-link {
-  color: #fff;
-  text-decoration: none;
-  border-bottom: 1px solid #fff;
-  padding-bottom: 4px;
-  display: inline-block;
-  font-size: 0.9rem;
-  letter-spacing: 1px;
+/* ================= COLLECTION INTRO ================= */
+.collection-intro{
+  text-align:center;
+  padding:12vh 6vw 8vh;
+}
+.section-tag{
+  font-size:0.7rem;
+  letter-spacing:4px;
+  color:#999;
+  margin-bottom:1rem;
+  text-transform:uppercase;
+}
+.collection-intro h2{
+  margin-bottom:1.5rem;
+}
+.view-all{
+  display:inline-block;
+  margin-top:2rem;
+  padding:0.8rem 2.5rem;
+  border:1px solid #1a1a1a;
+  color:#1a1a1a;
+  text-decoration:none;
+  font-size:0.7rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  transition:all 0.3s ease;
+}
+.view-all:hover{
+  background:#1a1a1a;
+  color:#fff;
 }
 
-/* ================= PRODUCT LIST ================= */
-.products {
-  display: flex;
-  flex-direction: column;
-  gap: 8rem;
+/* ================= PRODUCT GRID ================= */
+.products{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:3rem;
+  margin-bottom:8vh;
 }
 
-.product-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  opacity: 0; 
-  animation: fadeIn 1s forwards; /* Simple reveal animation */
+@media(min-width:768px){
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
-/* Stagger animation delay */
-.product-card:nth-child(1) { animation-delay: 0.1s; }
-.product-card:nth-child(2) { animation-delay: 0.2s; }
-.product-card:nth-child(3) { animation-delay: 0.3s; }
-
-.product-image {
-  position: relative; /* CRITICAL FIX: Ensures badge stays inside */
-  height: 500px;
-  width: 100%;
-  border-radius: 4px; /* Slightly sharper corners for luxury feel */
-  overflow: hidden;
-  background: #1a1a1a;
+@media(min-width:1024px){
+  .products{
+    grid-template-columns:repeat(3,1fr);
+  }
 }
 
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.8s ease;
-  will-change: transform;
+.product-card{
+  cursor:pointer;
+  transition:transform 0.3s ease;
+}
+.product-card:hover{
+  transform:translateY(-5px);
 }
 
-.product-card:hover .product-image img {
-  transform: scale(1.05); /* Subtle zoom on hover */
+.product-image{
+  position:relative;
+  aspect-ratio:3/4;
+  overflow:hidden;
+  background:#e8e8e8;
+  margin-bottom:1rem;
+}
+.product-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 0.6s ease;
+}
+.product-card:hover .product-image img{
+  transform:scale(1.05);
 }
 
-.badge {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  background: rgba(255, 255, 255, 0.95);
-  color: #000;
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  font-weight: 600;
-  text-transform: uppercase;
-  padding: 8px 14px;
-  z-index: 2;
+.badge{
+  position:absolute;
+  top:15px;
+  left:15px;
+  background:#fff;
+  color:#1a1a1a;
+  font-size:0.6rem;
+  letter-spacing:2px;
+  padding:6px 12px;
+  z-index:2;
 }
 
-.product-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* Changed to top alignment */
+.product-category{
+  font-size:0.65rem;
+  letter-spacing:3px;
+  color:#999;
+  margin-bottom:0.5rem;
+  text-transform:uppercase;
+}
+.product-name{
+  font-size:1.05rem;
+  font-weight:400;
+  margin-bottom:0.5rem;
+}
+.product-price{
+  font-size:0.95rem;
+  color:#666;
 }
 
-.product-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+/* ================= PHILOSOPHY SECTION ================= */
+.philosophy{
+  padding:12vh 6vw;
+  background:#fff;
 }
-
-.product-category {
-  font-size: 0.7rem;
-  letter-spacing: 3px;
-  color: #888;
-  text-transform: uppercase;
+.philosophy-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:4rem;
+  align-items:center;
 }
-
-.product-name {
-  font-size: 1.4rem;
-  font-family: 'Playfair Display', serif;
+@media(min-width:900px){
+  .philosophy-grid{
+    grid-template-columns:1fr 1fr;
+  }
 }
-
-.product-price {
-  font-size: 1rem;
-  font-family: -apple-system, sans-serif; /* Keep numbers sans-serif usually */
-  letter-spacing: 1px;
+.philosophy-image{
+  aspect-ratio:4/5;
+  overflow:hidden;
+  position:relative;
+}
+.philosophy-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.image-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid rgba(255,255,255,0.3);
+  margin:2rem;
+}
+.overlay-text{
+  color:#fff;
+  font-size:0.8rem;
+  letter-spacing:6px;
+  text-transform:uppercase;
+}
+.philosophy-content h2{
+  margin-bottom:1.5rem;
 }
 
 /* ================= CART DRAWER ================= */
-.cart-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  max-width: 420px;
-  height: 100vh;
-  background: #111;
-  z-index: 50;
-  padding: 3rem;
-  transform: translateX(100%);
-  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+.cart-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.5);
+  backdrop-filter:blur(4px);
+  z-index:40;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.4s ease;
+}
+.cart-overlay.open{
+  opacity:1;
+  pointer-events:all;
 }
 
-.cart-drawer.open {
-  transform: translateX(0);
+.cart-drawer{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:90%;
+  max-width:420px;
+  height:100vh;
+  background:#fff;
+  z-index:50;
+  padding:2rem;
+  transition:right 0.4s cubic-bezier(0.4,0,0.2,1);
+  box-shadow:-10px 0 40px rgba(0,0,0,0.1);
+  display:flex;
+  flex-direction:column;
+}
+.cart-drawer.open{
+  right:0;
 }
 
-.cart-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 3rem;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding-bottom: 1rem;
+.cart-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:2rem;
+  padding-bottom:1rem;
+  border-bottom:1px solid #e8e8e8;
+}
+.cart-header h2{
+  font-size:1.3rem;
+  font-weight:400;
+}
+.close-cart{
+  cursor:pointer;
+  font-size:1.8rem;
+  transition:transform 0.3s ease;
+  color:#999;
+}
+.close-cart:hover{
+  transform:rotate(90deg);
+  color:#1a1a1a;
 }
 
-.close-btn {
-  font-size: 1.5rem;
-  cursor: pointer;
+.cart-items{
+  flex:1;
+  overflow-y:auto;
+}
+.cart-item{
+  border-bottom:1px solid #e8e8e8;
+  padding:1.5rem 0;
+  display:flex;
+  gap:1rem;
+}
+.cart-item-image{
+  width:80px;
+  height:100px;
+  object-fit:cover;
+  background:#f5f5f5;
+}
+.cart-item-info{
+  flex:1;
+}
+.cart-item-name{
+  font-size:0.9rem;
+  margin-bottom:0.3rem;
+}
+.cart-item-category{
+  font-size:0.65rem;
+  letter-spacing:2px;
+  color:#999;
+  margin-bottom:0.5rem;
+  text-transform:uppercase;
+}
+.cart-item-price{
+  color:#666;
+  font-size:0.85rem;
+}
+.remove-item{
+  color:#999;
+  cursor:pointer;
+  font-size:0.75rem;
+  text-decoration:underline;
+  transition:color 0.3s ease;
+}
+.remove-item:hover{
+  color:#1a1a1a;
 }
 
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
+.empty-cart{
+  text-align:center;
+  padding:3rem 1rem;
+  color:#999;
 }
 
-.cart-total {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  display: flex;
-  justify-content: space-between;
-  font-size: 1.2rem;
+.cart-footer{
+  padding-top:1.5rem;
+  border-top:1px solid #e8e8e8;
 }
-
-.overlay {
-  position: fixed;
-  top:0; left:0; width:100%; height:100%;
-  background: rgba(0,0,0,0.6);
-  z-index: 40;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
+.cart-total{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:1.5rem;
+  font-size:1rem;
 }
-.overlay.open {
-  opacity: 1;
-  pointer-events: all;
+.checkout-btn{
+  width:100%;
+  padding:1rem;
+  background:#1a1a1a;
+  color:#fff;
+  border:none;
+  font-size:0.75rem;
+  letter-spacing:3px;
+  cursor:pointer;
+  transition:all 0.3s ease;
+  text-transform:uppercase;
+}
+.checkout-btn:hover{
+  background:#000;
 }
 
 /* ================= FOOTER ================= */
-footer {
-  padding: 6rem 6vw;
-  border-top: 1px solid rgba(255,255,255,0.06);
-  color: #666;
-  font-size: 0.85rem;
-  display: flex;
-  justify-content: space-between;
+footer{
+  padding:6rem 6vw 3rem;
+  text-align:center;
+  border-top:1px solid #e8e8e8;
+  background:#fff;
 }
-
-/* ================= ANIMATION ================= */
-@keyframes fadeIn {
-  to { opacity: 1; }
+.footer-content{
+  max-width:1400px;
+  margin:0 auto;
 }
-
-/* ================= RESPONSIVE ================= */
-@media(min-width: 900px) {
-  .product-card {
-    flex-direction: row;
-    align-items: center;
-    gap: 5rem;
-  }
-  
-  .product-image {
-    flex: 1.2;
-    height: 600px; /* Taller on desktop */
-  }
-
-  .product-meta {
-    flex: 1;
-    display: block; /* Stack content vertically on the right */
-  }
-  
-  .product-info {
-    margin-bottom: 1rem;
-  }
-  
-  .product-name {
-    font-size: 2rem;
-    margin: 0.5rem 0;
-  }
-  
-  /* Alternating Layout for visual interest */
-  .product-card:nth-child(even) {
-    flex-direction: row-reverse;
-  }
+.footer-text{
+  color:#999;
+  font-size:0.8rem;
+  letter-spacing:2px;
 }
 </style>
 </head>
@@ -333,123 +479,184 @@ footer {
 
 <header>
   <div class="header-inner">
-    <div class="nav-btn" aria-label="Menu">☰</div>
+    <div class="menu-icon">☰</div>
     <div class="logo">AMEIO</div>
-    <div class="cart nav-btn" onclick="toggleCart()" aria-label="Open Cart">
-      👜
-      <span class="cart-count">2</span>
+    <div class="header-icons">
+      <div class="icon">🔍</div>
+      <div class="cart icon" onclick="toggleCart()">
+        🛍️
+        <span class="cart-badge" id="cartCount">0</span>
+      </div>
     </div>
   </div>
 </header>
 
-<div class="overlay" id="overlay" onclick="toggleCart()"></div>
-
+<!-- HERO -->
 <section class="hero">
-  <h1 class="serif">
-    Elevated Beauty.<br>Effortless Confidence.
-  </h1>
-  <p>
-    Advanced dermal-sync technology meets high-fashion artistry.
-    Luxury that feels like skin.
-  </p>
-  <div>
-    <a href="#" class="cta-link">DISCOVER THE COLLECTION</a>
+  <div class="hero-content">
+    <div class="hero-tag">The New Standard of Radiance</div>
+    <h1 class="serif">
+      <em>Elevated Beauty.</em><br>
+      Effortless Confidence.
+    </h1>
+    <p>
+      Advanced dermal-sync technology meets high-fashion artistry. Luxury that feels like your second skin.
+    </p>
+    <a href="#products" class="cta-button">Shop Collection</a>
   </div>
 </section>
 
-<section>
+<!-- COLLECTION INTRO -->
+<section class="collection-intro">
+  <div class="section-tag">The Essentials</div>
+  <h2 class="serif">Curated icons for the modern minimalist.</h2>
+  <p>High-impact results with effortless application.</p>
+  <a href="#products" class="view-all">View All Products</a>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
   <div class="products">
-
-    <div class="product-card">
-      <div class="product-image">
-        <span class="badge">CLINICAL</span>
-        <img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?q=80&w=1200" alt="Dermal Recovery Serum Bottle">
-      </div>
-      <div class="product-meta">
-        <div class="product-info">
-          <div class="product-category">SKINCARE</div>
-          <h3 class="product-name serif">Dermal Recovery Serum</h3>
-          <p style="font-size:0.9rem; margin-top:0.5rem;">Restores barrier function overnight.</p>
-        </div>
-        <div class="product-price">$120.00</div>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-image">
-        <span class="badge">NEW SHADE</span>
-        <img src="https://images.unsplash.com/photo-1615396899839-c99c121888b0?q=80&w=1200" alt="Velvet Silk Foundation Swatch">
-      </div>
-      <div class="product-meta">
-        <div class="product-info">
-          <div class="product-category">COMPLEXION</div>
-          <h3 class="product-name serif">Velvet Silk Foundation</h3>
-          <p style="font-size:0.9rem; margin-top:0.5rem;">Breathable, buildable coverage.</p>
-        </div>
-        <div class="product-price">$68.00</div>
-      </div>
-    </div>
-
-    <div class="product-card">
+    
+    <!-- Product 1 -->
+    <div class="product-card" onclick="addToCart('Velvet Silk Foundation', 68, 'COMPLEXION')">
       <div class="product-image">
         <span class="badge">BESTSELLER</span>
-        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=1200" alt="Lumière Satin Lipstick">
+        <img src="https://images.unsplash.com/photo-1596704017254-9b121068ec31?w=600&q=80" alt="Foundation">
       </div>
-      <div class="product-meta">
-        <div class="product-info">
-          <div class="product-category">LIPS</div>
-          <h3 class="product-name serif">Lumière Satin Lipstick</h3>
-          <p style="font-size:0.9rem; margin-top:0.5rem;">High-impact pigment with minimal weight.</p>
-        </div>
-        <div class="product-price">$42.00</div>
-      </div>
+      <div class="product-category">Complexion</div>
+      <div class="product-name">Velvet Silk Foundation</div>
+      <div class="product-price">$68.00</div>
     </div>
 
+    <!-- Product 2 -->
+    <div class="product-card" onclick="addToCart('Lumière Satin Lipstick', 42, 'LIPS')">
+      <div class="product-image">
+        <span class="badge">NEW SHADE</span>
+        <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=600&q=80" alt="Lipstick">
+      </div>
+      <div class="product-category">Lips</div>
+      <div class="product-name">Lumière Satin Lipstick</div>
+      <div class="product-price">$42.00</div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card" onclick="addToCart('Dermal Recovery Serum', 120, 'SKINCARE')">
+      <div class="product-image">
+        <span class="badge">CLINICAL</span>
+        <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=80" alt="Serum">
+      </div>
+      <div class="product-category">Skincare</div>
+      <div class="product-name">Dermal Recovery Serum</div>
+      <div class="product-price">$120.00</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy">
+  <div class="philosophy-grid">
+    <div class="philosophy-image">
+      <img src="https://images.unsplash.com/photo-1515688594390-b649af70d282?w=800&q=80" alt="Luxury texture">
+      <div class="image-overlay">
+        <div class="overlay-text">Est. 2024</div>
+      </div>
+    </div>
+    <div class="philosophy-content">
+      <div class="section-tag">Our Philosophy</div>
+      <h2 class="serif">
+        Where Science Meets<br>
+        <em>Sensual Beauty.</em>
+      </h2>
+      <p>
+        We believe beauty should be intuitive, not complicated. Each AMEIO formula is precision-engineered to deliver transformative results while honoring your skin's natural intelligence. From our clinical-grade serums to our runway-ready color cosmetics, every product embodies our commitment to excellence without compromise.
+      </p>
+    </div>
   </div>
 </section>
 
 <footer>
-  <div>© AMEIO Cosmetics · Global House</div>
-  <div>Insta · TikTok</div>
+  <div class="footer-content">
+    <p class="footer-text">© AMEIO COSMETICS · GLOBAL BEAUTY HOUSE</p>
+  </div>
 </footer>
 
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+
+<!-- CART DRAWER -->
 <div class="cart-drawer" id="cart">
   <div class="cart-header">
     <h2 class="serif">Your Bag</h2>
-    <div class="close-btn" onclick="toggleCart()">✕</div>
+    <div class="close-cart" onclick="toggleCart()">✕</div>
   </div>
   
-  <div class="cart-item">
-    <span>Velvet Silk Foundation</span>
-    <span>$68.00</span>
-  </div>
-  <div class="cart-item">
-    <span>Lumière Satin Lipstick</span>
-    <span>$42.00</span>
-  </div>
-
-  <div class="cart-total">
-    <span class="serif">Total</span>
-    <span>$110.00</span>
+  <div class="cart-items" id="cartItems">
+    <div class="empty-cart">Your bag is empty</div>
   </div>
   
-  <div style="margin-top:2rem; background:#fff; color:#000; text-align:center; padding:1rem; cursor:pointer; font-weight:600; letter-spacing:1px;">
-    CHECKOUT
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>TOTAL</span>
+      <span id="cartTotal">$0.00</span>
+    </div>
+    <button class="checkout-btn">Proceed to Checkout</button>
   </div>
 </div>
 
 <script>
+let cart = [];
+
 function toggleCart(){
-  document.getElementById("cart").classList.toggle("open");
-  document.getElementById("overlay").classList.toggle("open");
-  
-  // Prevent body scroll when cart is open
-  if(document.body.style.overflow === "hidden"){
-    document.body.style.overflow = "auto";
-  } else {
-    document.body.style.overflow = "hidden";
-  }
+  const drawer = document.getElementById("cart");
+  const overlay = document.getElementById("cartOverlay");
+  drawer.classList.toggle("open");
+  overlay.classList.toggle("open");
 }
+
+function addToCart(name, price, category){
+  cart.push({name, price, category});
+  updateCart();
+  
+  const drawer = document.getElementById("cart");
+  const overlay = document.getElementById("cartOverlay");
+  drawer.classList.add("open");
+  overlay.classList.add("open");
+}
+
+function removeFromCart(index){
+  cart.splice(index, 1);
+  updateCart();
+}
+
+function updateCart(){
+  const container = document.getElementById("cartItems");
+  const totalEl = document.getElementById("cartTotal");
+  const countEl = document.getElementById("cartCount");
+  
+  if(cart.length === 0){
+    container.innerHTML = '<div class="empty-cart">Your bag is empty</div>';
+  } else {
+    container.innerHTML = cart.map((item, i) => `
+      <div class="cart-item">
+        <div class="cart-item-image"></div>
+        <div class="cart-item-info">
+          <div class="cart-item-category">${item.category}</div>
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-price">$${item.price}.00</div>
+          <div class="remove-item" onclick="removeFromCart(${i})">Remove</div>
+        </div>
+      </div>
+    `).join('');
+  }
+  
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  totalEl.textContent = `$${total}.00`;
+  countEl.textContent = cart.length;
+}
+
+updateCart();
 </script>
 
 </body>
