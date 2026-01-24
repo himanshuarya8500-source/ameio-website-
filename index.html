@@ -14,12 +14,11 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* Base Settings */
         body { 
             background-color: #050505; 
             color: #e5e5e5; 
             font-family: 'Inter', sans-serif; 
-            overflow-x: hidden; /* Fixes Scroll Errors */
+            overflow-x: hidden; 
         }
         .serif { font-family: 'Cormorant Garamond', serif; }
 
@@ -31,15 +30,13 @@
             transition: all 0.5s ease;
         }
 
-        /* Hover Effect (Side Light) */
         .glass-card:hover {
-            border-left: 4px solid rgba(255, 255, 255, 0.5); /* The Light Flash */
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.06);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
         }
 
-        /* Image Zoom on Hover */
         .product-img { transition: transform 0.7s ease; }
         .glass-card:hover .product-img { transform: scale(1.05); }
     </style>
@@ -66,9 +63,8 @@
                 </p>
                 <a href="#collection" class="inline-block border border-white/20 px-8 py-3 text-[10px] uppercase tracking-[0.3em] hover:bg-white hover:text-black transition duration-300">Explore</a>
             </div>
-            
             <div class="relative" data-aos="zoom-in">
-                <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=800&q=80" alt="Luxury Model" class="rounded-lg shadow-2xl grayscale hover:grayscale-0 transition duration-1000 w-full object-cover h-[500px]">
+                <img src="https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&w=800&q=80" alt="Luxury Model" class="rounded-lg shadow-2xl grayscale hover:grayscale-0 transition duration-1000 w-full object-cover h-[500px]">
             </div>
         </div>
     </section>
@@ -81,7 +77,7 @@
                 
                 <div class="glass-card p-6 rounded-xl cursor-pointer group" data-aos="fade-up" data-aos-delay="100">
                     <div class="overflow-hidden rounded-lg mb-6">
-                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80" class="product-img w-full h-64 object-cover" alt="Serum">
+                        <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=600&q=80" class="product-img w-full h-64 object-cover" alt="Serum">
                     </div>
                     <h3 class="text-xl serif italic text-white">Midnight Elixir</h3>
                     <p class="text-[9px] uppercase tracking-widest text-gray-500 mt-2">Radiance Serum</p>
@@ -89,7 +85,7 @@
 
                 <div class="glass-card p-6 rounded-xl cursor-pointer group" data-aos="fade-up" data-aos-delay="200">
                     <div class="overflow-hidden rounded-lg mb-6">
-                        <img src="https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?auto=format&fit=crop&w=600&q=80" class="product-img w-full h-64 object-cover" alt="Lipstick">
+                        <img src="https://images.unsplash.com/photo-1591360236480-458a3e21ebac?auto=format&fit=crop&w=600&q=80" class="product-img w-full h-64 object-cover" alt="Red Lipstick">
                     </div>
                     <h3 class="text-xl serif italic text-white">Crimson Veil</h3>
                     <p class="text-[9px] uppercase tracking-widest text-gray-500 mt-2">Velvet Matte</p>
@@ -97,7 +93,7 @@
 
                 <div class="glass-card p-6 rounded-xl cursor-pointer group" data-aos="fade-up" data-aos-delay="300">
                     <div class="overflow-hidden rounded-lg mb-6">
-                        <img src="https://images.unsplash.com/photo-1535633302723-997a8518005e?auto=format&fit=crop&w=600&q=80" class="product-img w-full h-64 object-cover" alt="Jewelry">
+                        <img src="https://images.unsplash.com/photo-1599643478518-17488fbbcd75?auto=format&fit=crop&w=600&q=80" class="product-img w-full h-64 object-cover" alt="Gold Jewelry">
                     </div>
                     <h3 class="text-xl serif italic text-white">Nebula Opal</h3>
                     <p class="text-[9px] uppercase tracking-widest text-gray-500 mt-2">18k Gold</p>
@@ -113,11 +109,7 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 50
-        });
+        AOS.init({ duration: 1000, once: true, offset: 50 });
     </script>
 </body>
 </html>
