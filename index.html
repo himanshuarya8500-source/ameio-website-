@@ -6,159 +6,149 @@
 <title>AMEIO Cosmetics — Coming Soon</title>
 
 <style>
-/* ================= RESET ================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+:root{
+  --vh: 100vh;
 }
 
-html {
-  width: 100%;
-  height: 100%;
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{
+  width:100%;
+  height:100%;
+  background:#000;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
 }
 
-body {
-  min-height: 100%;
-  background: radial-gradient(circle at top, #111, #000);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #fff;
-  overflow-x: hidden;
+/* REAL FULL SCREEN */
+body{
+  min-height:calc(var(--vh) * 1);
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+  color:#fff;
 }
 
-/* ================= PAGE WRAPPER ================= */
-.page {
-  min-height: 100dvh; /* dynamic viewport */
-  display: grid;
-  place-items: center;
-  padding: clamp(3rem, 8vh, 8rem) 1rem;
-  position: relative;
+/* BACKGROUND */
+.bg{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top,#111,#000);
+  z-index:-2;
 }
 
-/* ================= AMBIENT ================= */
-.ambient {
-  position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 70vmin;
-  height: 70vmin;
-  background: radial-gradient(
-    circle,
-    rgba(212,175,55,0.2),
-    transparent 65%
-  );
-  animation: pulse 7s ease-in-out infinite alternate;
-  z-index: 0;
+/* AMBIENT */
+.ambient{
+  position:fixed;
+  inset:0;
+  margin:auto;
+  width:70vmin;
+  height:70vmin;
+  background:radial-gradient(circle,rgba(212,175,55,.2),transparent 65%);
+  filter:blur(2px);
+  z-index:-1;
 }
 
-@keyframes pulse {
-  from { transform: scale(0.9); opacity: 0.4; }
-  to   { transform: scale(1.15); opacity: 0.85; }
+/* WRAPPER = PERSPECTIVE */
+.scene{
+  perspective:1200px;
+  width:100%;
+  display:grid;
+  place-items:center;
+  padding:6vh 1rem;
 }
 
-/* ================= CARD ================= */
-.card {
-  position: relative;
-  z-index: 1;
-  width: min(94%, 860px);
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(28px);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 32px;
-  padding: clamp(2.5rem, 5vw, 4.5rem);
-  text-align: center;
-  box-shadow: 0 40px 90px rgba(0,0,0,0.85);
-  transform-style: preserve-3d;
-  animation: enter 1.2s ease forwards;
+/* CARD */
+.card{
+  width:min(92%,860px);
+  background:rgba(255,255,255,.06);
+  backdrop-filter:blur(28px);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:32px;
+  padding:clamp(2.5rem,5vw,4.5rem);
+  text-align:center;
+  transform-style:preserve-3d;
+  transition:transform .15s ease;
+  box-shadow:0 40px 90px rgba(0,0,0,.85);
 }
 
-@keyframes enter {
-  from { opacity: 0; transform: translateY(60px); }
-  to   { opacity: 1; transform: translateY(0); }
+/* TEXT */
+.brand{
+  letter-spacing:6px;
+  font-size:.85rem;
+  opacity:.6;
+  margin-bottom:1.2rem;
+  transform:translateZ(30px);
 }
 
-/* ================= TEXT ================= */
-.brand {
-  letter-spacing: 6px;
-  font-size: 0.85rem;
-  color: rgba(255,255,255,0.6);
-  margin-bottom: 1.2rem;
+h1{
+  font-size:clamp(2.6rem,6vw,4.4rem);
+  font-weight:800;
+  line-height:1.05;
+  margin-bottom:1.6rem;
+  background:linear-gradient(120deg,#fff,#cfcfcf,#8b8b8b);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  transform:translateZ(60px);
 }
 
-h1 {
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
-  line-height: 1.05;
-  margin-bottom: 1.6rem;
-  font-weight: 800;
-  background: linear-gradient(120deg, #fff, #d0d0d0, #8b8b8b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+p{
+  max-width:620px;
+  margin:0 auto 3rem;
+  color:#b5b5b5;
+  transform:translateZ(40px);
 }
 
-p {
-  max-width: 620px;
-  margin: 0 auto 3rem;
-  font-size: 1.05rem;
-  color: #b5b5b5;
+/* FORM */
+.form{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+  transform:translateZ(50px);
 }
 
-/* ================= FORM ================= */
-.form {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-  flex-wrap: wrap;
+input{
+  padding:16px 26px;
+  width:280px;
+  border-radius:50px;
+  border:1px solid #333;
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  outline:none;
 }
 
-input {
-  padding: 16px 26px;
-  width: 280px;
-  border-radius: 50px;
-  border: 1px solid #333;
-  background: rgba(0,0,0,0.55);
-  color: #fff;
-  outline: none;
+button{
+  padding:16px 38px;
+  border-radius:50px;
+  border:none;
+  background:#fff;
+  font-weight:700;
+  cursor:pointer;
 }
 
-button {
-  padding: 16px 38px;
-  border-radius: 50px;
-  border: none;
-  font-weight: 700;
-  cursor: pointer;
-  background: #fff;
-  color: #000;
-  transition: 0.3s;
+button:hover{
+  background:#d4af37;
+  color:#fff;
 }
 
-button:hover {
-  background: #d4af37;
-  color: #fff;
-  box-shadow: 0 0 30px rgba(212,175,55,0.45);
-}
-
-/* ================= MOBILE ================= */
-@media (max-width: 768px) {
-  .form {
-    flex-direction: column;
-  }
-  input {
-    width: 100%;
-  }
+/* MOBILE */
+@media(max-width:768px){
+  .form{flex-direction:column}
+  input{width:100%}
 }
 </style>
 </head>
 
 <body>
 
-<div class="page">
-  <div class="ambient"></div>
+<div class="bg"></div>
+<div class="ambient"></div>
 
-  <div class="card">
+<div class="scene">
+  <div class="card" id="card">
     <div class="brand">AMEIO COSMETICS</div>
-
     <h1>Something<br>Extraordinary</h1>
-
     <p>
       A refined beauty experience is being crafted.
       Where luxury formulation meets modern elegance.
@@ -170,6 +160,40 @@ button:hover {
     </div>
   </div>
 </div>
+
+<script>
+/* ===== REAL VIEWPORT FIX ===== */
+function setVH(){
+  document.documentElement.style.setProperty(
+    "--vh",
+    `${window.innerHeight}px`
+  );
+}
+setVH();
+window.addEventListener("resize", setVH);
+
+/* ===== 3D TILT (GUARANTEED) ===== */
+const card = document.getElementById("card");
+
+card.addEventListener("mousemove", e => {
+  const rect = card.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const midX = rect.width / 2;
+  const midY = rect.height / 2;
+
+  const rotateY = ((x - midX) / midX) * 10;
+  const rotateX = -((y - midY) / midY) * 10;
+
+  card.style.transform =
+    `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+});
+
+card.addEventListener("mouseleave", () => {
+  card.style.transform = "rotateX(0deg) rotateY(0deg)";
+});
+</script>
 
 </body>
 </html>
