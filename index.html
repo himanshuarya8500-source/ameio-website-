@@ -15,13 +15,39 @@
                         url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9…
                 </style>
 </head>
-<body>
-    <div class="hero-bg h-screen flex items-center justify-center text-white text-center">
-        <div>
-            <h1 class="text-6xl font-serif mb-4">AMEIO</h1>
-            <p class="text-xl tracking-widest uppercase">Timeless Luxury Cosmetics</p>
-            <button class="mt-8 px-8 py-3 bg-white text-black font-bold rounded-full">Coming Soon</button>
+<body class="bg-[#faf9f6] text-[#1a1a1a] font-['Inter', sans-serif]">
+    <nav class="flex justify-between items-center p-6 border-b border-gray-200">
+        <h1 class="text-2xl font-serif tracking-tighter font-bold">AMEIO</h1>
+        <div class="space-x-6 text-sm uppercase tracking-widest">
+            <a href="#" class="hover:text-gold">Collections</a>
+            <a href="#" class="hover:text-gold">Our Story</a>
         </div>
-    </div>
+    </nav>
+
+    <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1522335789203-aafd1fc54bc9?auto=format&fit=crop&q=80" 
+                 class="w-full h-full object-cover opacity-40" alt="Luxury Cosmetics">
+        </div>
+        
+        <div class="relative z-10 text-center px-4">
+            <span class="text-xs uppercase tracking-[0.5em] mb-4 block text-gray-500">Launching Spring 2026</span>
+            <h2 class="text-7xl md:text-9xl font-serif mb-6 italic">Ameio Cosmetics</h2>
+            <p class="max-w-md mx-auto text-lg text-gray-600 mb-8 font-light leading-relaxed">
+                Experience timeless luxury. Crafted for the bold, the beautiful, and the next generation of elegance.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="bg-[#1a1a1a] text-white px-10 py-4 rounded-full text-sm uppercase tracking-widest hover:bg-black transition">
+                    Notify Me
+                </button>
+                <button class="border border-[#1a1a1a] px-10 py-4 rounded-full text-sm uppercase tracking-widest hover:bg-gray-100 transition">
+                    View Catalog
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="fixed bottom-0 w-full p-4 bg-white border-t border-gray-100 text-center text-[10px] uppercase tracking-[0.3em] text-gray-400">
+        © 2026 AMEIO COSMETICS | Timeless Luxury | Made for You
+    </footer>
 </body>
-</html>
