@@ -1,132 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMEIO Cosmetics – Coming Soon</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AMEIO Cosmetics — Coming Soon</title>
 
 <style>
-/* =======================
-   GLOBAL FIX (IMPORTANT)
-======================= */
-html, body {
-  width: 100%;
-  min-height: 100%;
+/* ================= RESET ================= */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
 }
 
 body {
-  min-height: 100svh; /* REAL full screen fix */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 100%;
   background: radial-gradient(circle at top, #111, #000);
-  overflow-x: hidden;
-  perspective: 1200px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #fff;
+  overflow-x: hidden;
 }
 
-/* =======================
-   AMBIENT BACKGROUND
-======================= */
-.ambient {
-  position: fixed;
-  inset: 0;
-  margin: auto;
-  width: 80vmin;
-  height: 80vmin;
-  background: radial-gradient(
-    circle,
-    rgba(212,175,55,0.18),
-    transparent 65%
-  );
-  animation: pulse 7s ease-in-out infinite alternate;
-  z-index: -1;
-}
-
-@keyframes pulse {
-  from { transform: scale(0.9); opacity: 0.5; }
-  to   { transform: scale(1.15); opacity: 0.9; }
-}
-
-/* =======================
-   MAIN CARD
-======================= */
-.card {
-  width: min(92%, 820px);
-  margin: 4vh 0;
-  padding: 4.5rem 3rem;
-  border-radius: 32px;
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(28px);
-  border: 1px solid rgba(255,255,255,0.12);
-  box-shadow: 0 40px 80px rgba(0,0,0,0.8);
-  text-align: center;
-  transform-style: preserve-3d;
-  animation: enter 1.4s cubic-bezier(.2,.8,.2,1) forwards;
+/* ================= PAGE WRAPPER ================= */
+.page {
+  min-height: 100dvh; /* dynamic viewport */
+  display: grid;
+  place-items: center;
+  padding: clamp(3rem, 8vh, 8rem) 1rem;
   position: relative;
 }
 
-/* Spotlight */
-.card::after {
-  content: "";
+/* ================= AMBIENT ================= */
+.ambient {
   position: absolute;
   inset: 0;
+  margin: auto;
+  width: 70vmin;
+  height: 70vmin;
   background: radial-gradient(
-    500px circle at var(--x,50%) var(--y,50%),
-    rgba(255,255,255,0.14),
-    transparent 45%
+    circle,
+    rgba(212,175,55,0.2),
+    transparent 65%
   );
-  opacity: 0;
-  transition: opacity 0.4s;
-  pointer-events: none;
+  animation: pulse 7s ease-in-out infinite alternate;
+  z-index: 0;
 }
-.card:hover::after { opacity: 1; }
+
+@keyframes pulse {
+  from { transform: scale(0.9); opacity: 0.4; }
+  to   { transform: scale(1.15); opacity: 0.85; }
+}
+
+/* ================= CARD ================= */
+.card {
+  position: relative;
+  z-index: 1;
+  width: min(94%, 860px);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(28px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 32px;
+  padding: clamp(2.5rem, 5vw, 4.5rem);
+  text-align: center;
+  box-shadow: 0 40px 90px rgba(0,0,0,0.85);
+  transform-style: preserve-3d;
+  animation: enter 1.2s ease forwards;
+}
 
 @keyframes enter {
-  from { opacity: 0; transform: translateY(80px) scale(0.95); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; transform: translateY(60px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* =======================
-   TEXT
-======================= */
+/* ================= TEXT ================= */
 .brand {
   letter-spacing: 6px;
   font-size: 0.85rem;
   color: rgba(255,255,255,0.6);
   margin-bottom: 1.2rem;
-  transform: translateZ(30px);
 }
 
 h1 {
-  font-size: clamp(2.8rem, 6vw, 4.5rem);
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
   line-height: 1.05;
   margin-bottom: 1.6rem;
   font-weight: 800;
-  background: linear-gradient(120deg, #ffffff, #cfcfcf, #8b8b8b);
+  background: linear-gradient(120deg, #fff, #d0d0d0, #8b8b8b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transform: translateZ(60px);
 }
 
 p {
   max-width: 620px;
-  margin: 0 auto 3.2rem;
-  font-size: 1.1rem;
+  margin: 0 auto 3rem;
+  font-size: 1.05rem;
   color: #b5b5b5;
-  transform: translateZ(40px);
 }
 
-/* =======================
-   FORM
-======================= */
+/* ================= FORM ================= */
 .form {
   display: flex;
-  justify-content: center;
   gap: 14px;
-  transform: translateZ(55px);
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 input {
@@ -137,124 +118,58 @@ input {
   background: rgba(0,0,0,0.55);
   color: #fff;
   outline: none;
-  font-size: 0.95rem;
-}
-
-input:focus {
-  border-color: #d4af37;
-  box-shadow: 0 0 22px rgba(212,175,55,0.25);
 }
 
 button {
   padding: 16px 38px;
   border-radius: 50px;
   border: none;
+  font-weight: 700;
+  cursor: pointer;
   background: #fff;
   color: #000;
-  font-weight: 700;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: 0.35s;
+  transition: 0.3s;
 }
 
 button:hover {
   background: #d4af37;
   color: #fff;
-  transform: scale(1.06);
-  box-shadow: 0 0 28px rgba(212,175,55,0.45);
+  box-shadow: 0 0 30px rgba(212,175,55,0.45);
 }
 
-/* =======================
-   PARTICLES
-======================= */
-.dot {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background: #d4af37;
-  border-radius: 50%;
-  opacity: 0.6;
-  animation: float 6s ease-in-out infinite alternate;
-}
-
-@keyframes float {
-  from { transform: translateY(0) translateZ(40px); }
-  to   { transform: translateY(-26px) translateZ(40px); }
-}
-
-/* =======================
-   MOBILE
-======================= */
+/* ================= MOBILE ================= */
 @media (max-width: 768px) {
-  .form { flex-direction: column; }
-  input { width: 100%; }
-  .card { padding: 3rem 1.6rem; }
+  .form {
+    flex-direction: column;
+  }
+  input {
+    width: 100%;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="ambient"></div>
+<div class="page">
+  <div class="ambient"></div>
 
-<div class="card" id="card">
-  <div class="brand">AMEIO COSMETICS</div>
+  <div class="card">
+    <div class="brand">AMEIO COSMETICS</div>
 
-  <h1>Something<br>Extraordinary</h1>
+    <h1>Something<br>Extraordinary</h1>
 
-  <p>
-    A refined beauty experience is being crafted.
-    Where luxury formulation meets modern elegance.
-  </p>
+    <p>
+      A refined beauty experience is being crafted.
+      Where luxury formulation meets modern elegance.
+    </p>
 
-  <div class="form">
-    <input type="email" id="email" placeholder="Enter your email">
-    <button id="btn">Notify Me</button>
+    <div class="form">
+      <input type="email" placeholder="Enter your email">
+      <button>Notify Me</button>
+    </div>
   </div>
-
-  <div class="dot" style="top:18%;left:14%"></div>
-  <div class="dot" style="bottom:22%;right:18%;width:7px;height:7px"></div>
-  <div class="dot" style="top:46%;right:6%"></div>
 </div>
-
-<script>
-const card = document.getElementById("card");
-const btn = document.getElementById("btn");
-const email = document.getElementById("email");
-
-/* Desktop tilt + spotlight */
-document.addEventListener("mousemove", e => {
-  const x = (window.innerWidth / 2 - e.clientX) / 28;
-  const y = (window.innerHeight / 2 - e.clientY) / 28;
-  card.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-  card.style.setProperty("--x", `${e.clientX}px`);
-  card.style.setProperty("--y", `${e.clientY}px`);
-});
-
-/* Reset */
-document.addEventListener("mouseleave", () => {
-  card.style.transform = "rotateX(0deg) rotateY(0deg)";
-});
-
-/* Email feedback */
-btn.onclick = () => {
-  if (!email.value.includes("@")) {
-    email.style.borderColor = "red";
-  } else {
-    btn.innerText = "Registered ✓";
-    btn.style.background = "#d4af37";
-    btn.style.color = "#fff";
-  }
-};
-
-/* Mobile gyro */
-if (window.DeviceOrientationEvent) {
-  window.addEventListener("deviceorientation", e => {
-    card.style.transform =
-      `rotateY(${e.gamma / 6}deg) rotateX(${e.beta / 6}deg)`;
-  });
-}
-</script>
 
 </body>
 </html>
