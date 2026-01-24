@@ -1,533 +1,182 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMEIO | Luxury Cosmetics - Launching Soon</title>
-    
-    <meta name="description" content="AMEIO - Ultra-luxury cosmetics launching soon. Where shadows meet sophistication. Be the first to experience the next era of high-end beauty.">
-    <meta name="keywords" content="luxury cosmetics, high-end makeup, premium beauty, AMEIO">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="AMEIO | Luxury Cosmetics - Launching Soon">
-    <meta property="og:description" content="Ultra-luxury cosmetics launching soon. Join the waitlist for exclusive early access.">
-    <meta property="og:type" content="website">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- ================= META ================= -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AMEIO — Luxury Cosmetics | Launching Soon</title>
 
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            background: #0a0a0a;
-            color: #f5f5f5;
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden;
-        }
-        
-        .playfair { font-family: 'Playfair Display', serif; }
+  <meta name="description" content="AMEIO is an ultra-luxury cosmetics brand launching soon. Where artistry meets precision. Join the exclusive waitlist." />
+  <link rel="canonical" href="https://ameiocosmetics.com/" />
 
-        /* Glassmorphism Cards */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+  <!-- Open Graph -->
+  <meta property="og:title" content="AMEIO — Luxury Cosmetics" />
+  <meta property="og:description" content="Ultra-luxury beauty. Limited. Intentional. Launching soon." />
+  <meta property="og:type" content="website" />
 
-        .glass-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 215, 0, 0.3);
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
-        }
+  <!-- ================= FONTS ================= -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-        /* Countdown Timer Styles */
-        .countdown-item {
-            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 255, 255, 0.05));
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            backdrop-filter: blur(10px);
-        }
+  <!-- ================= TAILWIND ================= -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-        /* Animated gradient text */
-        .gradient-text {
-            background: linear-gradient(90deg, #fff, #d4af37, #fff);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
-        }
+  <!-- ================= CUSTOM STYLES ================= -->
+  <style>
+    body {
+      background: #0b0b0b;
+      color: #f5f5f5;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+    .font-serif { font-family: 'Playfair Display', serif; }
 
-        /* Floating animation */
-        .float {
-            animation: float 6s ease-in-out infinite;
-        }
+    .gold-gradient {
+      background: linear-gradient(90deg, #f5e7c1, #c9a24d, #f5e7c1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
+    .glass {
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
 
-        /* Newsletter input */
-        .newsletter-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
+    .btn-gold {
+      background: linear-gradient(135deg, #d4af37, #f5e7c1);
+      color: #000;
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
 
-        .newsletter-input:focus {
-            outline: none;
-            border-color: rgba(255, 215, 0, 0.5);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* Button hover effect */
-        .btn-primary {
-            background: linear-gradient(135deg, #d4af37, #f4e5c2);
-            color: #000;
-            font-weight: 500;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
-        }
-
-        /* Product image animation */
-        .product-img {
-            filter: grayscale(30%);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover .product-img {
-            filter: grayscale(0%);
-            transform: scale(1.1) rotate(2deg);
-        }
-
-        /* Mobile menu */
-        .mobile-menu {
-            transform: translateX(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .mobile-menu.active {
-            transform: translateX(0);
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        /* Loading animation for countdown */
-        .pulse-gold {
-            animation: pulse-gold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        @keyframes pulse-gold {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Particle effect background */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.3), transparent);
-            border-radius: 50%;
-            animation: particle-float 15s infinite;
-        }
-
-        @keyframes particle-float {
-            0% { transform: translateY(100vh) scale(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) scale(1); opacity: 0; }
-        }
-    </style>
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(212,175,55,.35);
+    }
+  </style>
 </head>
+
 <body>
 
-    <!-- Particle Background -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 px-6 lg:px-12 py-5 bg-black/70 backdrop-blur-xl border-b border-white/5">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="text-3xl font-light tracking-[0.4em] playfair text-white">AMEIO</div>
-            
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex space-x-10 text-[11px] uppercase tracking-[0.25em] font-light">
-                <a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">About</a>
-                <a href="#collection" class="text-gray-400 hover:text-white transition-colors duration-300">Preview</a>
-                <a href="#notify" class="text-gray-400 hover:text-white transition-colors duration-300">Notify Me</a>
-                <a href="mailto:hello@ameiocosmetics.com" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a>
-            </div>
-
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-white z-50" id="mobile-menu-btn">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path class="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    <path class="close-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div class="mobile-menu fixed top-0 right-0 w-full h-screen bg-black/95 backdrop-blur-2xl md:hidden" id="mobile-menu">
-            <div class="flex flex-col items-center justify-center h-full space-y-8 text-xl uppercase tracking-[0.3em]">
-                <a href="#about" class="text-gray-400 hover:text-white transition mobile-link">About</a>
-                <a href="#collection" class="text-gray-400 hover:text-white transition mobile-link">Preview</a>
-                <a href="#notify" class="text-gray-400 hover:text-white transition mobile-link">Notify Me</a>
-                <a href="mailto:hello@ameiocosmetics.com" class="text-gray-400 hover:text-white transition mobile-link">Contact</a>
-            </div>
-        </div>
+<!-- ================= NAV ================= -->
+<header class="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-xl border-b border-white/5">
+  <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-5">
+    <div class="text-2xl tracking-[0.35em] font-serif">AMEIO</div>
+    <button id="menuBtn" class="md:hidden text-sm uppercase tracking-widest">Menu</button>
+    <nav class="hidden md:flex space-x-10 text-xs tracking-widest uppercase">
+      <a href="#about" class="text-gray-400 hover:text-white">About</a>
+      <a href="#preview" class="text-gray-400 hover:text-white">Preview</a>
+      <a href="#notify" class="text-gray-400 hover:text-white">Notify</a>
     </nav>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section class="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-12 overflow-hidden">
-        <div class="absolute inset-0 bg-gradient-to-br from-[#1a1410] via-[#0a0a0a] to-[#0a0a0a] -z-10"></div>
-        
-        <div class="max-w-7xl w-full grid lg:grid-cols-2 gap-16 items-center relative z-10">
-            <!-- Left Content -->
-            <div data-aos="fade-right" data-aos-duration="1000">
-                <div class="inline-block mb-6">
-                    <span class="text-[10px] uppercase tracking-[0.6em] text-gray-500 border border-white/10 px-4 py-2 backdrop-blur-sm">
-                        Coming Soon 2026
-                    </span>
-                </div>
-                
-                <h1 class="text-6xl md:text-8xl lg:text-9xl playfair italic leading-none mb-8">
-                    <span class="gradient-text">Darkest</span><br>
-                    <span class="text-white">Charm</span>
-                </h1>
-                
-                <p class="text-gray-400 font-light text-base md:text-lg max-w-md mb-12 leading-relaxed">
-                    Where shadows meet sophistication. Experience the next era of ultra-luxury cosmetics. 
-                    <span class="text-white">Be among the first to discover.</span>
-                </p>
+<!-- ================= HERO ================= -->
+<section class="min-h-screen flex items-center px-6 pt-32">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    
+    <div>
+      <span class="text-[10px] tracking-[0.5em] uppercase text-gray-500">Launching 2026</span>
+      <h1 class="mt-8 text-6xl md:text-8xl font-serif italic leading-tight">
+        <span class="gold-gradient">Dark</span><br/>Elegance
+      </h1>
+      <p class="mt-6 text-gray-400 max-w-md leading-relaxed">
+        AMEIO is an ultra-luxury cosmetics house built on restraint, precision, and intentional beauty.
+      </p>
+      <a href="#notify" class="inline-block mt-10 px-10 py-4 text-xs tracking-widest uppercase btn-gold">
+        Join Waitlist
+      </a>
+    </div>
 
-                <a href="#notify" class="btn-primary inline-block px-10 py-4 text-sm uppercase tracking-[0.3em] rounded-sm">
-                    Join Waitlist
-                </a>
+    <div class="relative">
+      <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=900&q=80"
+           alt="Luxury Cosmetics"
+           class="rounded-2xl border border-white/10 shadow-2xl" />
+    </div>
+  </div>
+</section>
 
-                <div class="mt-16 flex items-center space-x-6 text-sm">
-                    <div>
-                        <p class="text-3xl font-light text-white playfair">5K+</p>
-                        <p class="text-[10px] uppercase tracking-widest text-gray-500">Already Waiting</p>
-                    </div>
-                    <div class="w-px h-12 bg-white/10"></div>
-                    <div>
-                        <p class="text-3xl font-light text-white playfair">100%</p>
-                        <p class="text-[10px] uppercase tracking-widest text-gray-500">Luxury Promise</p>
-                    </div>
-                </div>
-            </div>
+<!-- ================= COUNTDOWN ================= -->
+<section class="py-24 bg-black/50">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="text-4xl font-serif italic mb-12">Launching In</h2>
+    <div class="grid grid-cols-4 gap-6 text-center">
+      <div class="glass p-6"><div id="d" class="text-4xl font-serif">00</div><span class="text-xs text-gray-500">Days</span></div>
+      <div class="glass p-6"><div id="h" class="text-4xl font-serif">00</div><span class="text-xs text-gray-500">Hours</span></div>
+      <div class="glass p-6"><div id="m" class="text-4xl font-serif">00</div><span class="text-xs text-gray-500">Minutes</span></div>
+      <div class="glass p-6"><div id="s" class="text-4xl font-serif">00</div><span class="text-xs text-gray-500">Seconds</span></div>
+    </div>
+  </div>
+</section>
 
-            <!-- Right Image -->
-            <div class="relative float" data-aos="zoom-in" data-aos-duration="1200" data-aos-delay="200">
-                <div class="absolute -top-10 -right-10 w-72 h-72 bg-gradient-to-br from-yellow-900/20 to-transparent rounded-full blur-3xl"></div>
-                <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?auto=format&fit=crop&w=1000&q=80" 
-                     alt="AMEIO Luxury Cosmetics" 
-                     class="rounded-2xl shadow-2xl w-full h-[600px] object-cover border border-white/10 relative z-10"
-                     loading="lazy">
-            </div>
-        </div>
+<!-- ================= ABOUT ================= -->
+<section id="about" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=80"
+         class="rounded-xl border border-white/10" />
+    <div>
+      <h3 class="text-4xl font-serif italic mb-6">Philosophy</h3>
+      <p class="text-gray-400 leading-relaxed">
+        AMEIO products are crafted in limited quantities using ethically sourced, high-performance ingredients.
+        No excess. No noise. Only intention.
+      </p>
+    </div>
+  </div>
+</section>
 
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 scroll-indicator">
-            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
-        </div>
-    </section>
+<!-- ================= NOTIFY ================= -->
+<section id="notify" class="py-28 bg-gradient-to-b from-black to-[#0f0a06]">
+  <div class="max-w-xl mx-auto text-center px-6">
+    <h3 class="text-4xl font-serif italic mb-6">Exclusive Access</h3>
+    <p class="text-gray-400 mb-10">Join the private waitlist for early access.</p>
 
-    <!-- Countdown Section -->
-    <section class="py-24 px-6 bg-black/40 backdrop-blur-sm" id="countdown-section">
-        <div class="max-w-5xl mx-auto text-center" data-aos="fade-up">
-            <h2 class="text-4xl md:text-5xl playfair italic mb-6 text-white">Launching In</h2>
-            <p class="text-gray-400 mb-16 text-sm uppercase tracking-widest">Mark Your Calendar</p>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto" id="countdown">
-                <div class="countdown-item p-8 rounded-xl">
-                    <p class="text-5xl md:text-6xl font-light playfair text-white pulse-gold" id="days">00</p>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mt-3">Days</p>
-                </div>
-                <div class="countdown-item p-8 rounded-xl">
-                    <p class="text-5xl md:text-6xl font-light playfair text-white pulse-gold" id="hours">00</p>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mt-3">Hours</p>
-                </div>
-                <div class="countdown-item p-8 rounded-xl">
-                    <p class="text-5xl md:text-6xl font-light playfair text-white pulse-gold" id="minutes">00</p>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mt-3">Minutes</p>
-                </div>
-                <div class="countdown-item p-8 rounded-xl">
-                    <p class="text-5xl md:text-6xl font-light playfair text-white pulse-gold" id="seconds">00</p>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mt-3">Seconds</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <form id="form" class="flex flex-col sm:flex-row gap-4">
+      <input required type="email" placeholder="Your email"
+             class="flex-1 px-6 py-4 bg-white/5 border border-white/10 text-white" />
+      <button class="btn-gold px-8 py-4 text-xs tracking-widest uppercase">
+        Notify Me
+      </button>
+    </form>
 
-    <!-- About Section -->
-    <section id="about" class="py-32 px-6 bg-gradient-to-b from-black/40 to-black">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div data-aos="fade-right">
-                <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=800&q=80" 
-                     alt="Luxury Beauty" 
-                     class="rounded-2xl shadow-2xl border border-white/10 w-full h-[500px] object-cover"
-                     loading="lazy">
-            </div>
-            
-            <div data-aos="fade-left">
-                <span class="text-[9px] uppercase tracking-[0.5em] text-gray-500 mb-6 block">Our Philosophy</span>
-                <h2 class="text-4xl md:text-5xl playfair italic mb-8 text-white leading-tight">
-                    Redefining <br>Luxury Beauty
-                </h2>
-                <p class="text-gray-400 leading-relaxed mb-6">
-                    AMEIO is not just cosmetics—it's an experience. Born from the intersection of artistry and science, 
-                    we craft products that transform your daily ritual into a moment of pure indulgence.
-                </p>
-                <p class="text-gray-400 leading-relaxed mb-8">
-                    Each formula is meticulously developed with rare, ethically-sourced ingredients from around the globe. 
-                    We believe true beauty emerges when sophistication meets sustainability.
-                </p>
-                
-                <div class="space-y-4">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-1.5 h-1.5 bg-yellow-600 rounded-full mt-2"></div>
-                        <div>
-                            <p class="text-white font-light">Ethically Sourced Ingredients</p>
-                            <p class="text-gray-500 text-sm">From the finest corners of the world</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <div class="w-1.5 h-1.5 bg-yellow-600 rounded-full mt-2"></div>
-                        <div>
-                            <p class="text-white font-light">Cruelty-Free & Vegan</p>
-                            <p class="text-gray-500 text-sm">Beauty without compromise</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start space-x-4">
-                        <div class="w-1.5 h-1.5 bg-yellow-600 rounded-full mt-2"></div>
-                        <div>
-                            <p class="text-white font-light">Limited Edition Collections</p>
-                            <p class="text-gray-500 text-sm">Exclusivity redefined</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <p id="success" class="hidden mt-6 text-green-400 text-sm">
+      You are on the list.
+    </p>
+  </div>
+</section>
 
-    <!-- Collection Preview -->
-    <section id="collection" class="py-32 px-6 bg-black">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20" data-aos="fade-up">
-                <span class="text-[9px] uppercase tracking-[0.5em] text-gray-500 mb-6 block">Sneak Peek</span>
-                <h2 class="text-5xl md:text-6xl playfair italic text-white mb-6">Curated Artifacts</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">
-                    A glimpse into our inaugural collection. Three masterpieces designed to elevate your beauty ritual.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                
-                <!-- Product 1 -->
-                <div class="glass-card p-8 rounded-2xl group cursor-pointer" data-aos="fade-up" data-aos-delay="100">
-                    <div class="overflow-hidden rounded-xl mb-8 relative">
-                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=700&q=80" 
-                             class="product-img w-full h-80 object-cover" 
-                             alt="Midnight Elixir Serum"
-                             loading="lazy">
-                        <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full">
-                            <span class="text-[9px] uppercase tracking-wider text-white">Coming Soon</span>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl playfair italic text-white mb-2">Midnight Elixir</h3>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mb-4">Radiance Serum</p>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        24K gold-infused serum that awakens your skin's natural luminosity. A blend of rare botanicals for timeless radiance.
-                    </p>
-                    <div class="flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-white font-light text-lg">$320</span>
-                        <span class="text-[9px] uppercase tracking-wider text-gray-600">30ml</span>
-                    </div>
-                </div>
+<!-- ================= FOOTER ================= -->
+<footer class="py-12 text-center text-xs text-gray-600">
+  © 2026 AMEIO Cosmetics. All rights reserved.
+</footer>
 
-                <!-- Product 2 -->
-                <div class="glass-card p-8 rounded-2xl group cursor-pointer" data-aos="fade-up" data-aos-delay="200">
-                    <div class="overflow-hidden rounded-xl mb-8 relative">
-                        <img src="https://images.unsplash.com/photo-1625093742435-6fa19236224d?auto=format&fit=crop&w=700&q=80" 
-                             class="product-img w-full h-80 object-cover" 
-                             alt="Crimson Veil Lipstick"
-                             loading="lazy">
-                        <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full">
-                            <span class="text-[9px] uppercase tracking-wider text-white">Coming Soon</span>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl playfair italic text-white mb-2">Crimson Veil</h3>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mb-4">Velvet Matte Lipstick</p>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        Luxurious velvet matte finish that lasts 16 hours. Enriched with hyaluronic acid and vitamin E for nourished lips.
-                    </p>
-                    <div class="flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-white font-light text-lg">$95</span>
-                        <span class="text-[9px] uppercase tracking-wider text-gray-600">3.5g</span>
-                    </div>
-                </div>
+<!-- ================= JS ================= -->
+<script>
+  // Countdown
+  const launch = new Date("2026-01-01T00:00:00").getTime();
+  const ids = { d: "d", h: "h", m: "m", s: "s" };
 
-                <!-- Product 3 -->
-                <div class="glass-card p-8 rounded-2xl group cursor-pointer" data-aos="fade-up" data-aos-delay="300">
-                    <div class="overflow-hidden rounded-xl mb-8 relative">
-                        <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=700&q=80" 
-                             class="product-img w-full h-80 object-cover" 
-                             alt="Stellar Glow Palette"
-                             loading="lazy">
-                        <div class="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-3 py-1 rounded-full">
-                            <span class="text-[9px] uppercase tracking-wider text-white">Coming Soon</span>
-                        </div>
-                    </div>
-                    <h3 class="text-2xl playfair italic text-white mb-2">Stellar Glow</h3>
-                    <p class="text-[10px] uppercase tracking-widest text-gray-500 mb-4">Illuminating Palette</p>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
-                        Six celestial shades from champagne to rose gold. Buildable, blendable, and impossibly smooth for an ethereal glow.
-                    </p>
-                    <div class="flex justify-between items-center pt-4 border-t border-white/5">
-                        <span class="text-white font-light text-lg">$185</span>
-                        <span class="text-[9px] uppercase tracking-wider text-gray-600">6 x 4g</span>
-                    </div>
-                </div>
+  setInterval(() => {
+    const now = Date.now();
+    const diff = launch - now;
 
-            </div>
-        </div>
-    </section>
+    const d = Math.max(0, Math.floor(diff / 86400000));
+    const h = Math.max(0, Math.floor((diff % 86400000) / 3600000));
+    const m = Math.max(0, Math.floor((diff % 3600000) / 60000));
+    const s = Math.max(0, Math.floor((diff % 60000) / 1000));
 
-    <!-- Newsletter Section -->
-    <section id="notify" class="py-32 px-6 bg-gradient-to-b from-black to-[#0f0a06]">
-        <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
-            <span class="text-[9px] uppercase tracking-[0.5em] text-gray-500 mb-6 block">Exclusive Access</span>
-            <h2 class="text-4xl md:text-6xl playfair italic text-white mb-6">
-                Be The First <br>To Know
-            </h2>
-            <p class="text-gray-400 mb-12 leading-relaxed max-w-xl mx-auto">
-                Join our exclusive waitlist for early access, special launch offers, and insider updates. 
-                Limited spots available for our founding members.
-            </p>
+    document.getElementById(ids.d).textContent = d.toString().padStart(2, "0");
+    document.getElementById(ids.h).textContent = h.toString().padStart(2, "0");
+    document.getElementById(ids.m).textContent = m.toString().padStart(2, "0");
+    document.getElementById(ids.s).textContent = s.toString().padStart(2, "0");
+  }, 1000);
 
-            <form class="max-w-md mx-auto" id="newsletter-form">
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <input 
-                        type="email" 
-                        placeholder="Enter your email" 
-                        required
-                        class="newsletter-input flex-1 px-6 py-4 rounded-lg text-white text-sm tracking-wide placeholder-gray-600"
-                        id="email-input"
-                    >
-                    <button 
-                        type="submit" 
-                        class="btn-primary px-8 py-4 rounded-lg text-sm uppercase tracking-wider whitespace-nowrap"
-                    >
-                        Join Waitlist
-                    </button>
-                </div>
-                <p class="text-gray-600 text-xs mt-4">We respect your privacy. Unsubscribe anytime.</p>
-            </form>
+  // Form UX (demo)
+  document.getElementById("form").addEventListener("submit", e => {
+    e.preventDefault();
+    document.getElementById("success").classList.remove("hidden");
+    e.target.reset();
+  });
+</script>
 
-            <!-- Success Message -->
-            <div id="success-message" class="hidden mt-8 p-6 bg-green-900/20 border border-green-500/30 rounded-lg backdrop-blur-sm">
-                <p class="text-green-400 font-light">✓ You're on the list! Check your email for confirmation.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Instagram Section -->
-    <section class="py-24 px-6 bg-[#0f0a06]">
-        <div class="max-w-7xl mx-auto text-center" data-aos="fade-up">
-            <h3 class="text-3xl playfair italic text-white mb-6">Follow The Journey</h3>
-            <p class="text-gray-400 mb-12 text-sm uppercase tracking-widest">@ameio.cosmetics</p>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="aspect-square overflow-hidden rounded-lg border border-white/10 group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=400&q=80" 
-                         alt="Instagram Post" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                         loading="lazy">
-                </div>
-                <div class="aspect-square overflow-hidden rounded-lg border border-white/10 group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=400&q=80" 
-                         alt="Instagram Post" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                         loading="lazy">
-                </div>
-                <div class="aspect-square overflow-hidden rounded-lg border border-white/10 group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1571875257727-256c39da42af?auto=format&fit=crop&w=400&q=80" 
-                         alt="Instagram Post" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                         loading="lazy">
-                </div>
-                <div class="aspect-square overflow-hidden rounded-lg border border-white/10 group cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=400&q=80" 
-                         alt="Instagram Post" 
-                         class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                         loading="lazy">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-16 px-6 bg-black border-t border-white/5">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-4 gap-12 mb-12">
-                <!-- Brand -->
-                <div class="md:col-span-2">
-                    <h3 class="text-3xl playfair tracking-[0.3em] text-white mb-4">AMEIO</h3>
-                    <p class="text-gray-500 text-sm leading-relaxed max-w-sm">
-                        Where luxury meets artistry. Redefining beauty standards one product at a time.
-                    </p>
-                    <div class="flex space-x-6 mt-6">
-                        <a href="#" class="text-gray-600 hover:text-white transition">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7​​​​​​​​​​​​​​​​
-```
+</body>
+</html>
