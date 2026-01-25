@@ -3,7 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMEIO Cosmetics - Launching Soon</title>
+    
+    <title>AMEIO Cosmetics | Redefining Beauty</title>
+    <meta name="description" content="Ameio Cosmetics - The new era of luxury beauty is launching soon. Join the exclusive waitlist.">
+    <meta property="og:title" content="AMEIO Cosmetics | Launching Soon">
+    <meta property="og:description" content="Get ready for something beautiful. Sign up for early access.">
+    <meta property="og:url" content="https://ameiocosmetics.com">
+    <meta property="og:type" content="website">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -13,15 +23,30 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
-            background: #000;
+            /* Modern clean font for text */
+            font-family: 'Montserrat', sans-serif;
+            background: #050505; /* Deep rich black */
             color: #fff;
             overflow-x: hidden;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 2rem 0;
+        }
+
+        /* Noise Texture for Premium Feel */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            opacity: 0.07;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
         }
 
         .container {
@@ -32,18 +57,25 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .logo {
-            font-size: clamp(2rem, 8vw, 5rem);
-            letter-spacing: 0.5em;
-            font-weight: 300;
+            /* Royal Serif Font for Logo */
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 9vw, 5.5rem);
+            letter-spacing: 0.3em;
+            font-weight: 500;
             margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #fff, #d4af37, #fff);
+            background: linear-gradient(135deg, #fff 20%, #d4af37 50%, #fff 80%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
+            animation: shine 4s linear infinite;
         }
 
         @keyframes shine {
@@ -52,134 +84,135 @@
 
         .brand-name {
             font-size: clamp(0.7rem, 1.2vw, 0.95rem);
-            letter-spacing: 0.3em;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 2rem;
-            font-weight: 300;
+            letter-spacing: 0.4em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2.5rem;
+            font-weight: 400;
             text-transform: uppercase;
         }
 
         .tagline {
-            font-size: clamp(0.8rem, 1.5vw, 1.1rem);
-            letter-spacing: 0.4em;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 2.5rem;
-            font-weight: 300;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1rem, 2vw, 1.4rem);
+            letter-spacing: 0.1em;
+            color: #d4af37;
+            margin-bottom: 3rem;
+            opacity: 0.9;
         }
 
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-            max-width: 700px;
-            margin: 0 auto 2.5rem;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto 3.5rem;
         }
 
         .time-box {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem 1rem;
-            border-radius: 8px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            transition: all 0.4s;
+            background: rgba(20, 20, 20, 0.6);
+            padding: 1.5rem 1.2rem;
+            border-radius: 2px; /* Sharp corners are more premium */
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            backdrop-filter: blur(5px);
+            transition: all 0.4s ease;
         }
 
         .time-box:hover {
             transform: translateY(-5px);
-            border-color: #d4af37;
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
         }
 
         .time-number {
-            font-size: clamp(2rem, 5vw, 3rem);
-            color: #d4af37;
-            font-weight: 300;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: #fff;
+            font-weight: 400;
             line-height: 1;
+            margin-bottom: 0.5rem;
         }
 
         .time-label {
-            font-size: 0.65rem;
-            letter-spacing: 0.2em;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 0.5rem;
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            color: #d4af37;
             text-transform: uppercase;
         }
 
         .email-section {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            width: 100%;
         }
 
         .email-form {
             display: flex;
-            gap: 1rem;
-            max-width: 550px;
+            gap: 0; /* Connected input and button */
+            max-width: 500px;
             margin: 0 auto;
-            flex-wrap: wrap;
-            justify-content: center;
+            position: relative;
         }
 
         .email-input {
             flex: 1;
-            min-width: 250px;
-            padding: 1rem 1.5rem;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 1.2rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-right: none;
             color: #fff;
-            font-size: 0.9rem;
-            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            border-radius: 0; /* Square edges */
             outline: none;
             transition: all 0.3s;
         }
 
         .email-input::placeholder {
-            color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 300;
         }
 
         .email-input:focus {
+            background: rgba(255, 255, 255, 0.08);
             border-color: #d4af37;
-            background: rgba(255, 255, 255, 0.12);
         }
 
         .submit-btn {
-            padding: 1rem 2.5rem;
-            background: linear-gradient(135deg, #d4af37, #f4d03f);
+            padding: 1rem 2rem;
+            background: #d4af37;
             color: #000;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.85rem;
+            border: 1px solid #d4af37;
+            border-radius: 0;
+            font-size: 0.8rem;
             font-weight: 600;
-            letter-spacing: 0.1em;
+            letter-spacing: 0.15em;
             cursor: pointer;
             transition: all 0.3s;
             text-transform: uppercase;
         }
 
         .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+            background: #fff;
+            color: #000;
+            border-color: #fff;
         }
 
         .submit-btn:disabled {
-            opacity: 0.7;
+            background: #333;
+            border-color: #333;
+            color: #777;
             cursor: not-allowed;
-            background: #555;
-            color: #ccc;
-            box-shadow: none;
-            transform: none;
         }
 
-        /* Success Message Style Updated */
+        /* Elegant Success Message */
         .success {
             display: none;
             margin-top: 1.5rem;
-            padding: 1rem;
-            /* Gold border for premium look */
-            border: 1px solid #d4af37; 
-            background: rgba(212, 175, 55, 0.1);
-            border-radius: 4px;
-            color: #f4d03f;
-            font-size: 1rem;
-            letter-spacing: 0.05em;
-            animation: fadeIn 0.5s ease-in;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #d4af37;
+            font-style: italic;
+            animation: fadeIn 0.8s ease;
         }
 
         @keyframes fadeIn {
@@ -193,99 +226,84 @@
 
         .social-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             justify-content: center;
             align-items: center;
-            flex-wrap: wrap;
+            margin-bottom: 2rem;
         }
 
         .social-link {
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(255, 255, 255, 0.5);
             text-decoration: none;
-            font-size: 0.85rem;
-            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
             transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            text-transform: uppercase;
         }
 
         .social-link:hover {
             color: #d4af37;
-            transform: translateY(-3px);
         }
 
-        .social-icon {
-            width: 22px;
-            height: 22px;
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            opacity: 0.3;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            z-index: 10;
+            padding-top: 2rem;
         }
 
+        .footer p {
+            margin-bottom: 0.4rem;
+        }
+
+        /* Background Elements */
         .bg-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            opacity: 0.3;
+            z-index: 1;
+            opacity: 0.4;
         }
 
         .glow {
             position: fixed;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.15), transparent 70%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08), transparent 60%);
             border-radius: 50%;
-            filter: blur(80px);
+            filter: blur(100px);
             pointer-events: none;
             z-index: 1;
         }
 
-        .glow-1 {
-            top: -300px;
-            left: -300px;
-            animation: float1 20s ease-in-out infinite;
-        }
+        .glow-1 { top: -400px; left: -200px; animation: float1 25s infinite; }
+        .glow-2 { bottom: -400px; right: -200px; animation: float2 30s infinite; }
 
-        .glow-2 {
-            bottom: -300px;
-            right: -300px;
-            animation: float2 25s ease-in-out infinite;
-        }
-
-        @keyframes float1 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(150px, 150px); }
-        }
-
-        @keyframes float2 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-150px, -150px); }
-        }
+        @keyframes float1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(100px, 100px); } }
+        @keyframes float2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-100px, -100px); } }
 
         @media (max-width: 768px) {
-            body { padding: 1rem 0; }
-            .container { padding: 1rem; }
-            .countdown { gap: 0.8rem; grid-template-columns: repeat(2, 1fr); max-width: 400px; }
-            .time-box { padding: 1.2rem 0.8rem; }
-            .time-number { font-size: 2rem; }
-            .email-form { flex-direction: column; padding: 0 1rem; }
-            .email-input, .submit-btn { width: 100%; }
-            .social-links { flex-direction: column; gap: 1rem; }
-        }
-
-        @media (max-width: 480px) {
-            .logo { font-size: 2.5rem; }
-            .brand-name { font-size: 0.7rem; }
-            .tagline { font-size: 0.75rem; }
-            .countdown { gap: 0.6rem; }
-            .time-number { font-size: 1.8rem; }
-            .time-label { font-size: 0.6rem; }
+            .container { padding: 1.5rem; }
+            .countdown { gap: 1rem; grid-template-columns: repeat(2, 1fr); max-width: 350px; }
+            .time-box { padding: 1rem 0.5rem; }
+            .time-number { font-size: 2.5rem; }
+            .email-form { flex-direction: column; gap: 1rem; }
+            .email-input { border-right: 1px solid rgba(255,255,255,0.2); width: 100%; text-align: center; }
+            .submit-btn { width: 100%; }
         }
     </style>
 </head>
 <body>
 
+    <div class="noise-overlay"></div>
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
     
@@ -294,23 +312,23 @@
     <div class="container">
         <h1 class="logo">AMEIO</h1>
         <p class="brand-name">Cosmetics</p>
-        <p class="tagline">LAUNCHING SOON</p>
+        <p class="tagline">Beauty Redefined. Naturally.</p>
 
         <div class="countdown">
             <div class="time-box">
-                <div class="time-number" id="days">30</div>
+                <div class="time-number" id="days">29</div>
                 <div class="time-label">Days</div>
             </div>
             <div class="time-box">
-                <div class="time-number" id="hours">00</div>
+                <div class="time-number" id="hours">23</div>
                 <div class="time-label">Hours</div>
             </div>
             <div class="time-box">
-                <div class="time-number" id="minutes">00</div>
+                <div class="time-number" id="minutes">59</div>
                 <div class="time-label">Minutes</div>
             </div>
             <div class="time-box">
-                <div class="time-number" id="seconds">00</div>
+                <div class="time-number" id="seconds">43</div>
                 <div class="time-label">Seconds</div>
             </div>
         </div>
@@ -324,7 +342,7 @@
                     type="email" 
                     name="email"
                     class="email-input" 
-                    placeholder="Enter your email"
+                    placeholder="Enter your email address"
                     required
                     id="email"
                 >
@@ -337,23 +355,24 @@
 
         <div class="social-links">
             <a href="https://instagram.com/AMEIOCOSMETICS" target="_blank" class="social-link">
-                <svg class="social-icon" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-                @AMEIOCOSMETICS
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                Instagram
             </a>
 
             <a href="mailto:info@ameiocosmetics.com" class="social-link">
-                <svg class="social-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-                Contact Us
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                Contact
             </a>
+        </div>
+
+        <div class="footer">
+            <p>&copy; 2026 AMEIO COSMETICS. ALL RIGHTS RESERVED.</p>
+            <p>PRIVACY POLICY | TERMS & CONDITIONS</p>
         </div>
     </div>
 
     <script>
-        // Canvas Animation (Stars)
+        // --- ANIMATED BACKGROUND (STARS) ---
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -364,9 +383,8 @@
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
                 this.z = Math.random() * 1000;
-                this.speed = Math.random() * 2 + 1;
+                this.speed = Math.random() * 1.5 + 0.5; // Slower, more elegant speed
             }
-
             update() {
                 this.z -= this.speed;
                 if (this.z <= 0) {
@@ -375,34 +393,32 @@
                     this.y = Math.random() * canvas.height;
                 }
             }
-
             draw() {
                 const scale = 1000 / (1000 + this.z);
                 const x2d = (this.x - canvas.width / 2) * scale + canvas.width / 2;
                 const y2d = (this.y - canvas.height / 2) * scale + canvas.height / 2;
-                const size = scale * 2;
+                const size = scale * 2.5;
+                
+                // Opacity based on distance
+                const alpha = scale; 
 
                 ctx.beginPath();
                 ctx.arc(x2d, y2d, size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(212, 175, 55, ${scale})`;
+                ctx.fillStyle = `rgba(212, 175, 55, ${alpha})`; // Gold Stars
                 ctx.fill();
             }
         }
 
-        const stars = Array.from({ length: 200 }, () => new Star());
+        const stars = Array.from({ length: 150 }, () => new Star()); // Fewer stars for cleaner look
 
         function animate() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas completely
             stars.forEach(star => {
                 star.update();
                 star.draw();
             });
-
             requestAnimationFrame(animate);
         }
-
         animate();
 
         window.addEventListener('resize', () => {
@@ -410,7 +426,7 @@
             canvas.height = window.innerHeight;
         });
 
-        // Countdown Timer - 30 days
+        // --- COUNTDOWN TIMER (30 DAYS) ---
         const launchDate = new Date();
         launchDate.setDate(launchDate.getDate() + 30);
 
@@ -428,27 +444,23 @@
             document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
             document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
         }
-
-        const timer = setInterval(updateCountdown, 1000);
+        setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // ----------------------------------------------------
-        // NEW FORM LOGIC (AJAX - NO REDIRECT)
-        // ----------------------------------------------------
+        // --- FORM HANDLING (NO REDIRECT) ---
         const form = document.getElementById('form');
         const submitBtn = document.getElementById('submitBtn');
         const successMsg = document.getElementById('success');
 
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop the page from reloading or redirecting
+            e.preventDefault(); // STOP REDIRECT
 
-            // Change button text to indicate loading
             submitBtn.disabled = true;
             submitBtn.textContent = 'JOINING...';
+            submitBtn.style.opacity = '0.7';
 
             const formData = new FormData(form);
 
-            // Send data to FormSubmit using AJAX (fetch)
             fetch("https://formsubmit.co/ajax/info@ameiocosmetics.com", {
                 method: "POST",
                 headers: { 
@@ -459,18 +471,15 @@
             })
             .then(response => response.json())
             .then(data => {
-                // SUCCESS: Show the message
-                form.style.display = 'none'; // Hide the form
-                successMsg.classList.add('show'); // Show success div
-                
-                // YOUR CUSTOM MESSAGE HERE:
-                successMsg.innerHTML = "✨ Welcome to Ameio! You are on the list."; 
+                form.style.display = 'none'; // Hide form
+                successMsg.classList.add('show'); // Show message
+                successMsg.innerHTML = "✨ Welcome to Ameio. You are on the list.";
             })
             .catch(error => {
                 console.log(error);
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'TRY AGAIN';
-                alert("Something went wrong. Please try again.");
+                alert("Something went wrong. Please check your connection.");
             });
         });
     </script>
