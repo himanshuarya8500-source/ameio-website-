@@ -89,7 +89,7 @@
         .footer-links a, .footer-links button { color: inherit; text-decoration: none; transition: 0.3s; text-transform: uppercase; background: none; border: none; font-family: inherit; font-size: inherit; letter-spacing: inherit; cursor: pointer; }
         .footer-links a:hover, .footer-links button:hover { color: var(--gold); }
 
-        /* --- MODALS FIXED (Responsive) --- */
+        /* --- MODALS (DESKTOP DEFAULT) --- */
         .modal {
             display: none; 
             position: fixed; 
@@ -97,10 +97,8 @@
             width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); 
             z-index: 9999; 
-            /* Default for Laptop: Center */
-            align-items: center; 
+            align-items: center; /* Center on Desktop */
             justify-content: center;
-            /* Allow scrolling if content is tall */
             overflow-y: auto; 
             backdrop-filter: blur(15px); opacity: 0; transition: opacity 0.3s ease;
         }
@@ -109,7 +107,6 @@
         .modal-content {
             background: rgba(10, 10, 10, 0.95); border: 1px solid var(--gold);
             padding: 2.5rem; max-width: 600px; width: 90%; 
-            /* Prevent modal from being taller than screen */
             max-height: 90vh; 
             overflow-y: auto; text-align: left; border-radius: 15px;
             box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
@@ -132,21 +129,24 @@
         }
         .back-btn:hover { background: var(--gold); color: #000; }
 
-        /* MOBILE SPECIFIC FIXES */
+        /* --- MOBILE FIXES --- */
         @media (max-width: 600px) {
             .input-group { border-radius: 20px; flex-direction: column; padding: 15px; gap: 10px; background: rgba(0,0,0,0.5); }
             .submit-btn { width: 100%; padding: 1rem; border-radius: 12px; }
             .email-input { text-align: center; padding: 0.5rem; }
             .container { transform: none !important; }
             
-            /* Fix Modal on Mobile */
+            /* MODAL MOBILE FIX: Start from Top & Allow Scroll */
             .modal {
-                align-items: flex-start; /* Start from top, don't force center */
-                padding-top: 2rem; /* Avoid Notch */
+                align-items: flex-start !important; /* Force start from top */
+                padding-top: 4rem; /* Safety space for notch */
+                overflow-y: scroll !important; /* Scrollable wrapper */
             }
             .modal-content {
-                max-height: none; /* Let content flow */
-                margin-bottom: 2rem; /* Space at bottom */
+                max-height: none !important; /* Allow full height expansion */
+                margin-bottom: 4rem; /* Bottom spacing */
+                width: 85%;
+                transform: none !important;
             }
         }
     </style>
@@ -238,7 +238,7 @@
     </div>
 
     <script>
-        // MODALS (FIXED)
+        // MODALS
         function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
         window.onclick = function(e) { if (e.target.classList.contains('modal')) { e.target.classList.remove('active'); document.body.style.overflow = 'auto'; } }
