@@ -89,19 +89,28 @@
         .footer-links a, .footer-links button { color: inherit; text-decoration: none; transition: 0.3s; text-transform: uppercase; background: none; border: none; font-family: inherit; font-size: inherit; letter-spacing: inherit; cursor: pointer; }
         .footer-links a:hover, .footer-links button:hover { color: var(--gold); }
 
-        /* --- MODALS FIXED --- */
+        /* --- MODALS FIXED (Responsive) --- */
         .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); /* Darker background */
-            z-index: 9999; /* Highest priority */
-            align-items: center; justify-content: center;
+            display: none; 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); 
+            z-index: 9999; 
+            /* Default for Laptop: Center */
+            align-items: center; 
+            justify-content: center;
+            /* Allow scrolling if content is tall */
+            overflow-y: auto; 
             backdrop-filter: blur(15px); opacity: 0; transition: opacity 0.3s ease;
         }
         .modal.active { display: flex; opacity: 1; }
         
         .modal-content {
             background: rgba(10, 10, 10, 0.95); border: 1px solid var(--gold);
-            padding: 2.5rem; max-width: 600px; width: 90%; max-height: 85vh;
+            padding: 2.5rem; max-width: 600px; width: 90%; 
+            /* Prevent modal from being taller than screen */
+            max-height: 90vh; 
             overflow-y: auto; text-align: left; border-radius: 15px;
             box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
             position: relative;
@@ -115,7 +124,6 @@
         .modal-body p { margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.9); }
         .modal-body h4 { color: var(--gold); margin: 2rem 0 0.8rem; font-family: 'Playfair Display', serif; font-size: 1.2rem; }
 
-        /* NEW BACK BUTTON */
         .back-btn {
             display: block; width: 100%; margin-top: 2rem; padding: 1rem;
             background: transparent; border: 1px solid var(--gold); color: var(--gold);
@@ -124,13 +132,22 @@
         }
         .back-btn:hover { background: var(--gold); color: #000; }
 
+        /* MOBILE SPECIFIC FIXES */
         @media (max-width: 600px) {
             .input-group { border-radius: 20px; flex-direction: column; padding: 15px; gap: 10px; background: rgba(0,0,0,0.5); }
             .submit-btn { width: 100%; padding: 1rem; border-radius: 12px; }
             .email-input { text-align: center; padding: 0.5rem; }
             .container { transform: none !important; }
-            .modal-content { padding: 1.5rem; }
-            .modal-title { font-size: 1.4rem; }
+            
+            /* Fix Modal on Mobile */
+            .modal {
+                align-items: flex-start; /* Start from top, don't force center */
+                padding-top: 2rem; /* Avoid Notch */
+            }
+            .modal-content {
+                max-height: none; /* Let content flow */
+                margin-bottom: 2rem; /* Space at bottom */
+            }
         }
     </style>
 </head>
@@ -189,18 +206,15 @@
             </div>
             <div class="modal-body">
                 <p><strong>Last Updated: Feb 2026</strong></p>
-                <p>Welcome to AMEIO Cosmetics. By joining our waitlist, you agree to the following brief terms:</p>
-                
+                <p>Welcome to AMEIO Cosmetics.</p>
                 <h4>1. Eligibility</h4>
                 <p>You must be at least 18 years old to join our exclusive list.</p>
-                
                 <h4>2. Waitlist Priority</h4>
                 <p>Signing up gives you early access to our store launch. It does not guarantee purchase availability if stock runs out.</p>
-                
                 <h4>3. Intellectual Property</h4>
-                <p>All content, logos, and designs on this site are the property of AMEIO Cosmetics.</p>
+                <p>All content is property of AMEIO Cosmetics.</p>
             </div>
-            <button class="back-btn" onclick="closeModal('terms')">Back to Home</button>
+            <button class="back-btn" onclick="closeModal('terms')">BACK TO HOME</button>
         </div>
     </div>
 
@@ -212,18 +226,14 @@
             </div>
             <div class="modal-body">
                 <p><strong>Your Privacy is our Luxury.</strong></p>
-                <p>At AMEIO, we respect your data. Here is how we handle it:</p>
-                
                 <h4>1. Information Collection</h4>
-                <p>We collect your email address solely for the purpose of notifying you about our launch and exclusive offers.</p>
-                
+                <p>We collect your email address solely for launch notifications.</p>
                 <h4>2. No Spam / No Selling</h4>
-                <p>We will never sell your data to third parties. You will only receive official AMEIO communications.</p>
-                
+                <p>We will never sell your data to third parties.</p>
                 <h4>3. Unsubscribe</h4>
-                <p>You can unsubscribe from our emails at any time with a single click.</p>
+                <p>You can unsubscribe at any time.</p>
             </div>
-            <button class="back-btn" onclick="closeModal('privacy')">Back to Home</button>
+            <button class="back-btn" onclick="closeModal('privacy')">BACK TO HOME</button>
         </div>
     </div>
 
@@ -253,7 +263,7 @@
             }
         });
 
-        // ANIMATION ENGINE
+        // ANIMATION
         const canvas = document.getElementById('star-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
