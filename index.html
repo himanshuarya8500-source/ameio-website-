@@ -3,216 +3,448 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>AMEIO Cosmetics | Redefining Beauty</title>
-    <meta name="description" content="Ameio Cosmetics - The new era of luxury beauty is launching soon. Join the exclusive waitlist.">
+    <title>AMEIO Cosmetics | The Future of Luxury</title>
+    <meta name="description" content="Redefining luxury beauty. Join the exclusive waitlist for Ameio Cosmetics.">
     
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="canonical" href="https://ameiocosmetics.com">
-
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
+        /* --- 1. CORE VARIABLES & RESET --- */
+        :root {
+            --gold: #d4af37;
+            --gold-dim: rgba(212, 175, 55, 0.3);
+            --bg-dark: #050505;
+            --text-light: #f5f5f5;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border-light: rgba(255, 255, 255, 0.1);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background: #050505;
-            color: #fff;
-            overflow-x: hidden;
-            min-height: 100vh;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            height: 100vh;
+            overflow: hidden; /* No scroll for cinematic feel */
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
-        /* Reveal Animation for Page Load */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        /* --- 2. BACKGROUND EFFECTS (ORGANIC & ZOOM) --- */
+        /* Canvas for Stars sits behind everything */
+        #star-canvas {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1; pointer-events: none;
         }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        /* Subtle Noise Texture */
         .noise-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 2; opacity: 0.05;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.04; z-index: 2; pointer-events: none;
         }
 
+        /* Slow Zoom / Breathing Background */
+        .ambient-glow {
+            position: fixed;
+            width: 150vw; height: 150vh;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05), transparent 60%);
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            animation: breathe 15s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes breathe {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
+        /* --- 3. MAIN CONTAINER & ANIMATIONS --- */
         .container {
-            text-align: center;
-            padding: 2rem;
             position: relative;
             z-index: 10;
-            max-width: 1200px;
+            text-align: center;
+            width: 100%;
+            max-width: 1000px;
+            padding: 2rem;
+            /* Entrance Scale Effect */
+            animation: zoomInReveal 1.5s cubic-bezier(0.2, 1, 0.3, 1) forwards;
+            opacity: 0;
         }
 
+        @keyframes zoomInReveal {
+            from { transform: scale(0.95) translateY(30px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        /* --- 4. TYPOGRAPHY & BRANDING --- */
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 9vw, 5.5rem);
-            letter-spacing: 0.3em;
+            font-size: clamp(3rem, 10vw, 6rem);
             font-weight: 500;
-            background: linear-gradient(135deg, #fff 20%, #d4af37 50%, #fff 80%);
+            letter-spacing: 0.15em;
+            color: transparent;
+            background: linear-gradient(135deg, #fff 30%, var(--gold) 50%, #fff 70%);
             background-size: 200% auto;
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 5s linear infinite;
+            animation: shineText 6s linear infinite;
+            margin-bottom: 0.5rem;
         }
 
-        @keyframes shine { to { background-position: 200% center; } }
+        @keyframes shineText { to { background-position: 200% center; } }
 
-        .brand-name {
-            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
-            letter-spacing: 0.5em;
-            color: rgba(255, 255, 255, 0.5);
-            margin-bottom: 2.5rem;
+        .brand-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 0.6em;
             text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 2.5rem;
         }
 
         .tagline {
             font-family: 'Playfair Display', serif;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
             font-style: italic;
-            font-size: clamp(1rem, 2vw, 1.3rem);
-            color: #d4af37;
-            margin-bottom: 3rem;
+            color: var(--gold);
+            margin-bottom: 3.5rem;
+            opacity: 0.9;
         }
 
+        /* --- 5. COMPONENT: COUNTDOWN --- */
         .countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: clamp(1rem, 4vw, 3rem);
             margin-bottom: 4rem;
         }
 
         .time-box {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 1.5rem;
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .time-val {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            line-height: 1;
+            background: linear-gradient(to bottom, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .time-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-top: 0.5rem;
+        }
+
+        /* Divider lines between numbers */
+        .time-box:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: -1.5rem; top: 20%; height: 60%;
+            width: 1px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* --- 6. COMPONENT: FORM --- */
+        .form-wrapper {
+            position: relative;
+            max-width: 450px;
+            margin: 0 auto 3rem;
+        }
+
+        .input-group {
+            position: relative;
+            display: flex;
+            background: var(--glass);
+            border: 1px solid var(--border-light);
+            backdrop-filter: blur(10px);
             transition: 0.4s ease;
         }
 
-        .time-box:hover {
-            border-color: #d4af37;
-            background: rgba(212, 175, 55, 0.03);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
-        }
-
-        .time-number { font-family: 'Playfair Display', serif; font-size: 3rem; color: #fff; }
-        .time-label { font-size: 0.6rem; color: #d4af37; letter-spacing: 0.2em; text-transform: uppercase; }
-
-        .email-form {
-            display: flex;
-            max-width: 500px;
-            margin: 0 auto;
+        .input-group:hover, .input-group:focus-within {
+            border-color: var(--gold);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+            background: rgba(255,255,255,0.05);
         }
 
         .email-input {
-            flex: 1; padding: 1.2rem; background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff; outline: none; transition: 0.3s;
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 1.2rem;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
         }
-
-        .email-input:focus { border-color: #d4af37; background: rgba(255, 255, 255, 0.03); }
 
         .submit-btn {
-            padding: 0 2rem; background: #d4af37; border: 1px solid #d4af37;
-            font-weight: 600; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            padding: 0 2rem;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
         }
 
-        .submit-btn:hover { background: #fff; border-color: #fff; }
+        .submit-btn:hover {
+            background: #fff;
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+        }
 
-        .success { display: none; color: #d4af37; font-style: italic; margin-top: 1.5rem; font-size: 1.1rem; }
-        .success.show { display: block; }
+        .success-msg {
+            margin-top: 1rem;
+            color: var(--gold);
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.5s ease;
+            position: absolute;
+            width: 100%;
+        }
+        .success-msg.visible { opacity: 1; transform: translateY(0); }
 
-        /* Socials & Footer */
-        .social-links { display: flex; gap: 2rem; justify-content: center; margin: 3rem 0; }
-        .social-link { color: rgba(255, 255, 255, 0.4); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.2em; transition: 0.3s; }
-        .social-link:hover { color: #d4af37; }
+        /* --- 7. FOOTER & SOCIALS --- */
+        .footer-nav {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
 
-        .footer { opacity: 0.3; font-size: 0.6rem; letter-spacing: 0.1em; padding-bottom: 2rem; }
+        .footer-nav a {
+            color: rgba(255,255,255,0.4);
+            text-decoration: none;
+            transition: 0.3s;
+            position: relative;
+        }
 
+        .footer-nav a:hover { color: var(--gold); }
+
+        /* Underline effect */
+        .footer-nav a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 1px;
+            background: var(--gold); transition: 0.3s;
+        }
+        .footer-nav a:hover::after { width: 100%; }
+
+        /* Responsive Fixes */
         @media (max-width: 768px) {
-            .countdown { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-            .email-form { flex-direction: column; }
-            .submit-btn { padding: 1.2rem; }
+            .time-box:not(:last-child)::after { display: none; } /* Hide dividers on mobile */
+            .countdown { gap: 1.5rem; }
+            .input-group { flex-direction: column; border-radius: 4px; overflow: hidden; }
+            .submit-btn { padding: 1rem; width: 100%; }
         }
     </style>
 </head>
 <body>
 
     <div class="noise-overlay"></div>
+    <div class="ambient-glow"></div>
+    <canvas id="star-canvas"></canvas>
 
     <div class="container">
-        <div class="reveal" id="r1"><h1 class="logo">AMEIO</h1></div>
-        <div class="reveal" id="r2"><p class="brand-name">Cosmetics</p></div>
-        <div class="reveal" id="r3"><p class="tagline">The New Era of Luxury Beauty.</p></div>
+        <h1 class="logo">AMEIO</h1>
+        <div class="brand-subtitle">COSMETICS</div>
+        <div class="tagline">Where Nature Meets Luxury</div>
 
-        <div class="countdown reveal" id="r4">
-            <div class="time-box"><div class="time-number" id="days">00</div><div class="time-label">Days</div></div>
-            <div class="time-box"><div class="time-number" id="hours">00</div><div class="time-label">Hrs</div></div>
-            <div class="time-box"><div class="time-number" id="minutes">00</div><div class="time-label">Min</div></div>
-            <div class="time-box"><div class="time-number" id="seconds">00</div><div class="time-label">Sec</div></div>
+        <div class="countdown">
+            <div class="time-box">
+                <span class="time-val" id="d">00</span>
+                <span class="time-label">Days</span>
+            </div>
+            <div class="time-box">
+                <span class="time-val" id="h">00</span>
+                <span class="time-label">Hours</span>
+            </div>
+            <div class="time-box">
+                <span class="time-val" id="m">00</span>
+                <span class="time-label">Mins</span>
+            </div>
+            <div class="time-box">
+                <span class="time-val" id="s">00</span>
+                <span class="time-label">Secs</span>
+            </div>
         </div>
 
-        <div class="email-section reveal" id="r5">
-            <form class="email-form" id="form">
-                <input type="email" name="email" class="email-input" placeholder="Your Email Address" required>
-                <button type="submit" class="submit-btn" id="submitBtn">Notify Me</button>
+        <div class="form-wrapper">
+            <form id="waitlistForm">
+                <div class="input-group">
+                    <input type="email" name="email" class="email-input" placeholder="Enter your email for early access" required>
+                    <button type="submit" class="submit-btn" id="btn">Join Waitlist</button>
+                </div>
             </form>
-            <div class="success" id="success">✨ You are on the elite list. Welcome to AMEIO.</div>
+            <div class="success-msg" id="successMsg">✨ Welcome to the inner circle.</div>
         </div>
 
-        <div class="social-links reveal" id="r6">
-            <a href="https://instagram.com/AMEIOCOSMETICS" target="_blank" class="social-link">INSTAGRAM</a>
-            <a href="mailto:info@ameiocosmetics.com" class="social-link">CONTACT</a>
-        </div>
-
-        <div class="footer reveal" id="r7">
-            &copy; 2026 AMEIO COSMETICS. REFINING ELEGANCE globally.
+        <div class="footer-nav">
+            <a href="https://instagram.com/AMEIOCOSMETICS" target="_blank">INSTAGRAM</a>
+            <a href="mailto:info@ameiocosmetics.com">CONTACT</a>
+            <a href="#">PRIVACY</a>
         </div>
     </div>
 
     <script>
-        // --- FIXED COUNTDOWN (Feb 25, 2026) ---
-        const targetDate = new Date("February 25, 2026 00:00:00").getTime();
+        /* ------------------------------------------------
+           1. ORGANIC STARFIELD & SHOOTING STARS ENGINE
+           ------------------------------------------------ */
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let entities = []; // Holds both stars and shooting stars
 
-        function updateTimer() {
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Star {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 1.5; // Tiny elegant stars
+                this.opacity = Math.random();
+                this.speed = Math.random() * 0.2 + 0.05; // Very slow drift
+                this.blinkSpeed = Math.random() * 0.02 + 0.005;
+                this.blinkDir = 1;
+            }
+            update() {
+                // Organic Blink
+                this.opacity += this.blinkSpeed * this.blinkDir;
+                if (this.opacity >= 1 || this.opacity <= 0.2) this.blinkDir *= -1;
+                
+                // Organic Drift (Slowly moves up)
+                this.y -= this.speed;
+                if (this.y < 0) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`; // Gold tint
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        class ShootingStar {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * (height / 2); // Start from top half
+                this.len = Math.random() * 80 + 10;
+                this.speed = Math.random() * 10 + 6;
+                this.size = Math.random() * 1 + 0.1;
+                // Shooting angle (diagonal down-right or down-left)
+                this.waitTime = new Date().getTime() + Math.random() * 3000 + 1000;
+                this.active = false;
+            }
+            update() {
+                if (this.active) {
+                    this.x -= this.speed;
+                    this.y += this.speed;
+                    if (this.x < 0 || this.y > height) {
+                        this.active = false;
+                        this.waitTime = new Date().getTime() + Math.random() * 5000 + 2000; // Random delay between shots
+                        this.reset();
+                    }
+                } else {
+                    if (new Date().getTime() > this.waitTime) {
+                        this.active = true;
+                    }
+                }
+            }
+            draw() {
+                if (!this.active) return;
+                
+                // Create gradient tail
+                const gradient = ctx.createLinearGradient(this.x, this.y, this.x + this.len, this.y - this.len);
+                gradient.addColorStop(0, "rgba(255, 255, 255, 1)");
+                gradient.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+                ctx.strokeStyle = gradient;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x + 30, this.y - 30); // Trail length
+                ctx.stroke();
+            }
+        }
+
+        // Initialize Stars
+        for (let i = 0; i < 120; i++) entities.push(new Star());
+        // Initialize Shooting Stars (2 of them)
+        const shooter1 = new ShootingStar();
+        const shooter2 = new ShootingStar();
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            entities.forEach(star => { star.update(); star.draw(); });
+            
+            shooter1.update(); shooter1.draw();
+            shooter2.update(); shooter2.draw();
+
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        /* ------------------------------------------------
+           2. COUNTDOWN LOGIC (FIXED DATE)
+           ------------------------------------------------ */
+        const targetDate = new Date("February 25, 2026 00:00:00").getTime();
+        
+        setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
-            
-            if (diff < 0) return;
 
-            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-            document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-            document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
-        }
-        setInterval(updateTimer, 1000);
-        updateTimer();
+            if (diff > 0) {
+                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            }
+        }, 1000);
 
-        // --- STAGGERED REVEAL ANIMATION ---
-        window.onload = () => {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach((el, index) => {
-                setTimeout(() => el.classList.add('visible'), 200 * index);
-            });
-        };
-
-        // --- FORM SUBMISSION (No Redirect) ---
-        const form = document.getElementById('form');
-        form.addEventListener('submit', function(e) {
+        /* ------------------------------------------------
+           3. FORM HANDLING (AJAX)
+           ------------------------------------------------ */
+        const form = document.getElementById('waitlistForm');
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.disabled = true; btn.innerText = "WAITING...";
+            const btn = document.getElementById('btn');
+            const msg = document.getElementById('successMsg');
+            
+            btn.innerText = "Processing...";
+            btn.style.opacity = "0.7";
 
             fetch("https://formsubmit.co/ajax/info@ameiocosmetics.com", {
                 method: "POST",
@@ -220,8 +452,13 @@
                 body: JSON.stringify(Object.fromEntries(new FormData(form)))
             })
             .then(() => {
-                form.style.display = 'none';
-                document.getElementById('success').classList.add('show');
+                form.style.opacity = '0';
+                setTimeout(() => form.style.display = 'none', 500);
+                msg.classList.add('visible');
+            })
+            .catch(() => {
+                btn.innerText = "Try Again";
+                btn.style.opacity = "1";
             });
         });
     </script>
