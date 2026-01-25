@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMEIO Cosmetics | Nature Meets Luxury</title>
+    <title>AMEIO Cosmetics | Interactive Luxury</title>
     <link rel="icon" type="image/png" href="favicon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,8 +14,8 @@
         :root {
             --gold: #d4af37;
             --text: #f5f5f5;
-            --glass: rgba(0, 20, 10, 0.4); /* Dark Greenish Glass */
-            --border: rgba(212, 175, 55, 0.3); /* Gold Border */
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(212, 175, 55, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,113 +28,99 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: #000;
+            background: #050505;
+            perspective: 1000px; /* Needed for 3D effect */
         }
 
-        /* --- 1. BACKGROUND VIDEO (NATURE) --- */
+        /* --- 1. LAYERS: VIDEO, LIGHTING, STARS --- */
+        
+        /* Layer 1: Base Video */
         .video-bg {
-            position: fixed;
-            right: 0; bottom: 0;
-            min-width: 100%; min-height: 100%;
-            width: auto; height: auto;
-            z-index: -2;
-            object-fit: cover;
-            opacity: 0.6; /* Slight dim to make text pop */
-        }
-
-        /* Gradient Overlay (Dark Green to Black) */
-        .overlay-gradient {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(10, 30, 10, 0.2) 0%, rgba(0,0,0,0.8) 100%);
-            z-index: -1; pointer-events: none;
+            object-fit: cover; z-index: -3; opacity: 0.7;
+            filter: saturate(1.2) contrast(1.1); /* Make colors pop slightly */
         }
 
-        /* --- 2. CANVAS & NOISE --- */
-        #star-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-        .noise-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url("https://grainy-gradients.vercel.app/noise.svg"); opacity: 0.04; z-index: 1; pointer-events: none; }
+        /* Layer 2: Interactive Cursor Spotlight (Shadow/Highlight Tech) */
+        .cursor-light {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2; pointer-events: none;
+            /* Initially dark, JavaScript updates this gradient position */
+            background: radial-gradient(circle 600px at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,15,5,0.9) 100%);
+            transition: background 0.1s ease; /* Smooth movement */
+        }
 
-        /* --- 3. MAIN CONTAINER --- */
+        /* Layer 3: Stars Canvas */
+        #star-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; mix-blend-mode: screen; }
+
+        /* --- 2. MAIN CONTAINER (WITH 3D MOTION) --- */
         .container {
             position: relative; z-index: 10;
             width: 100%; max-width: 900px;
-            padding: 5rem 2rem 2rem;
+            padding: 6rem 2rem 3rem;
             flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
+            /* 3D Transition properties */
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out; 
+            will-change: transform; /* Performance optimization */
         }
+
+        /* Content elements need slight Z-push for 3D depth */
+        .logo, .tagline, .countdown, .form-wrapper { transform: translateZ(20px); }
 
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3.5rem, 12vw, 6.5rem);
-            background: linear-gradient(135deg, #fff 40%, var(--gold) 60%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 0.2rem;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 12vw, 7rem);
+            background: linear-gradient(135deg, #fff 30%, var(--gold) 50%, #fff 70%);
+            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shineText 6s linear infinite; margin-bottom: 0.2rem;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
         }
+        @keyframes shineText { to { background-position: 200% center; } }
 
-        .brand-subtitle { font-size: 0.8rem; letter-spacing: 0.5em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 3rem; }
+        .brand-subtitle { font-size: 0.8rem; letter-spacing: 0.5em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 3rem; }
         
-        .tagline {
-            font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: #eaddcf; margin-bottom: 4rem; font-style: italic;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
-        }
+        .tagline { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.8rem); color: #eaddcf; margin-bottom: 5rem; font-style: italic; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
 
         /* --- COUNTDOWN --- */
-        .countdown { display: flex; gap: 2rem; margin-bottom: 4rem; flex-wrap: wrap; justify-content: center; }
-        .time-box { text-align: center; backdrop-filter: blur(5px); padding: 10px; border-radius: 10px; }
-        .time-val { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); color: #fff; line-height: 1; }
+        .countdown { display: flex; gap: 2rem; margin-bottom: 5rem; flex-wrap: wrap; justify-content: center; }
+        .time-val { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); color: #fff; line-height: 1; text-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .time-label { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-top: 5px; }
 
-        /* --- REFINED CAPSULE FORM (NEW LAYOUT) --- */
+        /* --- CAPSULE FORM --- */
         .form-wrapper { width: 100%; max-width: 500px; position: relative; margin-bottom: 5rem; }
         
         .input-group {
             display: flex; 
-            background: rgba(255, 255, 255, 0.08); /* Frosted Glass */
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            border-radius: 50px; /* CAPSULE SHAPE */
-            padding: 6px;
-            transition: 0.4s ease;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            background: rgba(255, 255, 255, 0.05); /* Ultra-clear glass */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px) saturate(180%); /* High-end frosted look */
+            border-radius: 50px; padding: 6px; transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.1);
         }
         
-        .input-group:focus-within { 
+        .input-group:focus-within, .input-group:hover { 
             border-color: var(--gold); 
-            background: rgba(0, 20, 10, 0.6); 
-            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
+            background: rgba(0, 20, 10, 0.4); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.2);
+            transform: translateY(-2px);
         }
 
         .email-input {
-            flex: 1; 
-            background: transparent; 
-            border: none; 
-            padding: 0 1.5rem;
-            color: #fff; 
-            font-family: 'Montserrat', sans-serif; 
-            font-size: 1rem;
-            outline: none;
+            flex: 1; background: transparent; border: none; padding: 0 1.5rem;
+            color: #fff; font-family: 'Montserrat', sans-serif; font-size: 1rem; outline: none;
         }
-        
-        .email-input::placeholder { color: rgba(255,255,255,0.5); }
+        .email-input::placeholder { color: rgba(255,255,255,0.4); }
 
         .submit-btn {
-            background: var(--gold); 
-            color: #051a05; /* Dark Green Text */
-            border: none; 
-            padding: 1rem 2.5rem;
-            border-radius: 40px; /* Button is also round */
-            font-weight: 600; 
-            font-size: 0.85rem; 
-            letter-spacing: 0.05em; 
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, var(--gold), #b08d2b); 
+            color: #051a05; border: none; padding: 1rem 2.5rem; border-radius: 40px;
+            font-weight: 700; font-size: 0.85rem; letter-spacing: 0.05em; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
         }
         
         .submit-btn:hover { 
-            background: #fff; 
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(255,255,255,0.4);
+            background: #fff; transform: scale(1.05);
+            box-shadow: 0 15px 30px rgba(255,255,255,0.3);
         }
 
         .success-msg { position: absolute; width: 100%; top: 120%; color: var(--gold); font-family: 'Playfair Display', serif; font-style: italic; opacity: 0; transition: 0.5s; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
@@ -144,18 +130,20 @@
         .footer-nav {
             margin-top: auto; padding: 2rem 0; width: 100%;
             display: flex; flex-direction: column; gap: 1.5rem;
-            font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);
+            font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.5);
             z-index: 10; text-align: center;
-            background: linear-gradient(to top, #000 20%, transparent); /* Fade out footer */
+            background: linear-gradient(to top, #000 40%, transparent);
         }
         .footer-links { display: flex; gap: 2rem; justify-content: center; }
         .footer-links a { color: inherit; text-decoration: none; transition: 0.3s; text-transform: uppercase; }
         .footer-links a:hover { color: var(--gold); }
 
         @media (max-width: 600px) {
-            .input-group { border-radius: 20px; flex-direction: column; padding: 15px; gap: 10px; background: rgba(0,0,0,0.6); }
+            .input-group { border-radius: 20px; flex-direction: column; padding: 15px; gap: 10px; background: rgba(0,0,0,0.5); }
             .submit-btn { width: 100%; padding: 1rem; border-radius: 12px; }
             .email-input { text-align: center; padding: 0.5rem; }
+            /* Disable heavy 3D effects on mobile for performance */
+            .container { transform: none !important; }
         }
     </style>
 </head>
@@ -165,16 +153,15 @@
         <source src="https://videos.pexels.com/video-files/5377546/5377546-hd_1080_1920_25fps.mp4" type="video/mp4">
     </video>
     
-    <div class="overlay-gradient"></div>
+    <div class="cursor-light" id="cursor-light"></div>
     
-    <div class="noise-overlay"></div>
     <canvas id="star-canvas"></canvas>
 
-    <div class="container">
+    <div class="container" id="tilt-container">
         <h1 class="logo">AMEIO</h1>
         <div class="brand-subtitle">ORGANIC LUXURY</div>
         
-        <p class="tagline">"Where the purity of nature meets the art of beauty."</p>
+        <p class="tagline">"Experience beauty that breathes."</p>
 
         <div class="countdown">
             <div class="time-box"><div class="time-val" id="d">00</div><div class="time-label">Days</div></div>
@@ -190,7 +177,7 @@
                     <button type="submit" class="submit-btn" id="btn">Get Early Access</button>
                 </div>
             </form>
-            <div class="success-msg" id="successMsg">✨ Nature welcomes you. You're on the list.</div>
+            <div class="success-msg" id="successMsg">✨ Welcome to the inner circle.</div>
         </div>
     </div>
 
@@ -207,43 +194,58 @@
     </div>
 
     <script>
-        /* --- SHOOTING STARS ENGINE --- */
+        /* ------------------------------------------------
+           1. INTERACTIVE CURSOR LIGHTING & 3D TILT
+           ------------------------------------------------ */
+        const lightLayer = document.getElementById('cursor-light');
+        const tiltContainer = document.getElementById('tilt-container');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            // Update Lighting Position (Spotlight effect)
+            lightLayer.style.background = `radial-gradient(circle 600px at ${x}px ${y}px, rgba(0,0,0,0) 0%, rgba(0,15,5,0.95) 100%)`;
+
+            // 3D Tilt Effect on Container (Subtle movement opposite to mouse)
+            const rotateX = ((centerY - y) / centerY) * 5; // Max 5 deg tilt
+            const rotateY = ((x - centerX) / centerX) * 5;
+            
+            // Apply tilt only on larger screens
+            if(window.innerWidth > 600) {
+                 tiltContainer.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
+            }
+        });
+
+        /* ------------------------------------------------
+           2. SHOOTING STARS ENGINE (RESTORED)
+           ------------------------------------------------ */
         const canvas = document.getElementById('star-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
-
         function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
         window.addEventListener('resize', resize); resize();
 
         class Star {
             constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 1.5;
-                this.opacity = Math.random() * 0.5;
-                this.speed = Math.random() * 0.1;
-            }
-            update() {
-                this.y -= this.speed;
-                if (this.y < 0) this.reset();
-            }
-            draw() {
-                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
-                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill();
-            }
+            reset() { this.x = Math.random() * width; this.y = Math.random() * height; this.size = Math.random() * 1.5; this.opacity = Math.random() * 0.8; this.speed = Math.random() * 0.1; }
+            update() { this.y -= this.speed; if (this.y < 0) this.reset(); }
+            draw() { ctx.fillStyle = `rgba(255, 255, 200, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
         }
-
-        const stars = Array.from({length: 80}, () => new Star());
-        
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            stars.forEach(s => { s.update(); s.draw(); });
-            requestAnimationFrame(animate);
+        class ShootingStar {
+            constructor() { this.reset(); }
+            reset() { this.x = Math.random()*width; this.y = Math.random()*height*0.5; this.len = Math.random()*80+10; this.speed = Math.random()*6+4; this.size = Math.random()*2; this.waitTime = Date.now() + Math.random()*3000+1000; this.active = false; }
+            update() { if(this.active){ this.x-=this.speed; this.y+=this.speed*0.5; if(this.x<0||this.y>height){ this.active=false; this.waitTime=Date.now()+Math.random()*4000; this.reset(); } } else if(Date.now()>this.waitTime) this.active=true; }
+            draw() { if(!this.active)return; const g=ctx.createLinearGradient(this.x,this.y,this.x+this.len,this.y-this.len*0.5); g.addColorStop(0,"rgba(255,255,255,1)"); g.addColorStop(1,"rgba(255,255,255,0)"); ctx.strokeStyle=g; ctx.lineWidth=this.size; ctx.beginPath(); ctx.moveTo(this.x,this.y); ctx.lineTo(this.x+this.len,this.y-this.len*0.5); ctx.stroke(); }
         }
+        const stars = Array.from({length: 100}, () => new Star());
+        const shooters = [new ShootingStar(), new ShootingStar()];
+        function animate() { ctx.clearRect(0,0,width,height); stars.forEach(s=> {s.update();s.draw();}); shooters.forEach(s=> {s.update();s.draw();}); requestAnimationFrame(animate); }
         animate();
 
-        /* --- FIXED COUNTDOWN --- */
+        /* --- 3. FIXED COUNTDOWN --- */
         const target = new Date("Feb 25, 2026 00:00:00").getTime();
         setInterval(() => {
             const diff = target - Date.now();
@@ -255,21 +257,12 @@
             }
         }, 1000);
 
-        /* --- FORM HANDLING --- */
+        /* --- 4. FORM HANDLING --- */
         const form = document.getElementById('waitlistForm');
         form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('btn');
-            btn.innerText = "Processing...";
-            
-            fetch("https://formsubmit.co/ajax/info@ameiocosmetics.com", {
-                method: "POST", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify(Object.fromEntries(new FormData(form)))
-            }).then(() => {
-                document.getElementById('successMsg').classList.add('visible');
-                form.style.opacity = '0';
-                setTimeout(() => form.style.visibility = 'hidden', 500);
-            });
+            e.preventDefault(); const btn = document.getElementById('btn'); btn.innerText = "Processing...";
+            fetch("https://formsubmit.co/ajax/info@ameiocosmetics.com", { method: "POST", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(Object.fromEntries(new FormData(form))) })
+            .then(() => { document.getElementById('successMsg').classList.add('visible'); form.style.opacity = '0'; setTimeout(() => form.style.visibility = 'hidden', 500); });
         });
     </script>
 </body>
