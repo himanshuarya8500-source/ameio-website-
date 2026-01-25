@@ -6,26 +6,20 @@
     
     <title>AMEIO Cosmetics | Redefining Beauty</title>
     <meta name="description" content="Ameio Cosmetics - The new era of luxury beauty is launching soon. Join the exclusive waitlist.">
-    <meta property="og:title" content="AMEIO Cosmetics | Launching Soon">
-    <meta property="og:description" content="Get ready for something beautiful. Sign up for early access.">
-    <meta property="og:url" content="https://ameiocosmetics.com">
-    <meta property="og:type" content="website">
     
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="canonical" href="https://ameiocosmetics.com">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            /* Modern clean font for text */
             font-family: 'Montserrat', sans-serif;
-            background: #050505; /* Deep rich black */
+            background: #050505;
             color: #fff;
             overflow-x: hidden;
             min-height: 100vh;
@@ -33,19 +27,24 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem 0;
         }
 
-        /* Noise Texture for Premium Feel */
+        /* Reveal Animation for Page Load */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .noise-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-            opacity: 0.07;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 2; opacity: 0.05;
             background-image: url("https://grainy-gradients.vercel.app/noise.svg");
         }
 
@@ -54,435 +53,177 @@
             padding: 2rem;
             position: relative;
             z-index: 10;
-            width: 100%;
             max-width: 1200px;
-            margin: 0 auto;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
 
         .logo {
-            /* Royal Serif Font for Logo */
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 9vw, 5.5rem);
             letter-spacing: 0.3em;
             font-weight: 500;
-            margin-bottom: 0.5rem;
             background: linear-gradient(135deg, #fff 20%, #d4af37 50%, #fff 80%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine 4s linear infinite;
+            animation: shine 5s linear infinite;
         }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+        @keyframes shine { to { background-position: 200% center; } }
 
         .brand-name {
-            font-size: clamp(0.7rem, 1.2vw, 0.95rem);
-            letter-spacing: 0.4em;
-            color: rgba(255, 255, 255, 0.6);
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            letter-spacing: 0.5em;
+            color: rgba(255, 255, 255, 0.5);
             margin-bottom: 2.5rem;
-            font-weight: 400;
             text-transform: uppercase;
         }
 
         .tagline {
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: clamp(1rem, 2vw, 1.4rem);
-            letter-spacing: 0.1em;
+            font-size: clamp(1rem, 2vw, 1.3rem);
             color: #d4af37;
             margin-bottom: 3rem;
-            opacity: 0.9;
         }
 
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            max-width: 800px;
-            margin: 0 auto 3.5rem;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
         }
 
         .time-box {
-            background: rgba(20, 20, 20, 0.6);
-            padding: 1.5rem 1.2rem;
-            border-radius: 2px; /* Sharp corners are more premium */
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            backdrop-filter: blur(5px);
-            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 1.5rem;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: 0.4s ease;
         }
 
         .time-box:hover {
-            transform: translateY(-5px);
-            border-color: rgba(212, 175, 55, 0.6);
-            box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+            background: rgba(212, 175, 55, 0.03);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
         }
 
-        .time-number {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.2rem, 5vw, 3.5rem);
-            color: #fff;
-            font-weight: 400;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .time-label {
-            font-size: 0.6rem;
-            letter-spacing: 0.25em;
-            color: #d4af37;
-            text-transform: uppercase;
-        }
-
-        .email-section {
-            margin-bottom: 3rem;
-            width: 100%;
-        }
+        .time-number { font-family: 'Playfair Display', serif; font-size: 3rem; color: #fff; }
+        .time-label { font-size: 0.6rem; color: #d4af37; letter-spacing: 0.2em; text-transform: uppercase; }
 
         .email-form {
             display: flex;
-            gap: 0; /* Connected input and button */
             max-width: 500px;
             margin: 0 auto;
-            position: relative;
         }
 
         .email-input {
-            flex: 1;
-            padding: 1.2rem 1.5rem;
-            background: rgba(255, 255, 255, 0.05);
+            flex: 1; padding: 1.2rem; background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-right: none;
-            color: #fff;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.95rem;
-            border-radius: 0; /* Square edges */
-            outline: none;
-            transition: all 0.3s;
+            color: #fff; outline: none; transition: 0.3s;
         }
 
-        .email-input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-            font-weight: 300;
-        }
-
-        .email-input:focus {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: #d4af37;
-        }
+        .email-input:focus { border-color: #d4af37; background: rgba(255, 255, 255, 0.03); }
 
         .submit-btn {
-            padding: 1rem 2rem;
-            background: #d4af37;
-            color: #000;
-            border: 1px solid #d4af37;
-            border-radius: 0;
-            font-size: 0.8rem;
-            font-weight: 600;
-            letter-spacing: 0.15em;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
+            padding: 0 2rem; background: #d4af37; border: 1px solid #d4af37;
+            font-weight: 600; cursor: pointer; transition: 0.3s; text-transform: uppercase;
         }
 
-        .submit-btn:hover {
-            background: #fff;
-            color: #000;
-            border-color: #fff;
-        }
+        .submit-btn:hover { background: #fff; border-color: #fff; }
 
-        .submit-btn:disabled {
-            background: #333;
-            border-color: #333;
-            color: #777;
-            cursor: not-allowed;
-        }
+        .success { display: none; color: #d4af37; font-style: italic; margin-top: 1.5rem; font-size: 1.1rem; }
+        .success.show { display: block; }
 
-        /* Elegant Success Message */
-        .success {
-            display: none;
-            margin-top: 1.5rem;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            color: #d4af37;
-            font-style: italic;
-            animation: fadeIn 0.8s ease;
-        }
+        /* Socials & Footer */
+        .social-links { display: flex; gap: 2rem; justify-content: center; margin: 3rem 0; }
+        .social-link { color: rgba(255, 255, 255, 0.4); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.2em; transition: 0.3s; }
+        .social-link:hover { color: #d4af37; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .success.show {
-            display: block;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 2.5rem;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .social-link {
-            color: rgba(255, 255, 255, 0.5);
-            text-decoration: none;
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            text-transform: uppercase;
-        }
-
-        .social-link:hover {
-            color: #d4af37;
-        }
-
-        .footer {
-            margin-top: auto;
-            text-align: center;
-            opacity: 0.3;
-            font-size: 0.65rem;
-            letter-spacing: 0.08em;
-            z-index: 10;
-            padding-top: 2rem;
-        }
-
-        .footer p {
-            margin-bottom: 0.4rem;
-        }
-
-        /* Background Elements */
-        .bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-            opacity: 0.4;
-        }
-
-        .glow {
-            position: fixed;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.08), transparent 60%);
-            border-radius: 50%;
-            filter: blur(100px);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .glow-1 { top: -400px; left: -200px; animation: float1 25s infinite; }
-        .glow-2 { bottom: -400px; right: -200px; animation: float2 30s infinite; }
-
-        @keyframes float1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(100px, 100px); } }
-        @keyframes float2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-100px, -100px); } }
+        .footer { opacity: 0.3; font-size: 0.6rem; letter-spacing: 0.1em; padding-bottom: 2rem; }
 
         @media (max-width: 768px) {
-            .container { padding: 1.5rem; }
-            .countdown { gap: 1rem; grid-template-columns: repeat(2, 1fr); max-width: 350px; }
-            .time-box { padding: 1rem 0.5rem; }
-            .time-number { font-size: 2.5rem; }
-            .email-form { flex-direction: column; gap: 1rem; }
-            .email-input { border-right: 1px solid rgba(255,255,255,0.2); width: 100%; text-align: center; }
-            .submit-btn { width: 100%; }
+            .countdown { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .email-form { flex-direction: column; }
+            .submit-btn { padding: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
     <div class="noise-overlay"></div>
-    <div class="glow glow-1"></div>
-    <div class="glow glow-2"></div>
-    
-    <canvas class="bg-canvas" id="canvas"></canvas>
 
     <div class="container">
-        <h1 class="logo">AMEIO</h1>
-        <p class="brand-name">Cosmetics</p>
-        <p class="tagline">Beauty Redefined. Naturally.</p>
+        <div class="reveal" id="r1"><h1 class="logo">AMEIO</h1></div>
+        <div class="reveal" id="r2"><p class="brand-name">Cosmetics</p></div>
+        <div class="reveal" id="r3"><p class="tagline">The New Era of Luxury Beauty.</p></div>
 
-        <div class="countdown">
-            <div class="time-box">
-                <div class="time-number" id="days">29</div>
-                <div class="time-label">Days</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="hours">23</div>
-                <div class="time-label">Hours</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="minutes">59</div>
-                <div class="time-label">Minutes</div>
-            </div>
-            <div class="time-box">
-                <div class="time-number" id="seconds">43</div>
-                <div class="time-label">Seconds</div>
-            </div>
+        <div class="countdown reveal" id="r4">
+            <div class="time-box"><div class="time-number" id="days">00</div><div class="time-label">Days</div></div>
+            <div class="time-box"><div class="time-number" id="hours">00</div><div class="time-label">Hrs</div></div>
+            <div class="time-box"><div class="time-number" id="minutes">00</div><div class="time-label">Min</div></div>
+            <div class="time-box"><div class="time-number" id="seconds">00</div><div class="time-label">Sec</div></div>
         </div>
 
-        <div class="email-section">
+        <div class="email-section reveal" id="r5">
             <form class="email-form" id="form">
-                <input type="hidden" name="_subject" value="New AMEIO Waitlist Signup!">
-                <input type="hidden" name="_captcha" value="false">
-                
-                <input 
-                    type="email" 
-                    name="email"
-                    class="email-input" 
-                    placeholder="Enter your email address"
-                    required
-                    id="email"
-                >
+                <input type="email" name="email" class="email-input" placeholder="Your Email Address" required>
                 <button type="submit" class="submit-btn" id="submitBtn">Notify Me</button>
             </form>
-
-            <div class="success" id="success">
-                </div>
+            <div class="success" id="success">✨ You are on the elite list. Welcome to AMEIO.</div>
         </div>
 
-        <div class="social-links">
-            <a href="https://instagram.com/AMEIOCOSMETICS" target="_blank" class="social-link">
-                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-                Instagram
-            </a>
-
-            <a href="mailto:info@ameiocosmetics.com" class="social-link">
-                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                Contact
-            </a>
+        <div class="social-links reveal" id="r6">
+            <a href="https://instagram.com/AMEIOCOSMETICS" target="_blank" class="social-link">INSTAGRAM</a>
+            <a href="mailto:info@ameiocosmetics.com" class="social-link">CONTACT</a>
         </div>
 
-        <div class="footer">
-            <p>&copy; 2026 AMEIO COSMETICS. ALL RIGHTS RESERVED.</p>
-            <p>PRIVACY POLICY | TERMS & CONDITIONS</p>
+        <div class="footer reveal" id="r7">
+            &copy; 2026 AMEIO COSMETICS. REFINING ELEGANCE globally.
         </div>
     </div>
 
     <script>
-        // --- ANIMATED BACKGROUND (STARS) ---
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // --- FIXED COUNTDOWN (Feb 25, 2026) ---
+        const targetDate = new Date("February 25, 2026 00:00:00").getTime();
 
-        class Star {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.z = Math.random() * 1000;
-                this.speed = Math.random() * 1.5 + 0.5; // Slower, more elegant speed
-            }
-            update() {
-                this.z -= this.speed;
-                if (this.z <= 0) {
-                    this.z = 1000;
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                }
-            }
-            draw() {
-                const scale = 1000 / (1000 + this.z);
-                const x2d = (this.x - canvas.width / 2) * scale + canvas.width / 2;
-                const y2d = (this.y - canvas.height / 2) * scale + canvas.height / 2;
-                const size = scale * 2.5;
-                
-                // Opacity based on distance
-                const alpha = scale; 
-
-                ctx.beginPath();
-                ctx.arc(x2d, y2d, size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(212, 175, 55, ${alpha})`; // Gold Stars
-                ctx.fill();
-            }
-        }
-
-        const stars = Array.from({ length: 150 }, () => new Star()); // Fewer stars for cleaner look
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas completely
-            stars.forEach(star => {
-                star.update();
-                star.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // --- COUNTDOWN TIMER (30 DAYS) ---
-        const launchDate = new Date();
-        launchDate.setDate(launchDate.getDate() + 30);
-
-        function updateCountdown() {
+        function updateTimer() {
             const now = new Date().getTime();
-            const distance = launchDate - now;
+            const diff = targetDate - now;
+            
+            if (diff < 0) return;
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
         }
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        setInterval(updateTimer, 1000);
+        updateTimer();
 
-        // --- FORM HANDLING (NO REDIRECT) ---
+        // --- STAGGERED REVEAL ANIMATION ---
+        window.onload = () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach((el, index) => {
+                setTimeout(() => el.classList.add('visible'), 200 * index);
+            });
+        };
+
+        // --- FORM SUBMISSION (No Redirect) ---
         const form = document.getElementById('form');
-        const submitBtn = document.getElementById('submitBtn');
-        const successMsg = document.getElementById('success');
-
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // STOP REDIRECT
-
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'JOINING...';
-            submitBtn.style.opacity = '0.7';
-
-            const formData = new FormData(form);
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true; btn.innerText = "WAITING...";
 
             fetch("https://formsubmit.co/ajax/info@ameiocosmetics.com", {
                 method: "POST",
-                headers: { 
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(Object.fromEntries(formData))
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(new FormData(form)))
             })
-            .then(response => response.json())
-            .then(data => {
-                form.style.display = 'none'; // Hide form
-                successMsg.classList.add('show'); // Show message
-                successMsg.innerHTML = "✨ Welcome to Ameio. You are on the list.";
-            })
-            .catch(error => {
-                console.log(error);
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'TRY AGAIN';
-                alert("Something went wrong. Please check your connection.");
+            .then(() => {
+                form.style.display = 'none';
+                document.getElementById('success').classList.add('show');
             });
         });
     </script>
-
 </body>
 </html>
