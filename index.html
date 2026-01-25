@@ -1,311 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AMEIO Cosmetics | Organic Luxury</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --gold: #d4af37;
-            --text: #f5f5f5;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="AMEIO Cosmetics – Organic Luxury Beauty">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+<title>AMEIO Cosmetics | Organic Luxury</title>
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: #050505;
-            perspective: 1000px;
-        }
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 
-        /* --- VIDEO BACKGROUND --- */
-        .video-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -3; overflow: hidden;
-            background-image: url('https://images.unsplash.com/photo-1552248717-44871b3f9627?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center;
-        }
-        .video-bg { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; filter: contrast(1.1) brightness(0.8); pointer-events: none; }
-        video::-webkit-media-controls { display: none !important; }
+<!-- GSAP + LENIS -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
 
-        /* --- LAYERS --- */
-        .cursor-light { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; background: radial-gradient(circle 600px at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,15,5,0.9) 100%); }
-        #star-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; mix-blend-mode: screen; }
+<style>
+:root{--gold:#d4af37}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    font-family:'Montserrat',sans-serif;
+    background:#050505;
+    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
+}
 
-        /* --- MAIN CONTAINER (CLICK FIX APPLIED) --- */
-        .container {
-            position: relative; 
-            z-index: 10; 
-            width: 100%; max-width: 900px;
-            padding: 6rem 2rem 3rem; 
-            flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
-            transform-style: preserve-3d; 
-            transition: transform 0.1s ease-out; 
-            will-change: transform;
-            
-            /* MAGIC FIX: This allows clicks to pass through empty space to the footer */
-            pointer-events: none; 
-        }
+/* VIDEO */
+.video-container{position:fixed;inset:0;z-index:-3}
+.video-bg{width:100%;height:100%;object-fit:cover;opacity:.6}
 
-        /* Re-enable clicks for actual content inside container */
-        .logo, .brand-subtitle, .tagline, .countdown, .form-wrapper {
-            pointer-events: auto; 
-            transform: translateZ(20px);
-        }
+/* LIGHT */
+.cursor-light{
+    position:fixed;inset:0;z-index:-2;
+    background:radial-gradient(circle 600px at 50% 50%,transparent,rgba(0,15,5,.95));
+}
 
-        .logo {
-            font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 12vw, 7rem);
-            background: linear-gradient(135deg, #fff 30%, var(--gold) 50%, #fff 70%);
-            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: shineText 6s linear infinite; margin-bottom: 0.2rem; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-        }
-        @keyframes shineText { to { background-position: 200% center; } }
+/* STARS */
+#star-canvas{position:fixed;inset:0;z-index:-1}
 
-        .brand-subtitle { font-size: 0.8rem; letter-spacing: 0.5em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 3rem; }
-        .tagline { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.8rem); color: #eaddcf; margin-bottom: 5rem; font-style: italic; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
+/* MAIN */
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:6rem 2rem 4rem;
+    text-align:center;
+    transform-style:preserve-3d;
+}
+.logo{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(3.5rem,12vw,7rem);
+    background:linear-gradient(135deg,#fff,var(--gold),#fff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-size:200%;
+    animation:shine 6s linear infinite;
+}
+@keyframes shine{to{background-position:200%}}
 
-        /* --- COUNTDOWN --- */
-        .countdown { display: flex; gap: 2rem; margin-bottom: 5rem; flex-wrap: wrap; justify-content: center; }
-        .time-val { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); color: #fff; line-height: 1; text-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        .time-label { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-top: 5px; }
+.brand-subtitle{letter-spacing:.5em;font-size:.8rem;opacity:.6;margin-bottom:3rem}
+.tagline{font-family:'Playfair Display',serif;font-style:italic;margin-bottom:4rem;color:#eaddcf}
 
-        /* --- FORM --- */
-        .form-wrapper { width: 100%; max-width: 500px; position: relative; margin-bottom: 5rem; z-index: 50; }
-        .input-group {
-            display: flex; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px) saturate(180%); border-radius: 50px; padding: 6px; transition: 0.4s;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            pointer-events: auto; /* Ensure form is clickable */
-        }
-        .input-group:focus-within { border-color: var(--gold); background: rgba(0, 20, 10, 0.4); }
-        .email-input { flex: 1; background: transparent; border: none; padding: 0 1.5rem; color: #fff; font-family: 'Montserrat', sans-serif; font-size: 1rem; outline: none; }
-        .submit-btn {
-            background: linear-gradient(135deg, var(--gold), #b08d2b); color: #051a05; border: none; padding: 1rem 2.5rem;
-            border-radius: 40px; font-weight: 700; cursor: pointer; transition: 0.3s;
-        }
-        .submit-btn:hover { background: #fff; transform: scale(1.05); }
-        .success-msg { position: absolute; width: 100%; top: 120%; color: var(--gold); font-family: 'Playfair Display', serif; font-style: italic; opacity: 0; transition: 0.5s; }
-        .success-msg.visible { opacity: 1; transform: translateY(0); }
+/* COUNTDOWN */
+.countdown{display:flex;justify-content:center;gap:2rem;margin-bottom:3rem}
+.time-val{font-size:clamp(2.5rem,5vw,4rem);font-family:'Playfair Display'}
+.time-label{font-size:.65rem;letter-spacing:.2em;color:var(--gold)}
 
-        /* --- FOOTER (BUTTON FIX) --- */
-        .footer-nav { 
-            margin-top: auto; padding: 2rem 0; width: 100%; 
-            display: flex; flex-direction: column; gap: 1.5rem; 
-            font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); 
-            text-align: center; background: linear-gradient(to top, #000 40%, transparent); 
-            
-            /* ENSURE FOOTER IS ON TOP & CLICKABLE */
-            position: relative;
-            z-index: 100; 
-            pointer-events: auto !important; 
-        }
-        .footer-links { display: flex; gap: 2rem; justify-content: center; }
-        .footer-links a, .footer-links button { 
-            color: inherit; text-decoration: none; transition: 0.3s; 
-            text-transform: uppercase; background: none; border: none; 
-            font-family: inherit; font-size: inherit; letter-spacing: inherit; cursor: pointer; 
-            padding: 10px; /* Bigger touch area */
-        }
-        .footer-links a:hover, .footer-links button:hover { color: var(--gold); }
+/* LAUNCH STATE */
+.launch-badge{display:none;font-family:'Playfair Display';font-size:1.6rem;letter-spacing:.2em;color:var(--gold)}
+.enter-store{
+    display:none;margin-top:2rem;
+    padding:1.2rem 3rem;
+    border-radius:60px;
+    border:none;
+    background:linear-gradient(135deg,var(--gold),#b08d2b);
+    font-weight:700;
+    cursor:pointer;
+}
+body.launch-live .countdown{opacity:0;pointer-events:none;transform:translateY(40px)}
+body.launch-live .launch-badge,
+body.launch-live .enter-store{display:block}
 
-        /* --- MODALS (FINAL FIXED LAYOUT) --- */
-        .modal {
-            display: none; 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.92); z-index: 9999; 
-            align-items: center; justify-content: center; 
-            backdrop-filter: blur(15px); opacity: 0; transition: opacity 0.3s ease;
-            pointer-events: auto; /* Modal must be clickable */
-        }
-        .modal.active { display: flex; opacity: 1; }
-        
-        .modal-content {
-            background: rgba(10, 10, 10, 0.98); border: 1px solid var(--gold);
-            padding: 2.5rem; width: 90%; max-width: 500px; 
-            max-height: 85vh; overflow-y: auto; 
-            text-align: left; border-radius: 15px;
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
-            position: relative;
-        }
-        
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; position: sticky; top: 0; background: rgba(10,10,10,0.98); z-index: 2; }
-        .modal-title { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.5rem; }
-        .close-btn { color: var(--gold); font-size: 2.2rem; cursor: pointer; padding: 5px; }
-        
-        .modal-body p { margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
-        .modal-body h4 { color: var(--gold); margin: 1.5rem 0 0.5rem; font-family: 'Playfair Display', serif; }
+/* FORM */
+.form-wrapper{max-width:500px;margin:3rem auto}
+.input-group{
+    display:flex;
+    background:rgba(255,255,255,.08);
+    border-radius:50px;
+    padding:6px;
+}
+.email-input{
+    flex:1;background:transparent;border:none;
+    padding:1rem 1.5rem;color:#fff;outline:none;
+}
+.submit-btn{
+    background:linear-gradient(135deg,var(--gold),#b08d2b);
+    border:none;padding:1rem 2.5rem;
+    border-radius:40px;font-weight:700;cursor:pointer;
+}
+.success-msg,.error-msg{margin-top:1rem;opacity:0;transition:.4s}
+.visible{opacity:1}
+.success-msg{color:var(--gold)}
+.error-msg{color:#ff6b6b}
 
-        .back-btn {
-            display: block; width: 100%; margin-top: 2rem; padding: 1rem;
-            background: transparent; border: 1px solid var(--gold); color: var(--gold);
-            font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.2em;
-            cursor: pointer; transition: 0.3s;
-        }
-        .back-btn:hover { background: var(--gold); color: #000; }
+/* FOOTER */
+.footer-nav{margin-top:4rem;font-size:.7rem;opacity:.6}
+.footer-links{display:flex;justify-content:center;gap:2rem;margin:1rem 0}
+.footer-links a{color:inherit;text-decoration:none}
 
-        /* MOBILE FIXES */
-        @media (max-width: 600px) {
-            .input-group { border-radius: 20px; flex-direction: column; padding: 15px; gap: 10px; background: rgba(0,0,0,0.5); }
-            .submit-btn { width: 100%; padding: 1rem; border-radius: 12px; }
-            .email-input { text-align: center; padding: 0.5rem; }
-            .container { transform: none !important; } 
-            .footer-nav { transform: none !important; }
-
-            /* Mobile Modal Adjustments */
-            .modal { align-items: flex-start; padding-top: 3rem; }
-            .modal-content { width: 90%; max-height: none; margin-bottom: 3rem; }
-        }
-    </style>
+/* MOBILE */
+@media(max-width:600px){
+    .countdown{gap:1rem}
+    .input-group{flex-direction:column;border-radius:20px}
+    .submit-btn{width:100%}
+}
+</style>
 </head>
+
 <body>
 
-    <div class="video-container">
-        <video id="bg-video" autoplay muted loop playsinline webkit-playsinline class="video-bg"
-            poster="https://images.unsplash.com/photo-1552248717-44871b3f9627?q=80&w=2070&auto=format&fit=crop">
-            <source src="https://videos.pexels.com/video-files/1773435/1773435-hd_1920_1080_30fps.mp4" type="video/mp4">
-        </video>
-    </div>
-    
-    <div class="cursor-light" id="cursor-light"></div>
-    <canvas id="star-canvas"></canvas>
+<div class="video-container">
+<video class="video-bg" autoplay muted loop playsinline>
+<source src="https://videos.pexels.com/video-files/1773435/1773435-hd_1920_1080_30fps.mp4">
+</video>
+</div>
 
-    <div class="container" id="tilt-container">
-        <h1 class="logo">AMEIO</h1>
-        <div class="brand-subtitle">ORGANIC LUXURY</div>
-        <p class="tagline">"Experience beauty that breathes."</p>
+<div class="cursor-light" id="cursor-light"></div>
+<canvas id="star-canvas"></canvas>
 
-        <div class="countdown">
-            <div class="time-box"><div class="time-val" id="d">00</div><div class="time-label">Days</div></div>
-            <div class="time-box"><div class="time-val" id="h">00</div><div class="time-label">Hrs</div></div>
-            <div class="time-box"><div class="time-val" id="m">00</div><div class="time-label">Min</div></div>
-            <div class="time-box"><div class="time-val" id="s">00</div><div class="time-label">Sec</div></div>
-        </div>
+<div class="container" id="tilt">
+<h1 class="logo">AMEIO</h1>
+<div class="brand-subtitle">ORGANIC LUXURY</div>
+<p class="tagline">“Experience beauty that breathes.”</p>
 
-        <div class="form-wrapper">
-            <form id="waitlistForm">
-                <div class="input-group">
-                    <input type="email" name="email" class="email-input" placeholder="Enter your email address" required>
-                    <button type="submit" class="submit-btn" id="btn">Get Early Access</button>
-                </div>
-            </form>
-            <div class="success-msg" id="successMsg">✨ Welcome to the inner circle.</div>
-        </div>
-    </div>
+<div class="countdown">
+<div><div class="time-val" id="d">00</div><div class="time-label">Days</div></div>
+<div><div class="time-val" id="h">00</div><div class="time-label">Hrs</div></div>
+<div><div class="time-val" id="m">00</div><div class="time-label">Min</div></div>
+<div><div class="time-val" id="s">00</div><div class="time-label">Sec</div></div>
+</div>
 
-    <div class="footer-nav">
-        <div class="footer-links">
-            <a href="https://instagram.com/ameiocosmetics" target="_blank">Instagram</a>
-            <a href="mailto:info@ameiocosmetics.com">Contact</a>
-        </div>
-        <div>&copy; 2026 AMEIO COSMETICS. ALL RIGHTS RESERVED.</div>
-        <div class="footer-links">
-            <button onclick="openModal('terms')" type="button">Terms</button>
-            <button onclick="openModal('privacy')" type="button">Privacy</button>
-        </div>
-    </div>
+<div class="launch-badge">WE ARE LIVE</div>
+<button class="enter-store" onclick="enterStore()">ENTER STORE</button>
 
-    <div id="terms" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="modal-title">Terms & Conditions</span>
-                <span class="close-btn" onclick="closeModal('terms')">&times;</span>
-            </div>
-            <div class="modal-body">
-                <p><strong>Last Updated: Feb 2026</strong></p>
-                <p>Welcome to AMEIO Cosmetics.</p>
-                <h4>1. Eligibility</h4>
-                <p>You must be at least 18 years old to join our exclusive list.</p>
-                <h4>2. Waitlist Priority</h4>
-                <p>Signing up gives you early access to our store launch. It does not guarantee purchase availability if stock runs out.</p>
-                <h4>3. Intellectual Property</h4>
-                <p>All content is property of AMEIO Cosmetics.</p>
-            </div>
-            <button class="back-btn" onclick="closeModal('terms')">BACK TO HOME</button>
-        </div>
-    </div>
+<div class="form-wrapper">
+<form id="waitlistForm" action="https://formsubmit.co/your-form-key-here" method="POST">
+<input type="hidden" name="_captcha" value="false">
+<div class="input-group">
+<input class="email-input" type="email" name="email" placeholder="Enter your email" required>
+<button class="submit-btn" id="submitBtn">Get Early Access</button>
+</div>
+</form>
+<div class="success-msg" id="successMsg">Welcome to the inner circle.</div>
+<div class="error-msg" id="errorMsg">Something went wrong.</div>
+</div>
 
-    <div id="privacy" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="modal-title">Privacy Policy</span>
-                <span class="close-btn" onclick="closeModal('privacy')">&times;</span>
-            </div>
-            <div class="modal-body">
-                <p><strong>Your Privacy is our Luxury.</strong></p>
-                <h4>1. Information Collection</h4>
-                <p>We collect your email address solely for launch notifications.</p>
-                <h4>2. No Spam / No Selling</h4>
-                <p>We will never sell your data to third parties.</p>
-                <h4>3. Unsubscribe</h4>
-                <p>You can unsubscribe at any time.</p>
-            </div>
-            <button class="back-btn" onclick="closeModal('privacy')">BACK TO HOME</button>
-        </div>
-    </div>
+<div class="footer-nav">
+<div class="footer-links">
+<a href="#">Instagram</a>
+<a href="mailto:info@ameiocosmetics.com">Contact</a>
+</div>
+© 2026 AMEIO COSMETICS
+</div>
+</div>
 
-    <script>
-        function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
-        window.onclick = function(e) { if (e.target.classList.contains('modal')) { e.target.classList.remove('active'); document.body.style.overflow = 'auto'; } }
+<script>
+'use strict';
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const video = document.getElementById('bg-video');
-            if(video) video.play().catch(e => { document.body.addEventListener('touchstart', () => video.play(), { once: true }); });
-        });
+/* LENIS */
+if(!matchMedia('(prefers-reduced-motion:reduce)').matches){
+const lenis=new Lenis({lerp:.08});
+function raf(t){lenis.raf(t);requestAnimationFrame(raf)}
+requestAnimationFrame(raf);
+}
 
-        const lightLayer = document.getElementById('cursor-light');
-        const tiltContainer = document.getElementById('tilt-container');
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX; const y = e.clientY;
-            if(lightLayer) lightLayer.style.background = `radial-gradient(circle 600px at ${x}px ${y}px, rgba(0,0,0,0) 0%, rgba(0,15,5,0.95) 100%)`;
-            if(window.innerWidth > 600 && tiltContainer) {
-                 const cx = window.innerWidth/2; const cy = window.innerHeight/2;
-                 tiltContainer.style.transform = `perspective(1000px) rotateX(${((cy-y)/cy)*5}deg) rotateY(${((x-cx)/cx)*5}deg) translateZ(10px)`;
-            }
-        });
+/* COUNTDOWN + LAUNCH */
+const target=new Date("Feb 25, 2026 00:00:00").getTime();
+let launched=false;
+function updateCountdown(){
+const diff=target-Date.now();
+if(diff>0){
+const d=Math.floor(diff/86400000);
+const h=Math.floor(diff/3600000)%24;
+const m=Math.floor(diff/60000)%60;
+const s=Math.floor(diff/1000)%60;
+['d','h','m','s'].forEach((id,i)=>{
+document.getElementById(id).innerText=[d,h,m,s][i].toString().padStart(2,'0');
+});
+}else if(!launched){
+launched=true;
+document.body.classList.add('launch-live');
+gsap.from('.logo',{scale:.9,opacity:0,duration:1.2});
+}}
+updateCountdown();setInterval(updateCountdown,1000);
 
-        const canvas = document.getElementById('star-canvas');
-        if(canvas) {
-            const ctx = canvas.getContext('2d');
-            let width, height;
-            function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-            window.addEventListener('resize', resize); resize();
-            class Star { constructor(){this.reset()} reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.size=Math.random()*1.5;this.opacity=Math.random()*0.8;this.speed=Math.random()*0.1} update(){this.y-=this.speed;if(this.y<0)this.reset()} draw(){ctx.fillStyle=`rgba(255,255,200,${this.opacity})`;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
-            const stars = Array.from({length:100},()=>new Star());
-            function animate(){ctx.clearRect(0,0,width,height);stars.forEach(s=>{s.update();s.draw()});requestAnimationFrame(animate)}
-            animate();
-        }
+/* ENTER STORE */
+function enterStore(){
+gsap.to('.container',{opacity:0,scale:.96,duration:.8,onComplete:()=>{
+location.href='/shop';
+}});
+}
 
-        const target = new Date("Feb 25, 2026 00:00:00").getTime();
-        setInterval(() => {
-            const diff = target - Date.now();
-            if(diff > 0) {
-                document.getElementById('d').innerText = Math.floor(diff/(1000*60*60*24)).toString().padStart(2,'0');
-                document.getElementById('h').innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60)).toString().padStart(2,'0');
-                document.getElementById('m').innerText = Math.floor((diff%(1000*60*60))/(1000*60)).toString().padStart(2,'0');
-                document.getElementById('s').innerText = Math.floor((diff%(1000*60))/1000).toString().padStart(2,'0');
-            }
-        }, 1000);
+/* CURSOR LIGHT + TILT */
+const light=document.getElementById('cursor-light');
+const tilt=document.getElementById('tilt');
+addEventListener('mousemove',e=>{
+light.style.background=`radial-gradient(circle 600px at ${e.clientX}px ${e.clientY}px,transparent,rgba(0,15,5,.95))`;
+if(innerWidth>600){
+tilt.style.transform=`rotateX(${(0.5-e.clientY/innerHeight)*10}deg) rotateY(${(e.clientX/innerWidth-0.5)*10}deg)`;
+}
+});
 
-        const form = document.getElementById('waitlistForm');
-        if(form) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault(); const btn = document.getElementById('btn'); btn.innerText = "Processing...";
-                fetch("https://formsubmit.co/ajax/info@ameiocosmetics.com", { method: "POST", headers: {'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(Object.fromEntries(new FormData(form))) })
-                .then(() => { document.getElementById('successMsg').classList.add('visible'); form.style.opacity = '0'; setTimeout(()=>form.style.visibility='hidden',500); });
-            });
-        }
-    </script>
+/* STARS */
+const c=document.getElementById('star-canvas'),ctx=c.getContext('2d');
+let stars=[];
+function resize(){c.width=innerWidth;c.height=innerHeight;stars=[...Array(100)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,s:Math.random()*1.5}))}
+addEventListener('resize',resize);resize();
+(function anim(){
+ctx.clearRect(0,0,c.width,c.height);
+stars.forEach(s=>{s.y-=.1;if(s.y<0)s.y=c.height;ctx.fillStyle='rgba(255,255,200,.8)';ctx.beginPath();ctx.arc(s.x,s.y,s.s,0,Math.PI*2);ctx.fill();});
+requestAnimationFrame(anim);
+})();
+
+/* FORM */
+const form=document.getElementById('waitlistForm');
+form.addEventListener('submit',async e=>{
+e.preventDefault();
+try{
+const r=await fetch(form.action,{method:'POST',body:new FormData(form)});
+if(!r.ok)throw Error();
+document.getElementById('successMsg').classList.add('visible');
+form.style.display='none';
+}catch{
+document.getElementById('errorMsg').classList.add('visible');
+}
+});
+</script>
+
 </body>
 </html>
