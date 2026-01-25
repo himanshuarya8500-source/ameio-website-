@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AMEIO Cosmetics | Organic Luxury</title>
 
-<meta name="description" content="AMEIO – Organic luxury beauty. Glow from within.">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
@@ -23,47 +21,48 @@ body{
     overflow-x:hidden;
 }
 
-/* VIDEO BACKGROUND */
-.video-container{
-    position:fixed;
-    inset:0;
-    z-index:-4;
-}
-.video-bg{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    opacity:.6;
-}
+/* ===== BACKGROUND ===== */
+.video-container{position:fixed;inset:0;z-index:-5}
+.video-bg{width:100%;height:100%;object-fit:cover;opacity:.6}
+.overlay{position:fixed;inset:0;background:radial-gradient(circle,transparent,rgba(0,0,0,.85));z-index:-4}
 
-/* OVERLAYS */
-.overlay{
-    position:fixed;
-    inset:0;
-    background:radial-gradient(circle at center, transparent 0%, rgba(0,0,0,.85) 80%);
-    z-index:-3;
-}
-.cursor-light{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-2;
-}
-#star-canvas{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-1;
-}
+/* ===== LIGHT & STARS ===== */
+.cursor-light{position:fixed;inset:0;pointer-events:none;z-index:-3}
+#star-canvas{position:fixed;inset:0;pointer-events:none;z-index:-2}
 
-/* MAIN */
+/* ===== MAIN ===== */
 .container{
     max-width:900px;
     margin:auto;
     padding:6rem 2rem 4rem;
     text-align:center;
+    perspective:1000px;
 }
 
+.lux-hover{
+    position:relative;
+    display:inline-block;
+    transition:transform .4s ease, text-shadow .4s ease;
+}
+.lux-hover::after{
+    content:'';
+    position:absolute;
+    inset:-40%;
+    background:radial-gradient(circle at var(--x,50%) var(--y,50%),
+        rgba(212,175,55,.35),
+        transparent 60%);
+    opacity:0;
+    transition:.4s;
+    pointer-events:none;
+}
+.lux-hover:hover::after,
+.lux-hover:active::after{opacity:1}
+.lux-hover:hover{
+    transform:translateZ(20px);
+    text-shadow:0 0 20px rgba(212,175,55,.5);
+}
+
+/* LOGO */
 .logo{
     font-family:'Playfair Display',serif;
     font-size:clamp(3.5rem,12vw,7rem);
@@ -75,142 +74,61 @@ body{
 }
 @keyframes shine{to{background-position:200%}}
 
-.brand-subtitle{
-    letter-spacing:.5em;
-    font-size:.8rem;
-    opacity:.6;
-    margin-bottom:3rem;
-}
+.brand-subtitle{letter-spacing:.5em;font-size:.8rem;opacity:.6;margin-bottom:3rem}
+.tagline{font-family:'Playfair Display',serif;font-style:italic;color:#eaddcf;margin-bottom:4rem}
 
-.tagline{
-    font-family:'Playfair Display',serif;
-    font-style:italic;
-    color:#eaddcf;
-    margin-bottom:4rem;
-}
-
-/* MOTTO */
+/* MOTO */
 .motto{
-    max-width:700px;
-    margin:0 auto 5rem;
-    font-size:0.95rem;
-    line-height:1.8;
-    color:rgba(255,255,255,0.85);
+    max-width:700px;margin:0 auto 5rem;
+    font-size:.95rem;line-height:1.8;
+    color:rgba(255,255,255,.85);
 }
-.motto strong{
-    color:var(--gold);
-    letter-spacing:0.1em;
-}
+.motto strong{color:var(--gold);letter-spacing:.12em}
 
 /* COUNTDOWN */
-.countdown{
-    display:flex;
-    justify-content:center;
-    gap:2rem;
-    margin-bottom:4rem;
-}
-.time-val{
-    font-size:clamp(2.5rem,5vw,4rem);
-    font-family:'Playfair Display';
-}
-.time-label{
-    font-size:.65rem;
-    letter-spacing:.2em;
-    color:var(--gold);
-}
+.countdown{display:flex;justify-content:center;gap:2rem;margin-bottom:4rem}
+.time-val{font-size:clamp(2.5rem,5vw,4rem);font-family:'Playfair Display'}
+.time-label{font-size:.65rem;letter-spacing:.2em;color:var(--gold)}
 
 /* FORM */
 .form-wrapper{max-width:500px;margin:auto}
 .input-group{
-    display:flex;
-    background:rgba(255,255,255,.08);
-    border-radius:50px;
-    padding:6px;
+    display:flex;background:rgba(255,255,255,.08);
+    border-radius:50px;padding:6px;
 }
-.email-input{
-    flex:1;
-    background:transparent;
-    border:none;
-    padding:1rem 1.5rem;
-    color:#fff;
-    outline:none;
-}
+.email-input{flex:1;background:transparent;border:none;padding:1rem 1.5rem;color:#fff}
 .submit-btn{
     background:linear-gradient(135deg,var(--gold),#b08d2b);
-    border:none;
-    padding:1rem 2.5rem;
-    border-radius:40px;
-    font-weight:600;
-    cursor:pointer;
+    border:none;padding:1rem 2.5rem;border-radius:40px;
+    font-weight:600;cursor:pointer;
 }
-.success-msg,.error-msg{
-    margin-top:1rem;
-    opacity:0;
-    transition:.3s;
-}
-.visible{opacity:1}
-.success-msg{color:var(--gold)}
-.error-msg{color:#ff6b6b}
 
 /* FOOTER */
-.footer{
-    margin-top:4rem;
-    text-align:center;
-    font-size:.7rem;
-    opacity:.7;
-}
+.footer{margin-top:5rem;padding:3rem 1.5rem;text-align:center}
 .footer-links{
-    display:flex;
-    justify-content:center;
-    gap:2rem;
-    margin:1rem 0;
+    display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;margin-bottom:2rem
 }
-.footer-links a,
-.footer-links button{
-    background:none;
-    border:none;
-    color:inherit;
-    cursor:pointer;
-    text-decoration:none;
+.footer-links a,.footer-links button{
+    padding:.85rem 1.7rem;border-radius:50px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(212,175,55,.35);
+    color:#fff;font-size:.65rem;letter-spacing:.18em;
+    cursor:pointer;text-decoration:none;transition:.35s
 }
-
-/* MODAL */
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.92);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
+.footer-links a:hover,.footer-links button:hover{
+    background:rgba(212,175,55,.15);
+    box-shadow:0 0 26px rgba(212,175,55,.35);
+    transform:translateY(-3px)
 }
-.modal.active{display:flex}
-.modal-content{
-    background:#0a0a0a;
-    padding:2rem;
-    max-width:500px;
-    border:1px solid var(--gold);
-}
-.close-btn{
-    float:right;
-    background:none;
-    border:none;
-    color:var(--gold);
-    font-size:1.5rem;
-    cursor:pointer;
-}
-
-@media(max-width:600px){
-    .countdown{gap:1rem}
-    .input-group{flex-direction:column;border-radius:20px}
-    .submit-btn{width:100%}
+.footer-brand{
+    font-family:'Playfair Display',serif;
+    font-size:.75rem;letter-spacing:.32em;color:var(--gold)
 }
 </style>
 </head>
 
 <body>
 
-<!-- BACKGROUND -->
 <div class="video-container">
 <video class="video-bg" autoplay muted loop playsinline>
 <source src="https://videos.pexels.com/video-files/1773435/1773435-hd_1920_1080_30fps.mp4">
@@ -220,133 +138,81 @@ body{
 <div class="cursor-light" id="cursor-light"></div>
 <canvas id="star-canvas"></canvas>
 
-<!-- CONTENT -->
 <div class="container">
-<h1 class="logo">AMEIO</h1>
-<div class="brand-subtitle">ORGANIC LUXURY</div>
-<p class="tagline">“Experience beauty that breathes.”</p>
+<h1 class="logo lux-hover">AMEIO</h1>
+<div class="brand-subtitle lux-hover">ORGANIC LUXURY</div>
+<p class="tagline lux-hover">“Experience beauty that breathes.”</p>
 
-<div class="motto">
+<div class="motto lux-hover">
 <strong>WHY AMEIO</strong><br><br>
-We don’t believe beauty starts on the face.<br>
-It begins from within — from your gut, your balance, your lifestyle.<br><br>
-At AMEIO, we work holistically — not just skin-deep.<br>
-From digestion to glow, from purity to performance.<br><br>
-<strong>Organic. Intentional. Top-most.</strong><br>
-Glow that is felt, not just seen.
+Beauty doesn’t start on the face.<br>
+It starts from within — your gut, balance, and lifestyle.<br><br>
+<strong>Organic. Intentional. Top-most.</strong>
 </div>
 
-<div class="countdown">
-<div><div class="time-val" id="d">00</div><div class="time-label">Days</div></div>
-<div><div class="time-val" id="h">00</div><div class="time-label">Hrs</div></div>
-<div><div class="time-val" id="m">00</div><div class="time-label">Min</div></div>
-<div><div class="time-val" id="s">00</div><div class="time-label">Sec</div></div>
-</div>
-
-<div class="form-wrapper">
-<form id="waitlistForm" action="https://formsubmit.co/your-form-key-here" method="POST">
-<input type="hidden" name="_captcha" value="false">
-<div class="input-group">
-<input class="email-input" type="email" name="email" placeholder="Enter your email" required>
-<button class="submit-btn">Get Early Access</button>
-</div>
-</form>
-<div class="success-msg" id="successMsg">Welcome to the inner circle.</div>
-<div class="error-msg" id="errorMsg">Something went wrong.</div>
+<div class="countdown lux-hover">
+<div><div class="time-val">00</div><div class="time-label">Days</div></div>
+<div><div class="time-val">00</div><div class="time-label">Hrs</div></div>
+<div><div class="time-val">00</div><div class="time-label">Min</div></div>
+<div><div class="time-val">00</div><div class="time-label">Sec</div></div>
 </div>
 
 <div class="footer">
-<div class="footer-links">
+<div class="footer-links lux-hover">
 <a href="https://instagram.com/ameiocosmetics" target="_blank">Instagram</a>
-<button onclick="openModal('terms')">Terms</button>
-<button onclick="openModal('privacy')">Privacy</button>
+<a href="mailto:info@ameiocosmetics.com">Contact Us</a>
 </div>
-© 2026 AMEIO COSMETICS
-</div>
-</div>
-
-<!-- MODALS -->
-<div id="terms" class="modal">
-<div class="modal-content">
-<button class="close-btn" onclick="closeModal('terms')">×</button>
-<h3>Terms & Conditions</h3>
-<p>Use of this site constitutes acceptance of AMEIO terms.</p>
-</div>
-</div>
-
-<div id="privacy" class="modal">
-<div class="modal-content">
-<button class="close-btn" onclick="closeModal('privacy')">×</button>
-<h3>Privacy Policy</h3>
-<p>Your data is protected and never shared.</p>
+<div class="footer-brand lux-hover">© 2026 AMEIO COSMETICS</div>
 </div>
 </div>
 
 <script>
-/* MODAL */
-function openModal(id){document.getElementById(id).classList.add('active')}
-function closeModal(id){document.getElementById(id).classList.remove('active')}
-
-/* COUNTDOWN */
-const target=new Date("Feb 25, 2026 00:00:00").getTime();
-function update(){
-const diff=target-Date.now();
-const d=Math.max(0,Math.floor(diff/86400000));
-const h=Math.max(0,Math.floor(diff/3600000)%24);
-const m=Math.max(0,Math.floor(diff/60000)%60);
-const s=Math.max(0,Math.floor(diff/1000)%60);
-['d','h','m','s'].forEach((id,i)=>{
-document.getElementById(id).innerText=[d,h,m,s][i].toString().padStart(2,'0');
-});
-}
-update();setInterval(update,1000);
-
-/* FORM */
-document.getElementById('waitlistForm').addEventListener('submit',async e=>{
-e.preventDefault();
-try{
-const r=await fetch(e.target.action,{method:'POST',body:new FormData(e.target)});
-if(!r.ok)throw Error();
-document.getElementById('successMsg').classList.add('visible');
-e.target.style.display='none';
-}catch{
-document.getElementById('errorMsg').classList.add('visible');
-}
-});
-
 /* CURSOR LIGHT */
 const light=document.getElementById('cursor-light');
 addEventListener('mousemove',e=>{
-light.style.background=`radial-gradient(circle 600px at ${e.clientX}px ${e.clientY}px, transparent, rgba(0,0,0,.95))`;
+light.style.background=`radial-gradient(circle 700px at ${e.clientX}px ${e.clientY}px,
+rgba(212,175,55,.08), rgba(0,0,0,.95))`;
 });
 
-/* STAR SHOOTING (DIAGONAL) */
+/* 3D LIGHT ON TEXT */
+document.querySelectorAll('.lux-hover').forEach(el=>{
+el.addEventListener('mousemove',e=>{
+const r=el.getBoundingClientRect();
+el.style.setProperty('--x',`${((e.clientX-r.left)/r.width)*100}%`);
+el.style.setProperty('--y',`${((e.clientY-r.top)/r.height)*100}%`);
+});
+});
+
+/* REAL SHOOTING STARS */
 const c=document.getElementById('star-canvas'),ctx=c.getContext('2d');
 let stars=[];
 function resize(){
 c.width=innerWidth;c.height=innerHeight;
-stars=[...Array(120)].map(()=>({
+stars=[...Array(40)].map(()=>spawn());
+}
+function spawn(){
+return{
 x:Math.random()*c.width,
-y:Math.random()*c.height,
-vx:Math.random()*0.8+0.4,
-vy:Math.random()*0.8+0.4,
-s:Math.random()*1.5
-}));
+y:Math.random()*c.height/2,
+vx:Math.random()*8+6,
+vy:Math.random()*4+2,
+life:Math.random()*60+40
+};
 }
 addEventListener('resize',resize);resize();
 (function anim(){
 ctx.clearRect(0,0,c.width,c.height);
-stars.forEach(st=>{
-st.x+=st.vx;
-st.y+=st.vy;
-if(st.x>c.width||st.y>c.height){
-st.x=Math.random()*-100;
-st.y=Math.random()*c.height;
-}
-ctx.fillStyle='rgba(255,255,200,.9)';
+stars.forEach(s=>{
+ctx.strokeStyle='rgba(212,175,55,.8)';
+ctx.lineWidth=1.5;
 ctx.beginPath();
-ctx.arc(st.x,st.y,st.s,0,Math.PI*2);
-ctx.fill();
+ctx.moveTo(s.x,s.y);
+ctx.lineTo(s.x-s.vx*4,s.y-s.vy*4);
+ctx.stroke();
+s.x+=s.vx;
+s.y+=s.vy;
+s.life--;
+if(s.life<=0||s.x>c.width||s.y>c.height)Object.assign(s,spawn());
 });
 requestAnimationFrame(anim);
 })();
