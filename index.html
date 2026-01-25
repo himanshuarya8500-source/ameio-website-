@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AMEIO Cosmetics | Organic Luxury</title>
 
-<meta name="description" content="AMEIO Cosmetics – Organic luxury beauty.">
+<meta name="description" content="AMEIO – Organic luxury beauty. Glow from within.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +27,7 @@ body{
 .video-container{
     position:fixed;
     inset:0;
-    z-index:-3;
-    overflow:hidden;
+    z-index:-4;
 }
 .video-bg{
     width:100%;
@@ -37,24 +36,19 @@ body{
     opacity:.6;
 }
 
-/* DARK OVERLAY */
+/* OVERLAYS */
 .overlay{
     position:fixed;
     inset:0;
     background:radial-gradient(circle at center, transparent 0%, rgba(0,0,0,.85) 80%);
-    z-index:-2;
+    z-index:-3;
 }
-
-/* CURSOR LIGHT */
 .cursor-light{
     position:fixed;
     inset:0;
     pointer-events:none;
-    z-index:-1;
-    background:radial-gradient(circle 600px at 50% 50%, transparent, rgba(0,0,0,.95));
+    z-index:-2;
 }
-
-/* STARS */
 #star-canvas{
     position:fixed;
     inset:0;
@@ -93,6 +87,19 @@ body{
     font-style:italic;
     color:#eaddcf;
     margin-bottom:4rem;
+}
+
+/* MOTTO */
+.motto{
+    max-width:700px;
+    margin:0 auto 5rem;
+    font-size:0.95rem;
+    line-height:1.8;
+    color:rgba(255,255,255,0.85);
+}
+.motto strong{
+    color:var(--gold);
+    letter-spacing:0.1em;
 }
 
 /* COUNTDOWN */
@@ -150,7 +157,7 @@ body{
     margin-top:4rem;
     text-align:center;
     font-size:.7rem;
-    opacity:.6;
+    opacity:.7;
 }
 .footer-links{
     display:flex;
@@ -158,11 +165,13 @@ body{
     gap:2rem;
     margin:1rem 0;
 }
+.footer-links a,
 .footer-links button{
     background:none;
     border:none;
     color:inherit;
     cursor:pointer;
+    text-decoration:none;
 }
 
 /* MODAL */
@@ -217,6 +226,16 @@ body{
 <div class="brand-subtitle">ORGANIC LUXURY</div>
 <p class="tagline">“Experience beauty that breathes.”</p>
 
+<div class="motto">
+<strong>WHY AMEIO</strong><br><br>
+We don’t believe beauty starts on the face.<br>
+It begins from within — from your gut, your balance, your lifestyle.<br><br>
+At AMEIO, we work holistically — not just skin-deep.<br>
+From digestion to glow, from purity to performance.<br><br>
+<strong>Organic. Intentional. Top-most.</strong><br>
+Glow that is felt, not just seen.
+</div>
+
 <div class="countdown">
 <div><div class="time-val" id="d">00</div><div class="time-label">Days</div></div>
 <div><div class="time-val" id="h">00</div><div class="time-label">Hrs</div></div>
@@ -238,6 +257,7 @@ body{
 
 <div class="footer">
 <div class="footer-links">
+<a href="https://instagram.com/ameiocosmetics" target="_blank">Instagram</a>
 <button onclick="openModal('terms')">Terms</button>
 <button onclick="openModal('privacy')">Privacy</button>
 </div>
@@ -300,14 +320,34 @@ addEventListener('mousemove',e=>{
 light.style.background=`radial-gradient(circle 600px at ${e.clientX}px ${e.clientY}px, transparent, rgba(0,0,0,.95))`;
 });
 
-/* STARS */
+/* STAR SHOOTING (DIAGONAL) */
 const c=document.getElementById('star-canvas'),ctx=c.getContext('2d');
 let stars=[];
-function resize(){c.width=innerWidth;c.height=innerHeight;stars=[...Array(120)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,s:Math.random()*1.5}))}
+function resize(){
+c.width=innerWidth;c.height=innerHeight;
+stars=[...Array(120)].map(()=>({
+x:Math.random()*c.width,
+y:Math.random()*c.height,
+vx:Math.random()*0.8+0.4,
+vy:Math.random()*0.8+0.4,
+s:Math.random()*1.5
+}));
+}
 addEventListener('resize',resize);resize();
 (function anim(){
 ctx.clearRect(0,0,c.width,c.height);
-stars.forEach(s=>{s.y-=.15;if(s.y<0)s.y=c.height;ctx.fillStyle='rgba(255,255,200,.8)';ctx.beginPath();ctx.arc(s.x,s.y,s.s,0,Math.PI*2);ctx.fill();});
+stars.forEach(st=>{
+st.x+=st.vx;
+st.y+=st.vy;
+if(st.x>c.width||st.y>c.height){
+st.x=Math.random()*-100;
+st.y=Math.random()*c.height;
+}
+ctx.fillStyle='rgba(255,255,200,.9)';
+ctx.beginPath();
+ctx.arc(st.x,st.y,st.s,0,Math.PI*2);
+ctx.fill();
+});
 requestAnimationFrame(anim);
 })();
 </script>
