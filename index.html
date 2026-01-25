@@ -1,165 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMEIO Foundation</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .hero {
-            text-align: center;
-            padding: 50px 0;
-        }
-        .hero img {
-            max-width: 100%;
-            height: auto;
-        }
-        .hero h1 {
-            font-size: 2.5em;
-            margin: 20px 0;
-        }
-        .hero p {
-            font-size: 1.2em;
-            margin: 10px 0;
-        }
-        .section {
-            margin: 40px 0;
-        }
-        .section h2 {
-            font-size: 1.8em;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .products {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-        .product {
-            width: 30%;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .product img {
-            max-width: 100%;
-            height: auto;
-        }
-        .product h3 {
-            font-size: 1.4em;
-            margin: 10px 0;
-        }
-        .product p {
-            font-size: 1.2em;
-            color: #e91e63;
-        }
-        .testimonials {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .testimonial {
-            margin-bottom: 20px;
-        }
-        .testimonial p {
-            font-style: italic;
-        }
-        .testimonial cite {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMEIO - Elevated Beauty</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+    
+    :root {
+      --color-brand-ivory: #f9f8f6;
+      --color-brand-nude: #e8ded1;
+      --color-brand-rose: #c19a9b;
+      --color-brand-charcoal: #1a1a1a;
+      --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      --font-serif: 'Playfair Display', serif;
+    }
+    
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--color-brand-ivory);
+      color: var(--color-brand-charcoal);
+    }
+    
+    h1, h2, h3, h4 {
+      font-family: var(--font-serif);
+    }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <div class="hero">
-            <img src="/images/hero-foundation.png" alt="AMEIO Foundation">
-            <h1>The New Standard of Radiance</h1>
-            <p>Elevated Beauty.<br>Effortless Confidence.</p>
-            <p>Advanced dermal-sync technology meets high-fashion artistry. Luxury that feels like your second skin.</p>
-            <button>Shop Collection</button>
-            <button>Discover the Science</button>
-            <div>Scroll</div>
+<body class="min-h-screen bg-brand-ivory overflow-x-hidden">
+  <!-- Navigation -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-brand-ivory/80 backdrop-blur-md border-b border-brand-charcoal/5">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-8">
+        <button class="lg:hidden p-2">
+          <svg class="lucide lucide-menu w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M4 5h16"></path>
+            <path d="M4 12h16"></path>
+            <path d="M4 19h16"></path>
+          </svg>
+        </button>
+        <div class="hidden lg:flex items-center gap-8 text-11px uppercase tracking-[0.2em] font-medium">
+          <a href="#shop" class="hover:text-brand-rose transition-colors">Shop</a>
+          <a href="#story" class="hover:text-brand-rose transition-colors">Our Story</a>
+          <a href="#ingredients" class="hover:text-brand-rose transition-colors">Science</a>
         </div>
-
-        <div class="section">
-            <img src="/images/texture-silk.png" alt="Luxury Texture">
-            <p>Est. 2024</p>
-            <h2>Our Philosophy</h2>
-            <p>Where Science Meets<br>Sensual Beauty.</p>
-            <p>AMEIO was born from a singular vision: to bridge the gap between clinical performance and high-fashion elegance. We believe that luxury shouldn't be a mask, but a celebration of your innate radiance.</p>
-            <p>Our formulations are developed in collaboration with leading dermatologists and world-class makeup artists, ensuring that every drop of AMEIO not only enhances your look but nourishes your skin's vital barrier.</p>
-            <button>Learn More</button>
-        </div>
-
-        <div class="section">
-            <h2>The Essentials</h2>
-            <p>Curated icons for the modern minimalist. High-impact results with effortless application.</p>
-            <a href="#">[View All Products]</a>
-            <div class="products">
-                <div class="product">
-                    <img src="/images/hero-foundation.png" alt="Velvet Silk Foundation">
-                    <h3>Bestseller</h3>
-                    <p>Complexion</p>
-                    <h3>Velvet Silk Foundation</h3>
-                    <p>$68.00</p>
-                </div>
-                <div class="product">
-                    <img src="/images/product-lipstick.png" alt="Lumière Satin Lipstick">
-                    <h3>New Shade</h3>
-                    <p>Lips</p>
-                    <h3>Lumière Satin Lipstick</h3>
-                    <p>$42.00</p>
-                </div>
-                <div class="product">
-                    <img src="/images/product-serum.png" alt="Dermal Recovery Serum">
-                    <h3>Clinical</h3>
-                    <p>Skincare</p>
-                    <h3>Dermal Recovery Serum</h3>
-                    <p>$120.00</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section">
-            <h2>Purity in Every Drop</h2>
-            <p>We believe transparency is the ultimate luxury. Discover the potent actives and botanical extracts that power the AMEIO glow.</p>
-            <ul>
-                <li><strong>Dermatologically Tested</strong><br>Every formulation undergoes rigorous clinical testing to ensure safety and efficacy for all skin types.</li>
-                <li><strong>Clean Formulations</strong><br>Free from parabens, sulfates, and synthetic fragrances. Only the essentials for your skin's health.</li>
-                <li><strong>Ethically Sourced</strong><br>Global ingredients harvested with respect for local communities and the environment.</li>
-                <li><strong>Bio-Active Tech</strong><br>Utilizing encapsulated delivery systems to ensure ingredients reach the deepest layers of the epidermis.</li>
-            </ul>
-        </div>
-
-        <div class="section testimonials">
-            <h2>AMEIO</h2>
-            <div class="testimonial">
-                <p>"AMEIO has completely redefined my expectations for luxury foundation. It's the first time a product truly feels like a second skin while providing impeccable coverage."</p>
-                <cite>— Elena Rossi<br>Fashion Editor, Vogue Italia</cite>
-            </div>
-            <div class="testimonial">
-                <p>"The attention to detail in the formulations is astounding. As a makeup artist, I need products that perform under pressure, and AMEIO delivers every single time."</p>
-                <cite>— Marcus Chen<br>Global Celebrity MUA</cite>
-            </div>
-            <div class="testimonial">
-                <p>"Minimalist, effective, and stunningly packaged. It's the kind of brand that makes you feel sophisticated before you even apply the product."</p>
-                <cite>— Sarah J. Parker<br>Beauty Influencer</cite>
-            </div>
-        </div>
+      </div>
+      <div class="absolute left-12 -translate-x-12">
+        <h1 class="text-2xl md:text-3xl font-serif tracking-[0.1em] uppercase font-light">AMEIO</h1>
+      </div>
+      <div class="flex items-center gap-6">
+        <button class="p-2 hover:text-brand-rose transition-colors">
+          <svg class="lucide lucide-search w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="m21 21-4.35-4.35"></path>
+            <circle cx="11" cy="11" r="8"></circle>
+          </svg>
+        </button>
+        <button class="hidden md:block p-2 hover:text-brand-rose transition-colors">
+          <svg class="lucide lucide-user w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </button>
+        <button class="p-2 hover:text-brand-rose transition-colors relative">
+          <svg class="lucide lucide-shopping-bag w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+            <path d="M3.103 6.034h17.794"></path>
+            <path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path>
+          </svg>
+          <span class="absolute top-1 right-1 w-2 h-2 bg-brand-rose rounded-full"></span>
+        </button>
+      </div>
     </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="relative h-screen w-full overflow-hidden pt-20">
+      <div class="absolute inset-0 z-0">
+        <!-- Replace with your hero image URL -->
+        <img alt="AMEIO Foundation" class="w-full h-full object-cover" src="https://via.placeholder.com/1920x1080/1a1a1a/f9f8f6?text=AMEIO+Hero+Image">
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-r from-brand-ivory/40 to-transparent"></div>
+      <div class="relative z-10 h-full max-w-7xl mx-auto px-6 flex flex-col justify-center">
+        <div class="max-w-2xl" style="opacity: 1; transform: none;">
+          <span class="text-12px uppercase tracking-[0.4em] mb-6 block font-medium opacity-80">The New Standard of Radiance</span>
+          <h2 class="text-6xl md:text-8xl font-serif leading-[1.1] mb-8 font-light italic">
+            Elevated Beauty<br class="not-italic">Effortless Confidence.
+          </h2>
+          <p class="text-lg md:text-xl font-light leading-relaxed mb-10 opacity-70 max-w-md">
+            Advanced dermal-sync technology meets high-fashion artistry. Luxury that feels like your second skin.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <button class="px-10 py-4 bg-brand-charcoal text-white text-12px uppercase tracking-[0.2em] hover:bg-brand-charcoal/90 transition-all">
+              Shop Collection
+            </button>
+            <button class="px-10 py-4 border border-brand-charcoal/20 text-brand-charcoal text-12px uppercase tracking-[0.2em] hover:bg-brand-charcoal hover:text-white transition-all">
+              Discover the Science
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="absolute bottom-10 left-12 -translate-x-12 flex flex-col items-center gap-4 opacity-40" style="opacity: 1;">
+        <span class="text-10px uppercase tracking-[0.3em] vertical-rl">Scroll</span>
+        <div class="w-1px h-12 bg-brand-charcoal"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    lucide.createIcons();
+  </script>
 </body>
 </html>
-``` that power
