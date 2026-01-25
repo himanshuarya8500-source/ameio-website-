@@ -1,16 +1,274 @@
-/* --- 1. VIDEO CONTAINER FIX (New Premium Background) --- */
-.video-container {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    z-index: -3; 
-    overflow: hidden;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AMEIO Cosmetics | Organic Luxury</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     
-    /* नई हाई-क्वालिटी लक्जरी इमेज */
-    background-image: url('https://images.unsplash.com/photo-1552248717-44871b3f9627?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold: #d4af37;
+            --text: #f5f5f5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #050505;
+            perspective: 1000px;
+        }
+
+        /* --- 1. VIDEO CONTAINER FIX (Premium Background) --- */
+        .video-container {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            z-index: -3; 
+            overflow: hidden;
+            /* Premium Fallback Image (Dark Leaves) - Solves the Black Screen Issue */
+            background-image: url('https://images.unsplash.com/photo-1552248717-44871b3f9627?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .video-bg {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            opacity: 0.6; /* Video Visibility */
+            filter: contrast(1.1) brightness(0.8);
+            pointer-events: none;
+        }
+
+        /* Hides default play button on iOS/Android */
+        video::-webkit-media-controls { display: none !important; }
+
+        /* --- 2. LUXURY LAYERS (Stars, Light) --- */
+        .cursor-light {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2; pointer-events: none;
+            background: radial-gradient(circle 600px at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,15,5,0.9) 100%);
+        }
+
+        #star-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; mix-blend-mode: screen; }
+
+        /* --- 3. CONTAINER & TYPOGRAPHY --- */
+        .container {
+            position: relative; z-index: 10;
+            width: 100%; max-width: 900px;
+            padding: 6rem 2rem 3rem;
+            flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
+            transform-style: preserve-3d; transition: transform 0.1s ease-out; 
+            will-change: transform;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 12vw, 7rem);
+            background: linear-gradient(135deg, #fff 30%, var(--gold) 50%, #fff 70%);
+            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shineText 6s linear infinite; margin-bottom: 0.2rem;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+        }
+        @keyframes shineText { to { background-position: 200% center; } }
+
+        .brand-subtitle { font-size: 0.8rem; letter-spacing: 0.5em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 3rem; }
+        .tagline { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.8rem); color: #eaddcf; margin-bottom: 5rem; font-style: italic; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
+
+        /* --- COUNTDOWN --- */
+        .countdown { display: flex; gap: 2rem; margin-bottom: 5rem; flex-wrap: wrap; justify-content: center; }
+        .time-val { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); color: #fff; line-height: 1; text-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .time-label { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-top: 5px; }
+
+        /* --- FORM --- */
+        .form-wrapper { width: 100%; max-width: 500px; position: relative; margin-bottom: 5rem; }
+        .input-group {
+            display: flex; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-radius: 50px; padding: 6px; transition: 0.4s;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .input-group:focus-within { border-color: var(--gold); background: rgba(0, 20, 10, 0.4); }
+        .email-input { flex: 1; background: transparent; border: none; padding: 0 1.5rem; color: #fff; font-family: 'Montserrat', sans-serif; font-size: 1rem; outline: none; }
+        .submit-btn {
+            background: linear-gradient(135deg, var(--gold), #b08d2b); color: #051a05; border: none; padding: 1rem 2.5rem;
+            border-radius: 40px; font-weight: 700; cursor: pointer; transition: 0.3s;
+        }
+        .submit-btn:hover { background: #fff; transform: scale(1.05); }
+        .success-msg { position: absolute; width: 100%; top: 120%; color: var(--gold); font-family: 'Playfair Display', serif; font-style: italic; opacity: 0; transition: 0.5s; }
+        .success-msg.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- FOOTER --- */
+        .footer-nav { margin-top: auto; padding: 2rem 0; width: 100%; display: flex; flex-direction: column; gap: 1.5rem; font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); z-index: 10; text-align: center; background: linear-gradient(to top, #000 40%, transparent); }
+        .footer-links { display: flex; gap: 2rem; justify-content: center; }
+        .footer-links a, .footer-links button { color: inherit; text-decoration: none; transition: 0.3s; text-transform: uppercase; background: none; border: none; font-family: inherit; font-size: inherit; letter-spacing: inherit; cursor: pointer; }
+        .footer-links a:hover, .footer-links button:hover { color: var(--gold); }
+
+        /* --- MODALS --- */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 100; align-items: center; justify-content: center; backdrop-filter: blur(10px); opacity: 0; transition: opacity 0.3s ease; }
+        .modal.active { display: flex; opacity: 1; }
+        .modal-content { background: rgba(20, 20, 20, 0.9); border: 1px solid var(--gold); padding: 2rem; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; text-align: left; border-radius: 10px; box-shadow: 0 0 50px rgba(212, 175, 55, 0.2); }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; }
+        .modal-title { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.5rem; }
+        .close-btn { color: #fff; font-size: 2rem; cursor: pointer; line-height: 0.5; }
+        .modal-body p { margin-bottom: 1rem; font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.8); }
+        .modal-body h4 { color: #fff; margin: 1.5rem 0 0.5rem; }
+
+        @media (max-width: 600px) {
+            .input-group { border-radius: 20px; flex-direction: column; padding: 15px; gap: 10px; background: rgba(0,0,0,0.5); }
+            .submit-btn { width: 100%; padding: 1rem; border-radius: 12px; }
+            .email-input { text-align: center; padding: 0.5rem; }
+            .container { transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-container">
+        <video 
+            id="bg-video"
+            autoplay 
+            muted 
+            loop 
+            playsinline 
+            webkit-playsinline 
+            class="video-bg"
+            poster="https://images.unsplash.com/photo-1552248717-44871b3f9627?q=80&w=2070&auto=format&fit=crop"
+        >
+            <source src="https://videos.pexels.com/video-files/1773435/1773435-hd_1920_1080_30fps.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+    <div class="cursor-light" id="cursor-light"></div>
+    <canvas id="star-canvas"></canvas>
+
+    <div class="container" id="tilt-container">
+        <h1 class="logo">AMEIO</h1>
+        <div class="brand-subtitle">ORGANIC LUXURY</div>
+        <p class="tagline">"Experience beauty that breathes."</p>
+
+        <div class="countdown">
+            <div class="time-box"><div class="time-val" id="d">00</div><div class="time-label">Days</div></div>
+            <div class="time-box"><div class="time-val" id="h">00</div><div class="time-label">Hrs</div></div>
+            <div class="time-box"><div class="time-val" id="m">00</div><div class="time-label">Min</div></div>
+            <div class="time-box"><div class="time-val" id="s">00</div><div class="time-label">Sec</div></div>
+        </div>
+
+        <div class="form-wrapper">
+            <form id="waitlistForm">
+                <div class="input-group">
+                    <input type="email" name="email" class="email-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="submit-btn" id="btn">Get Early Access</button>
+                </div>
+            </form>
+            <div class="success-msg" id="successMsg">✨ Welcome to the inner circle.</div>
+        </div>
+    </div>
+
+    <div class="footer-nav">
+        <div class="footer-links">
+            <a href="https://instagram.com/ameiocosmetics" target="_blank">Instagram</a>
+            <a href="mailto:info@ameiocosmetics.com">Contact</a>
+        </div>
+        <div>&copy; 2026 AMEIO COSMETICS. ALL RIGHTS RESERVED.</div>
+        <div class="footer-links">
+            <button onclick="openModal('terms')">Terms</button>
+            <button onclick="openModal('privacy')">Privacy</button>
+        </div>
+    </div>
+
+    <div id="terms" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><span class="modal-title">Terms & Conditions</span><span class="close-btn" onclick="closeModal('terms')">&times;</span></div>
+            <div class="modal-body">
+                <p><strong>Last Updated: Feb 2026</strong></p>
+                <p>Welcome to AMEIO Cosmetics.</p>
+                <h4>1. Eligibility</h4><p>You must be at least 18 years old.</p>
+                <h4>2. Waitlist</h4><p>Signing up grants early access priority but does not guarantee stock.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="privacy" class="modal">
+        <div class="modal-content">
+            <div class="modal-header"><span class="modal-title">Privacy Policy</span><span class="close-btn" onclick="closeModal('privacy')">&times;</span></div>
+            <div class="modal-body">
+                <p><strong>Your Privacy is our Luxury.</strong></p>
+                <h4>1. Collection</h4><p>We only collect your email for launch notifications.</p>
+                <h4>2. No Spam</h4><p>We do not sell your data.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // MODALS
+        function openModal(id){document.getElementById(id).classList.add('active');document.body.style.overflow='hidden'}
+        function closeModal(id){document.getElementById(id).classList.remove('active');document.body.style.overflow='auto'}
+        window.onclick=function(e){if(e.target.classList.contains('modal')){e.target.classList.remove('active');document.body.style.overflow='auto'}}
+
+        // VIDEO FORCE PLAY
+        document.addEventListener('DOMContentLoaded', () => {
+            const video = document.getElementById('bg-video');
+            video.play().catch(function(e) { 
+                document.body.addEventListener('touchstart', function() { video.play(); }, { once: true });
+            });
+        });
+
+        // INTERACTIVE
+        const lightLayer = document.getElementById('cursor-light');
+        const tiltContainer = document.getElementById('tilt-container');
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX; const y = e.clientY;
+            lightLayer.style.background = `radial-gradient(circle 600px at ${x}px ${y}px, rgba(0,0,0,0) 0%, rgba(0,15,5,0.95) 100%)`;
+            if(window.innerWidth > 600) {
+                 const cx = window.innerWidth/2; const cy = window.innerHeight/2;
+                 tiltContainer.style.transform = `perspective(1000px) rotateX(${((cy-y)/cy)*5}deg) rotateY(${((x-cx)/cx)*5}deg) translateZ(10px)`;
+            }
+        });
+
+        // STARS
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        class Star { constructor(){this.reset()} reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.size=Math.random()*1.5;this.opacity=Math.random()*0.8;this.speed=Math.random()*0.1} update(){this.y-=this.speed;if(this.y<0)this.reset()} draw(){ctx.fillStyle=`rgba(255,255,200,${this.opacity})`;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
+        class Shooter { constructor(){this.reset()} reset(){this.x=Math.random()*width;this.y=Math.random()*height*0.5;this.len=Math.random()*80+10;this.speed=Math.random()*6+4;this.size=Math.random()*2;this.wait=Date.now()+Math.random()*3000+1000;this.active=false} update(){if(this.active){this.x-=this.speed;this.y+=this.speed*0.5;if(this.x<0||this.y>height){this.active=false;this.wait=Date.now()+Math.random()*4000;this.reset()}}else if(Date.now()>this.wait)this.active=true} draw(){if(!this.active)return;const g=ctx.createLinearGradient(this.x,this.y,this.x+this.len,this.y-this.len*0.5);g.addColorStop(0,"rgba(255,255,255,1)");g.addColorStop(1,"rgba(255,255,255,0)");ctx.strokeStyle=g;ctx.lineWidth=this.size;ctx.beginPath();ctx.moveTo(this.x,this.y);ctx.lineTo(this.x+this.len,this.y-this.len*0.5);ctx.stroke()}}
+        const stars = Array.from({length:100},()=>new Star()); const shooters=[new Shooter(),new Shooter()];
+        function animate(){ctx.clearRect(0,0,width,height);stars.forEach(s=>{s.update();s.draw()});shooters.forEach(s=>{s.update();s.draw()});requestAnimationFrame(animate)}
+        animate();
+
+        // COUNTDOWN & FORM
+        const target = new Date("Feb 25, 2026 00:00:00").getTime();
+        setInterval(() => {
+            const diff = target - Date.now();
+            if(diff > 0) {
+                document.getElementById('d').innerText = Math.floor(diff/(1000*60*60*24)).toString().padStart(2,'0');
+                document.getElementById('h').innerText = Math.floor((diff%(1000*60*60*24))/(1000*60*60)).toString().padStart(2,'0');
+                document.getElementById('m').innerText = Math.floor((diff%(1000*60*60))/(1000*60)).toString().padStart(2,'0');
+                document.getElementById('s').innerText = Math.floor((diff%(1000*60))/1000).toString().padStart(2,'0');
+            }
+        }, 1000);
+
+        const form = document.getElementById('waitlistForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); const btn = document.getElementById('btn'); btn.innerText = "Processing...";
+            fetch("https://formsubmit.co/ajax/info@ameiocosmetics.com", { method: "POST", headers: {'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(Object.fromEntries(new FormData(form))) })
+            .then(() => { document.getElementById('successMsg').classList.add('visible'); form.style.opacity = '0'; setTimeout(()=>form.style.visibility='hidden',500); });
+        });
+    </script>
+</body>
+</html>
