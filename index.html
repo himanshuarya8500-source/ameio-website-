@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AMEIO Cosmetics | Organic Luxury</title>
 
+<meta name="description" content="AMEIO Cosmetics – Organic luxury beauty.">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
@@ -21,28 +23,46 @@ body{
     overflow-x:hidden;
 }
 
-/* BG */
+/* VIDEO BACKGROUND */
 .video-container{
     position:fixed;
     inset:0;
-    z-index:-2;
+    z-index:-3;
+    overflow:hidden;
 }
 .video-bg{
     width:100%;
     height:100%;
     object-fit:cover;
-    opacity:.55;
+    opacity:.6;
 }
 
-/* Overlay */
+/* DARK OVERLAY */
 .overlay{
     position:fixed;
     inset:0;
-    background:radial-gradient(circle at center, transparent, rgba(0,0,0,.9));
+    background:radial-gradient(circle at center, transparent 0%, rgba(0,0,0,.85) 80%);
+    z-index:-2;
+}
+
+/* CURSOR LIGHT */
+.cursor-light{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-1;
+    background:radial-gradient(circle 600px at 50% 50%, transparent, rgba(0,0,0,.95));
+}
+
+/* STARS */
+#star-canvas{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
     z-index:-1;
 }
 
-/* Main */
+/* MAIN */
 .container{
     max-width:900px;
     margin:auto;
@@ -54,9 +74,9 @@ body{
     font-family:'Playfair Display',serif;
     font-size:clamp(3.5rem,12vw,7rem);
     background:linear-gradient(135deg,#fff,var(--gold),#fff);
+    background-size:200%;
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    background-size:200%;
     animation:shine 6s linear infinite;
 }
 @keyframes shine{to{background-position:200%}}
@@ -75,7 +95,7 @@ body{
     margin-bottom:4rem;
 }
 
-/* Countdown */
+/* COUNTDOWN */
 .countdown{
     display:flex;
     justify-content:center;
@@ -92,11 +112,8 @@ body{
     color:var(--gold);
 }
 
-/* Form */
-.form-wrapper{
-    max-width:500px;
-    margin:auto;
-}
+/* FORM */
+.form-wrapper{max-width:500px;margin:auto}
 .input-group{
     display:flex;
     background:rgba(255,255,255,.08);
@@ -128,11 +145,50 @@ body{
 .success-msg{color:var(--gold)}
 .error-msg{color:#ff6b6b}
 
-/* Footer */
+/* FOOTER */
 .footer{
     margin-top:4rem;
+    text-align:center;
     font-size:.7rem;
     opacity:.6;
+}
+.footer-links{
+    display:flex;
+    justify-content:center;
+    gap:2rem;
+    margin:1rem 0;
+}
+.footer-links button{
+    background:none;
+    border:none;
+    color:inherit;
+    cursor:pointer;
+}
+
+/* MODAL */
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+}
+.modal.active{display:flex}
+.modal-content{
+    background:#0a0a0a;
+    padding:2rem;
+    max-width:500px;
+    border:1px solid var(--gold);
+}
+.close-btn{
+    float:right;
+    background:none;
+    border:none;
+    color:var(--gold);
+    font-size:1.5rem;
+    cursor:pointer;
 }
 
 @media(max-width:600px){
@@ -145,13 +201,17 @@ body{
 
 <body>
 
+<!-- BACKGROUND -->
 <div class="video-container">
 <video class="video-bg" autoplay muted loop playsinline>
 <source src="https://videos.pexels.com/video-files/1773435/1773435-hd_1920_1080_30fps.mp4">
 </video>
 </div>
 <div class="overlay"></div>
+<div class="cursor-light" id="cursor-light"></div>
+<canvas id="star-canvas"></canvas>
 
+<!-- CONTENT -->
 <div class="container">
 <h1 class="logo">AMEIO</h1>
 <div class="brand-subtitle">ORGANIC LUXURY</div>
@@ -177,11 +237,37 @@ body{
 </div>
 
 <div class="footer">
+<div class="footer-links">
+<button onclick="openModal('terms')">Terms</button>
+<button onclick="openModal('privacy')">Privacy</button>
+</div>
 © 2026 AMEIO COSMETICS
 </div>
 </div>
 
+<!-- MODALS -->
+<div id="terms" class="modal">
+<div class="modal-content">
+<button class="close-btn" onclick="closeModal('terms')">×</button>
+<h3>Terms & Conditions</h3>
+<p>Use of this site constitutes acceptance of AMEIO terms.</p>
+</div>
+</div>
+
+<div id="privacy" class="modal">
+<div class="modal-content">
+<button class="close-btn" onclick="closeModal('privacy')">×</button>
+<h3>Privacy Policy</h3>
+<p>Your data is protected and never shared.</p>
+</div>
+</div>
+
 <script>
+/* MODAL */
+function openModal(id){document.getElementById(id).classList.add('active')}
+function closeModal(id){document.getElementById(id).classList.remove('active')}
+
+/* COUNTDOWN */
 const target=new Date("Feb 25, 2026 00:00:00").getTime();
 function update(){
 const diff=target-Date.now();
@@ -195,6 +281,7 @@ document.getElementById(id).innerText=[d,h,m,s][i].toString().padStart(2,'0');
 }
 update();setInterval(update,1000);
 
+/* FORM */
 document.getElementById('waitlistForm').addEventListener('submit',async e=>{
 e.preventDefault();
 try{
@@ -206,6 +293,23 @@ e.target.style.display='none';
 document.getElementById('errorMsg').classList.add('visible');
 }
 });
+
+/* CURSOR LIGHT */
+const light=document.getElementById('cursor-light');
+addEventListener('mousemove',e=>{
+light.style.background=`radial-gradient(circle 600px at ${e.clientX}px ${e.clientY}px, transparent, rgba(0,0,0,.95))`;
+});
+
+/* STARS */
+const c=document.getElementById('star-canvas'),ctx=c.getContext('2d');
+let stars=[];
+function resize(){c.width=innerWidth;c.height=innerHeight;stars=[...Array(120)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,s:Math.random()*1.5}))}
+addEventListener('resize',resize);resize();
+(function anim(){
+ctx.clearRect(0,0,c.width,c.height);
+stars.forEach(s=>{s.y-=.15;if(s.y<0)s.y=c.height;ctx.fillStyle='rgba(255,255,200,.8)';ctx.beginPath();ctx.arc(s.x,s.y,s.s,0,Math.PI*2);ctx.fill();});
+requestAnimationFrame(anim);
+})();
 </script>
 
 </body>
