@@ -27,7 +27,7 @@
             flex-direction: column;
             align-items: center;
             background: #050505;
-            perspective: 1000px;
+            perspective: 1000px; /* Essential for 3D */
         }
 
         /* --- VIDEO BACKGROUND --- */
@@ -43,11 +43,16 @@
         .cursor-light { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; pointer-events: none; background: radial-gradient(circle 600px at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,15,5,0.9) 100%); }
         #star-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; mix-blend-mode: screen; }
 
-        /* --- CONTAINER --- */
+        /* --- MAIN CONTAINER --- */
         .container {
-            position: relative; z-index: 10; width: 100%; max-width: 900px;
-            padding: 6rem 2rem 3rem; flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
-            transform-style: preserve-3d; transition: transform 0.1s ease-out; will-change: transform;
+            position: relative; 
+            z-index: 10; 
+            width: 100%; max-width: 900px;
+            padding: 6rem 2rem 3rem; 
+            flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
+            transform-style: preserve-3d; /* 3D enabled */
+            transition: transform 0.1s ease-out; 
+            will-change: transform;
         }
 
         .logo {
@@ -55,19 +60,20 @@
             background: linear-gradient(135deg, #fff 30%, var(--gold) 50%, #fff 70%);
             background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: shineText 6s linear infinite; margin-bottom: 0.2rem; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+            transform: translateZ(20px); /* Lift text */
         }
         @keyframes shineText { to { background-position: 200% center; } }
 
-        .brand-subtitle { font-size: 0.8rem; letter-spacing: 0.5em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 3rem; }
-        .tagline { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.8rem); color: #eaddcf; margin-bottom: 5rem; font-style: italic; text-shadow: 0 5px 15px rgba(0,0,0,0.8); }
+        .brand-subtitle { font-size: 0.8rem; letter-spacing: 0.5em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 3rem; transform: translateZ(20px); }
+        .tagline { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.8rem); color: #eaddcf; margin-bottom: 5rem; font-style: italic; text-shadow: 0 5px 15px rgba(0,0,0,0.8); transform: translateZ(20px); }
 
         /* --- COUNTDOWN --- */
-        .countdown { display: flex; gap: 2rem; margin-bottom: 5rem; flex-wrap: wrap; justify-content: center; }
+        .countdown { display: flex; gap: 2rem; margin-bottom: 5rem; flex-wrap: wrap; justify-content: center; transform: translateZ(20px); }
         .time-val { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); color: #fff; line-height: 1; text-shadow: 0 5px 15px rgba(0,0,0,0.5); }
         .time-label { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-top: 5px; }
 
         /* --- FORM --- */
-        .form-wrapper { width: 100%; max-width: 500px; position: relative; margin-bottom: 5rem; }
+        .form-wrapper { width: 100%; max-width: 500px; position: relative; margin-bottom: 5rem; transform: translateZ(30px); }
         .input-group {
             display: flex; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(20px) saturate(180%); border-radius: 50px; padding: 6px; transition: 0.4s;
@@ -77,61 +83,57 @@
         .email-input { flex: 1; background: transparent; border: none; padding: 0 1.5rem; color: #fff; font-family: 'Montserrat', sans-serif; font-size: 1rem; outline: none; }
         .submit-btn {
             background: linear-gradient(135deg, var(--gold), #b08d2b); color: #051a05; border: none; padding: 1rem 2.5rem;
-            border-radius: 40px; font-weight: 700; cursor: pointer; transition: 0.3s;
+            border-radius: 40px; font-weight: 700; cursor: pointer; transition: 0.3s; z-index: 50;
         }
         .submit-btn:hover { background: #fff; transform: scale(1.05); }
         .success-msg { position: absolute; width: 100%; top: 120%; color: var(--gold); font-family: 'Playfair Display', serif; font-style: italic; opacity: 0; transition: 0.5s; }
         .success-msg.visible { opacity: 1; transform: translateY(0); }
 
-        /* --- FOOTER --- */
-        .footer-nav { margin-top: auto; padding: 2rem 0; width: 100%; display: flex; flex-direction: column; gap: 1.5rem; font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); z-index: 10; text-align: center; background: linear-gradient(to top, #000 40%, transparent); }
+        /* --- FOOTER (FIXED CLICK ISSUE) --- */
+        .footer-nav { 
+            margin-top: auto; padding: 2rem 0; width: 100%; 
+            display: flex; flex-direction: column; gap: 1.5rem; 
+            font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.5); 
+            text-align: center; background: linear-gradient(to top, #000 40%, transparent); 
+            
+            /* CRITICAL FIX FOR CLICKING */
+            position: relative;
+            z-index: 100; /* Higher than everything else */
+            transform: translateZ(40px); /* Bring it closer to user than container */
+        }
         .footer-links { display: flex; gap: 2rem; justify-content: center; }
-        .footer-links a, .footer-links button { color: inherit; text-decoration: none; transition: 0.3s; text-transform: uppercase; background: none; border: none; font-family: inherit; font-size: inherit; letter-spacing: inherit; cursor: pointer; }
+        .footer-links a, .footer-links button { 
+            color: inherit; text-decoration: none; transition: 0.3s; 
+            text-transform: uppercase; background: none; border: none; 
+            font-family: inherit; font-size: inherit; letter-spacing: inherit; cursor: pointer; 
+            pointer-events: auto; /* Force clickable */
+        }
         .footer-links a:hover, .footer-links button:hover { color: var(--gold); }
 
-        /* --- MODALS (PERFECT CENTERED CARD) --- */
+        /* --- MODALS (FINAL FIXED LAYOUT) --- */
         .modal {
             display: none; 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); /* Dark backdrop */
-            z-index: 9999; 
-            
-            /* THIS CENTERS THE BOX */
-            display: flex;
-            align-items: center; 
-            justify-content: center;
-            
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92); z-index: 9999; 
+            align-items: center; justify-content: center; /* Center Default */
             backdrop-filter: blur(15px); opacity: 0; transition: opacity 0.3s ease;
         }
         .modal.active { display: flex; opacity: 1; }
         
+        /* The Box Itself */
         .modal-content {
-            background: rgba(10, 10, 10, 0.98); 
-            border: 1px solid var(--gold);
-            padding: 2rem; 
-            width: 90%; 
-            max-width: 500px; /* Limits width on desktop */
-            
-            /* THIS HANDLES THE SCROLL INSIDE THE BOX */
-            max-height: 80vh; /* Limits height so it never cuts off */
-            overflow-y: auto; /* Adds scrollbar inside the box if needed */
-            
-            text-align: left; 
-            border-radius: 15px;
+            background: rgba(10, 10, 10, 0.98); border: 1px solid var(--gold);
+            padding: 2.5rem; width: 90%; max-width: 500px; 
+            max-height: 85vh; /* Keep it inside screen */
+            overflow-y: auto; /* Scroll ONLY text, not the box */
+            text-align: left; border-radius: 15px;
             box-shadow: 0 0 60px rgba(212, 175, 55, 0.15);
             position: relative;
         }
         
-        /* Custom Scrollbar for Modal */
-        .modal-content::-webkit-scrollbar { width: 5px; }
-        .modal-content::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
-        .modal-content::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
-
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; position: sticky; top: 0; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem; position: sticky; top: 0; background: rgba(10,10,10,0.98); z-index: 2; }
         .modal-title { font-family: 'Playfair Display', serif; color: var(--gold); font-size: 1.5rem; }
-        .close-btn { color: var(--gold); font-size: 2rem; cursor: pointer; line-height: 0.5; padding: 5px; }
+        .close-btn { color: var(--gold); font-size: 2.2rem; cursor: pointer; padding: 5px; }
         
         .modal-body p { margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.6; color: rgba(255,255,255,0.9); }
         .modal-body h4 { color: var(--gold); margin: 1.5rem 0 0.5rem; font-family: 'Playfair Display', serif; }
@@ -144,16 +146,20 @@
         }
         .back-btn:hover { background: var(--gold); color: #000; }
 
+        /* MOBILE FIXES */
         @media (max-width: 600px) {
             .input-group { border-radius: 20px; flex-direction: column; padding: 15px; gap: 10px; background: rgba(0,0,0,0.5); }
             .submit-btn { width: 100%; padding: 1rem; border-radius: 12px; }
             .email-input { text-align: center; padding: 0.5rem; }
-            .container { transform: none !important; }
+            .container { transform: none !important; } /* Disable 3D on mobile to save battery */
             
-            /* Layout Adjustment for Mobile Modal */
+            /* Footer is simple on mobile */
+            .footer-nav { transform: none !important; z-index: 100; }
+
+            /* Modal adjustment for mobile */
             .modal-content {
-                width: 85%; /* Slightly narrower for nicer look */
-                max-height: 75vh; /* Leaves space top and bottom */
+                width: 88%;
+                max-height: 80vh; 
                 padding: 1.5rem;
             }
         }
@@ -201,8 +207,8 @@
         </div>
         <div>&copy; 2026 AMEIO COSMETICS. ALL RIGHTS RESERVED.</div>
         <div class="footer-links">
-            <button onclick="openModal('terms')">Terms</button>
-            <button onclick="openModal('privacy')">Privacy</button>
+            <button onclick="openModal('terms')" type="button">Terms</button>
+            <button onclick="openModal('privacy')" type="button">Privacy</button>
         </div>
     </div>
 
@@ -246,44 +252,73 @@
     </div>
 
     <script>
-        // MODALS (FIXED SCROLL LOGIC)
-        function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = 'auto'; }
-        window.onclick = function(e) { if (e.target.classList.contains('modal')) { e.target.classList.remove('active'); document.body.style.overflow = 'auto'; } }
+        // --- 1. MODAL FUNCTIONS (GLOBAL) ---
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Stop background scroll
+            }
+        }
 
-        // VIDEO
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if(modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restore scroll
+            }
+        }
+
+        // Close on clicking outside the box
+        window.onclick = function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // --- 2. VIDEO AUTOPLAY ---
         document.addEventListener('DOMContentLoaded', () => {
             const video = document.getElementById('bg-video');
-            video.play().catch(function(e) { 
-                document.body.addEventListener('touchstart', function() { video.play(); }, { once: true });
-            });
-        });
-
-        // INTERACTIVE
-        const lightLayer = document.getElementById('cursor-light');
-        const tiltContainer = document.getElementById('tilt-container');
-        document.addEventListener('mousemove', (e) => {
-            const x = e.clientX; const y = e.clientY;
-            lightLayer.style.background = `radial-gradient(circle 600px at ${x}px ${y}px, rgba(0,0,0,0) 0%, rgba(0,15,5,0.95) 100%)`;
-            if(window.innerWidth > 600) {
-                 const cx = window.innerWidth/2; const cy = window.innerHeight/2;
-                 tiltContainer.style.transform = `perspective(1000px) rotateX(${((cy-y)/cy)*5}deg) rotateY(${((x-cx)/cx)*5}deg) translateZ(10px)`;
+            if(video) {
+                video.play().catch(function(e) { 
+                    document.body.addEventListener('touchstart', function() { video.play(); }, { once: true });
+                });
             }
         });
 
-        // ANIMATION
-        const canvas = document.getElementById('star-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resize); resize();
-        class Star { constructor(){this.reset()} reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.size=Math.random()*1.5;this.opacity=Math.random()*0.8;this.speed=Math.random()*0.1} update(){this.y-=this.speed;if(this.y<0)this.reset()} draw(){ctx.fillStyle=`rgba(255,255,200,${this.opacity})`;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
-        class Shooter { constructor(){this.reset()} reset(){this.x=Math.random()*width;this.y=Math.random()*height*0.5;this.len=Math.random()*80+10;this.speed=Math.random()*6+4;this.size=Math.random()*2;this.wait=Date.now()+Math.random()*3000+1000;this.active=false} update(){if(this.active){this.x-=this.speed;this.y+=this.speed*0.5;if(this.x<0||this.y>height){this.active=false;this.wait=Date.now()+Math.random()*4000;this.reset()}}else if(Date.now()>this.wait)this.active=true} draw(){if(!this.active)return;const g=ctx.createLinearGradient(this.x,this.y,this.x+this.len,this.y-this.len*0.5);g.addColorStop(0,"rgba(255,255,255,1)");g.addColorStop(1,"rgba(255,255,255,0)");ctx.strokeStyle=g;ctx.lineWidth=this.size;ctx.beginPath();ctx.moveTo(this.x,this.y);ctx.lineTo(this.x+this.len,this.y-this.len*0.5);ctx.stroke()}}
-        const stars = Array.from({length:100},()=>new Star()); const shooters=[new Shooter(),new Shooter()];
-        function animate(){ctx.clearRect(0,0,width,height);stars.forEach(s=>{s.update();s.draw()});shooters.forEach(s=>{s.update();s.draw()});requestAnimationFrame(animate)}
-        animate();
+        // --- 3. 3D & LIGHTING ---
+        const lightLayer = document.getElementById('cursor-light');
+        const tiltContainer = document.getElementById('tilt-container');
+        
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX; const y = e.clientY;
+            if(lightLayer) {
+                lightLayer.style.background = `radial-gradient(circle 600px at ${x}px ${y}px, rgba(0,0,0,0) 0%, rgba(0,15,5,0.95) 100%)`;
+            }
+            // Only apply 3D tilt on large screens to avoid layout issues on mobile
+            if(window.innerWidth > 600 && tiltContainer) {
+                 const cx = window.innerWidth/2; const cy = window.innerHeight/2;
+                 const rx = ((cy-y)/cy)*5;
+                 const ry = ((x-cx)/cx)*5;
+                 tiltContainer.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(10px)`;
+            }
+        });
 
-        // COUNTDOWN & FORM
+        // --- 4. STARS ---
+        const canvas = document.getElementById('star-canvas');
+        if(canvas) {
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
+            window.addEventListener('resize', resize); resize();
+            class Star { constructor(){this.reset()} reset(){this.x=Math.random()*width;this.y=Math.random()*height;this.size=Math.random()*1.5;this.opacity=Math.random()*0.8;this.speed=Math.random()*0.1} update(){this.y-=this.speed;if(this.y<0)this.reset()} draw(){ctx.fillStyle=`rgba(255,255,200,${this.opacity})`;ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill()}}
+            const stars = Array.from({length:100},()=>new Star());
+            function animate(){ctx.clearRect(0,0,width,height);stars.forEach(s=>{s.update();s.draw()});requestAnimationFrame(animate)}
+            animate();
+        }
+
+        // --- 5. COUNTDOWN ---
         const target = new Date("Feb 25, 2026 00:00:00").getTime();
         setInterval(() => {
             const diff = target - Date.now();
@@ -295,12 +330,15 @@
             }
         }, 1000);
 
+        // --- 6. FORM ---
         const form = document.getElementById('waitlistForm');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault(); const btn = document.getElementById('btn'); btn.innerText = "Processing...";
-            fetch("https://formsubmit.co/ajax/info@ameiocosmetics.com", { method: "POST", headers: {'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(Object.fromEntries(new FormData(form))) })
-            .then(() => { document.getElementById('successMsg').classList.add('visible'); form.style.opacity = '0'; setTimeout(()=>form.style.visibility='hidden',500); });
-        });
+        if(form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault(); const btn = document.getElementById('btn'); btn.innerText = "Processing...";
+                fetch("https://formsubmit.co/ajax/info@ameiocosmetics.com", { method: "POST", headers: {'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify(Object.fromEntries(new FormData(form))) })
+                .then(() => { document.getElementById('successMsg').classList.add('visible'); form.style.opacity = '0'; setTimeout(()=>form.style.visibility='hidden',500); });
+            });
+        }
     </script>
 </body>
 </html>
