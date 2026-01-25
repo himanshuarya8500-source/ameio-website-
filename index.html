@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMEIO Cosmetics | Redefining Beauty</title>
+    <title>AMEIO Cosmetics | Nature Meets Luxury</title>
     <link rel="icon" type="image/png" href="favicon.png">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,210 +13,201 @@
     <style>
         :root {
             --gold: #d4af37;
-            --gold-deep: #8a6e15;
-            --bg-dark: #050505;
             --text: #f5f5f5;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(0, 20, 10, 0.4); /* Dark Greenish Glass */
+            --border: rgba(212, 175, 55, 0.3); /* Gold Border */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-dark);
             color: var(--text);
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
+            background: #000;
         }
 
-        /* --- 1. SPOTIFY-STYLE ORGANIC AURORA BACKGROUND --- */
-        .aurora-container {
+        /* --- 1. BACKGROUND VIDEO (NATURE) --- */
+        .video-bg {
+            position: fixed;
+            right: 0; bottom: 0;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            z-index: -2;
+            object-fit: cover;
+            opacity: 0.6; /* Slight dim to make text pop */
+        }
+
+        /* Gradient Overlay (Dark Green to Black) */
+        .overlay-gradient {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; pointer-events: none; overflow: hidden;
+            background: radial-gradient(circle, rgba(10, 30, 10, 0.2) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: -1; pointer-events: none;
         }
 
-        .aurora-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: floatOrganic 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        /* --- 2. CANVAS & NOISE --- */
+        #star-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        .noise-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url("https://grainy-gradients.vercel.app/noise.svg"); opacity: 0.04; z-index: 1; pointer-events: none; }
 
-        /* Blob 1: Top Left (Deep Gold) */
-        .blob-1 {
-            background: var(--gold-deep);
-            width: 500px; height: 500px;
-            top: -100px; left: -100px;
-            animation-duration: 25s;
-        }
-
-        /* Blob 2: Bottom Right (Bright Gold) */
-        .blob-2 {
-            background: var(--gold);
-            width: 400px; height: 400px;
-            bottom: -50px; right: -50px;
-            animation-duration: 18s;
-            animation-delay: -5s;
-        }
-
-        /* Blob 3: Center Moving (Subtle) */
-        .blob-3 {
-            background: #4a3b00; /* Very dark gold/brown */
-            width: 600px; height: 600px;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            animation: breathe 15s infinite alternate;
-            opacity: 0.2;
-        }
-
-        @keyframes floatOrganic {
-            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-            100% { transform: translate(50px, 50px) scale(1.1) rotate(10deg); }
-        }
-
-        @keyframes breathe {
-            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.1; }
-            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.3; }
-        }
-
-        /* --- 2. LAYERS: STARS & NOISE --- */
-        #star-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1; pointer-events: none;
-        }
-
-        .noise-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
-            opacity: 0.05; z-index: 2; pointer-events: none;
-        }
-
-        /* --- 3. MAIN CONTENT --- */
+        /* --- 3. MAIN CONTAINER --- */
         .container {
-            position: relative;
-            z-index: 10;
+            position: relative; z-index: 10;
             width: 100%; max-width: 900px;
             padding: 5rem 2rem 2rem;
-            flex: 1;
-            display: flex; flex-direction: column;
-            align-items: center; text-align: center;
+            flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 12vw, 6rem);
+            font-size: clamp(3.5rem, 12vw, 6.5rem);
             background: linear-gradient(135deg, #fff 40%, var(--gold) 60%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.2rem;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        .brand-subtitle { font-size: 0.75rem; letter-spacing: 0.6em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 3rem; }
+        .brand-subtitle { font-size: 0.8rem; letter-spacing: 0.5em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 3rem; }
         
         .tagline {
-            font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.5rem);
-            color: var(--gold); margin-bottom: 4rem; font-style: italic;
+            font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: #eaddcf; margin-bottom: 4rem; font-style: italic;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         /* --- COUNTDOWN --- */
         .countdown { display: flex; gap: 2rem; margin-bottom: 4rem; flex-wrap: wrap; justify-content: center; }
-        .time-box { text-align: center; position: relative; }
-        .time-val { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); color: #fff; line-height: 1; }
-        .time-label { font-size: 0.6rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-top: 5px; }
+        .time-box { text-align: center; backdrop-filter: blur(5px); padding: 10px; border-radius: 10px; }
+        .time-val { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 4rem); color: #fff; line-height: 1; }
+        .time-label { font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-top: 5px; }
 
-        /* --- FORM --- */
-        .form-wrapper { width: 100%; max-width: 450px; position: relative; margin-bottom: 5rem; }
+        /* --- REFINED CAPSULE FORM (NEW LAYOUT) --- */
+        .form-wrapper { width: 100%; max-width: 500px; position: relative; margin-bottom: 5rem; }
         
         .input-group {
-            display: flex; background: var(--glass);
-            border: 1px solid var(--border); backdrop-filter: blur(12px);
-            transition: 0.4s; padding: 5px;
-        }
-        .input-group:focus-within { border-color: var(--gold); box-shadow: 0 0 25px rgba(212,175,55,0.15); }
-
-        .email-input {
-            flex: 1; background: transparent; border: none; padding: 1rem;
-            color: #fff; font-family: 'Montserrat', sans-serif; outline: none;
+            display: flex; 
+            background: rgba(255, 255, 255, 0.08); /* Frosted Glass */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 50px; /* CAPSULE SHAPE */
+            padding: 6px;
+            transition: 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
         }
         
-        .submit-btn {
-            background: var(--gold); color: #000; border: none; padding: 0 2rem;
-            font-weight: 600; font-size: 0.8rem; letter-spacing: 0.1em; cursor: pointer;
-            transition: 0.3s;
+        .input-group:focus-within { 
+            border-color: var(--gold); 
+            background: rgba(0, 20, 10, 0.6); 
+            box-shadow: 0 15px 50px rgba(0,0,0,0.5);
         }
-        .submit-btn:hover { background: #fff; }
 
-        .success-msg { position: absolute; width: 100%; top: 110%; color: var(--gold); font-family: 'Playfair Display', serif; font-style: italic; opacity: 0; transition: 0.5s; }
+        .email-input {
+            flex: 1; 
+            background: transparent; 
+            border: none; 
+            padding: 0 1.5rem;
+            color: #fff; 
+            font-family: 'Montserrat', sans-serif; 
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        .email-input::placeholder { color: rgba(255,255,255,0.5); }
+
+        .submit-btn {
+            background: var(--gold); 
+            color: #051a05; /* Dark Green Text */
+            border: none; 
+            padding: 1rem 2.5rem;
+            border-radius: 40px; /* Button is also round */
+            font-weight: 600; 
+            font-size: 0.85rem; 
+            letter-spacing: 0.05em; 
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .submit-btn:hover { 
+            background: #fff; 
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255,255,255,0.4);
+        }
+
+        .success-msg { position: absolute; width: 100%; top: 120%; color: var(--gold); font-family: 'Playfair Display', serif; font-style: italic; opacity: 0; transition: 0.5s; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
         .success-msg.visible { opacity: 1; transform: translateY(0); }
 
         /* --- FOOTER --- */
         .footer-nav {
             margin-top: auto; padding: 2rem 0; width: 100%;
-            border-top: 1px solid rgba(255,255,255,0.05);
             display: flex; flex-direction: column; gap: 1.5rem;
-            font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.4);
+            font-size: 0.7rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.6);
             z-index: 10; text-align: center;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); /* Glass Footer */
+            background: linear-gradient(to top, #000 20%, transparent); /* Fade out footer */
         }
         .footer-links { display: flex; gap: 2rem; justify-content: center; }
-        .footer-links a { color: inherit; text-decoration: none; transition: 0.3s; }
+        .footer-links a { color: inherit; text-decoration: none; transition: 0.3s; text-transform: uppercase; }
         .footer-links a:hover { color: var(--gold); }
+
+        @media (max-width: 600px) {
+            .input-group { border-radius: 20px; flex-direction: column; padding: 15px; gap: 10px; background: rgba(0,0,0,0.6); }
+            .submit-btn { width: 100%; padding: 1rem; border-radius: 12px; }
+            .email-input { text-align: center; padding: 0.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="aurora-container">
-        <div class="aurora-blob blob-1"></div>
-        <div class="aurora-blob blob-2"></div>
-        <div class="aurora-blob blob-3"></div>
-    </div>
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="https://videos.pexels.com/video-files/5377546/5377546-hd_1080_1920_25fps.mp4" type="video/mp4">
+    </video>
+    
+    <div class="overlay-gradient"></div>
     
     <div class="noise-overlay"></div>
     <canvas id="star-canvas"></canvas>
 
     <div class="container">
         <h1 class="logo">AMEIO</h1>
-        <div class="brand-subtitle">COSMETICS</div>
+        <div class="brand-subtitle">ORGANIC LUXURY</div>
         
-        <p class="tagline">"Beauty that breathes. Luxury that lives."</p>
+        <p class="tagline">"Where the purity of nature meets the art of beauty."</p>
 
         <div class="countdown">
-            <div class="time-box"><div class="time-val" id="d">29</div><div class="time-label">Days</div></div>
-            <div class="time-box"><div class="time-val" id="h">12</div><div class="time-label">Hours</div></div>
-            <div class="time-box"><div class="time-val" id="m">45</div><div class="time-label">Mins</div></div>
-            <div class="time-box"><div class="time-val" id="s">30</div><div class="time-label">Secs</div></div>
+            <div class="time-box"><div class="time-val" id="d">00</div><div class="time-label">Days</div></div>
+            <div class="time-box"><div class="time-val" id="h">00</div><div class="time-label">Hrs</div></div>
+            <div class="time-box"><div class="time-val" id="m">00</div><div class="time-label">Min</div></div>
+            <div class="time-box"><div class="time-val" id="s">00</div><div class="time-label">Sec</div></div>
         </div>
 
         <div class="form-wrapper">
             <form id="waitlistForm">
                 <div class="input-group">
-                    <input type="email" name="email" class="email-input" placeholder="Your email address" required>
-                    <button type="submit" class="submit-btn" id="btn">JOIN</button>
+                    <input type="email" name="email" class="email-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="submit-btn" id="btn">Get Early Access</button>
                 </div>
             </form>
-            <div class="success-msg" id="successMsg">✨ Welcome to the inner circle.</div>
+            <div class="success-msg" id="successMsg">✨ Nature welcomes you. You're on the list.</div>
         </div>
     </div>
 
     <div class="footer-nav">
         <div class="footer-links">
-            <a href="https://instagram.com/AMEIOCOSMETICS">INSTAGRAM</a>
-            <a href="mailto:info@ameiocosmetics.com">CONTACT</a>
+            <a href="#">Instagram</a>
+            <a href="#">Contact</a>
         </div>
         <div>&copy; 2026 AMEIO COSMETICS. ALL RIGHTS RESERVED.</div>
         <div class="footer-links">
-            <a href="#">TERMS & CONDITIONS</a>
-            <a href="#">PRIVACY POLICY</a>
+            <a href="#">Terms</a>
+            <a href="#">Privacy</a>
         </div>
     </div>
 
     <script>
-        /* --- SHOOTING STARS & PARTICLES ENGINE --- */
+        /* --- SHOOTING STARS ENGINE --- */
         const canvas = document.getElementById('star-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -224,7 +215,6 @@
         function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
         window.addEventListener('resize', resize); resize();
 
-        // 1. Static/Slow Stars
         class Star {
             constructor() { this.reset(); }
             reset() {
@@ -232,7 +222,7 @@
                 this.y = Math.random() * height;
                 this.size = Math.random() * 1.5;
                 this.opacity = Math.random() * 0.5;
-                this.speed = Math.random() * 0.1; // Very slow drift
+                this.speed = Math.random() * 0.1;
             }
             update() {
                 this.y -= this.speed;
@@ -244,49 +234,11 @@
             }
         }
 
-        // 2. Dynamic Shooting Stars (Restored & Improved)
-        class ShootingStar {
-            constructor() { this.reset(); }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height * 0.5; // Start from top half
-                this.len = Math.random() * 80 + 10;
-                this.speed = Math.random() * 6 + 4;
-                this.size = Math.random() * 2;
-                this.waitTime = new Date().getTime() + Math.random() * 3000 + 1000;
-                this.active = false;
-            }
-            update() {
-                if (this.active) {
-                    this.x -= this.speed;
-                    this.y += this.speed * 0.5; // Slight diagonal
-                    if (this.x < 0 || this.y > height) {
-                        this.active = false;
-                        this.waitTime = new Date().getTime() + Math.random() * 4000; // Random delay
-                        this.reset();
-                    }
-                } else {
-                    if (Date.now() > this.waitTime) this.active = true;
-                }
-            }
-            draw() {
-                if (!this.active) return;
-                const grad = ctx.createLinearGradient(this.x, this.y, this.x + this.len, this.y - this.len);
-                grad.addColorStop(0, "rgba(255,255,255,1)");
-                grad.addColorStop(1, "rgba(255,255,255,0)");
-                ctx.strokeStyle = grad;
-                ctx.lineWidth = this.size;
-                ctx.beginPath(); ctx.moveTo(this.x, this.y); ctx.lineTo(this.x + this.len, this.y - this.len * 0.5); ctx.stroke();
-            }
-        }
-
         const stars = Array.from({length: 80}, () => new Star());
-        const shooters = [new ShootingStar(), new ShootingStar()]; // 2 shooting stars at a time
-
+        
         function animate() {
             ctx.clearRect(0, 0, width, height);
             stars.forEach(s => { s.update(); s.draw(); });
-            shooters.forEach(s => { s.update(); s.draw(); });
             requestAnimationFrame(animate);
         }
         animate();
@@ -309,12 +261,14 @@
             e.preventDefault();
             const btn = document.getElementById('btn');
             btn.innerText = "Processing...";
+            
             fetch("https://formsubmit.co/ajax/info@ameiocosmetics.com", {
                 method: "POST", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify(Object.fromEntries(new FormData(form)))
             }).then(() => {
                 document.getElementById('successMsg').classList.add('visible');
                 form.style.opacity = '0';
+                setTimeout(() => form.style.visibility = 'hidden', 500);
             });
         });
     </script>
