@@ -29,43 +29,42 @@
             flex-direction: column;
             align-items: center;
             background: #050505;
-            perspective: 1000px; /* Needed for 3D effect */
+            perspective: 1000px;
         }
 
-        /* --- 1. LAYERS: VIDEO, LIGHTING, STARS --- */
-        
-        /* Layer 1: Base Video */
+        /* --- 1. VIDEO BACKGROUND FIX (NO PLAY BUTTON) --- */
         .video-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; z-index: -3; opacity: 0.7;
-            filter: saturate(1.2) contrast(1.1); /* Make colors pop slightly */
+            filter: saturate(1.2) contrast(1.1);
+            pointer-events: none; /* Prevents clicking on video */
         }
 
-        /* Layer 2: Interactive Cursor Spotlight (Shadow/Highlight Tech) */
+        /* Hides the default play button on iOS/Android */
+        video::-webkit-media-controls { display: none !important; }
+        video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
+
+        /* --- 2. LAYERS --- */
         .cursor-light {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2; pointer-events: none;
-            /* Initially dark, JavaScript updates this gradient position */
             background: radial-gradient(circle 600px at 50% 50%, rgba(0,0,0,0) 0%, rgba(0,15,5,0.9) 100%);
-            transition: background 0.1s ease; /* Smooth movement */
+            transition: background 0.1s ease;
         }
 
-        /* Layer 3: Stars Canvas */
         #star-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; mix-blend-mode: screen; }
 
-        /* --- 2. MAIN CONTAINER (WITH 3D MOTION) --- */
+        /* --- 3. MAIN CONTAINER --- */
         .container {
             position: relative; z-index: 10;
             width: 100%; max-width: 900px;
             padding: 6rem 2rem 3rem;
             flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center;
-            /* 3D Transition properties */
             transform-style: preserve-3d;
             transition: transform 0.1s ease-out; 
-            will-change: transform; /* Performance optimization */
+            will-change: transform;
         }
 
-        /* Content elements need slight Z-push for 3D depth */
         .logo, .tagline, .countdown, .form-wrapper { transform: translateZ(20px); }
 
         .logo {
@@ -91,9 +90,9 @@
         
         .input-group {
             display: flex; 
-            background: rgba(255, 255, 255, 0.05); /* Ultra-clear glass */
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px) saturate(180%); /* High-end frosted look */
+            backdrop-filter: blur(20px) saturate(180%);
             border-radius: 50px; padding: 6px; transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
             box-shadow: 0 20px 40px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.1);
         }
@@ -142,7 +141,6 @@
             .input-group { border-radius: 20px; flex-direction: column; padding: 15px; gap: 10px; background: rgba(0,0,0,0.5); }
             .submit-btn { width: 100%; padding: 1rem; border-radius: 12px; }
             .email-input { text-align: center; padding: 0.5rem; }
-            /* Disable heavy 3D effects on mobile for performance */
             .container { transform: none !important; }
         }
     </style>
@@ -154,7 +152,6 @@
     </video>
     
     <div class="cursor-light" id="cursor-light"></div>
-    
     <canvas id="star-canvas"></canvas>
 
     <div class="container" id="tilt-container">
@@ -194,9 +191,7 @@
     </div>
 
     <script>
-        /* ------------------------------------------------
-           1. INTERACTIVE CURSOR LIGHTING & 3D TILT
-           ------------------------------------------------ */
+        // --- 1. CURSOR LIGHT & TILT ---
         const lightLayer = document.getElementById('cursor-light');
         const tiltContainer = document.getElementById('tilt-container');
 
@@ -205,23 +200,19 @@
             const y = e.clientY;
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
-
-            // Update Lighting Position (Spotlight effect)
-            lightLayer.style.background = `radial-gradient(circle 600px at ${x}px ${y}px, rgba(0,0,0,0) 0%, rgba(0,15,5,0.95) 100%)`;
-
-            // 3D Tilt Effect on Container (Subtle movement opposite to mouse)
-            const rotateX = ((centerY - y) / centerY) * 5; // Max 5 deg tilt
-            const rotateY = ((x - centerX) / centerX) * 5;
             
-            // Apply tilt only on larger screens
+            // Spotlight
+            lightLayer.style.background = `radial-gradient(circle 600px at ${x}px ${y}px, rgba(0,0,0,0) 0%, rgba(0,15,5,0.95) 100%)`;
+            
+            // 3D Tilt
             if(window.innerWidth > 600) {
+                 const rotateX = ((centerY - y) / centerY) * 5;
+                 const rotateY = ((x - centerX) / centerX) * 5;
                  tiltContainer.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
             }
         });
 
-        /* ------------------------------------------------
-           2. SHOOTING STARS ENGINE (RESTORED)
-           ------------------------------------------------ */
+        // --- 2. SHOOTING STARS ---
         const canvas = document.getElementById('star-canvas');
         const ctx = canvas.getContext('2d');
         let width, height;
@@ -245,7 +236,7 @@
         function animate() { ctx.clearRect(0,0,width,height); stars.forEach(s=> {s.update();s.draw();}); shooters.forEach(s=> {s.update();s.draw();}); requestAnimationFrame(animate); }
         animate();
 
-        /* --- 3. FIXED COUNTDOWN --- */
+        // --- 3. COUNTDOWN ---
         const target = new Date("Feb 25, 2026 00:00:00").getTime();
         setInterval(() => {
             const diff = target - Date.now();
@@ -257,7 +248,7 @@
             }
         }, 1000);
 
-        /* --- 4. FORM HANDLING --- */
+        // --- 4. FORM ---
         const form = document.getElementById('waitlistForm');
         form.addEventListener('submit', (e) => {
             e.preventDefault(); const btn = document.getElementById('btn'); btn.innerText = "Processing...";
