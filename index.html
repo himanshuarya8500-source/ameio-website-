@@ -11,50 +11,58 @@
 
   <style>
     :root {
-      --bg: #f2efe9;
-      --text: #1f1f1f;
-      --muted: #6b6b6b;
-      --accent: #7a8f5b;
+      /* === AMEIO FINAL COLOR SYSTEM === */
+      --bg-main: #F5F6F7;
+      --bg-soft: #ECEDEF;
+      --text-main: #2B2E33;
+      --text-muted: #7B7F85;
+      --border-soft: #C1C4C8;
+
+      /* Accent (Controlled use only) */
+      --accent: #E6A520;
+      --accent-soft: #FFD77A;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
-      background: var(--bg);
-      color: var(--text);
+      background: var(--bg-main);
+      color: var(--text-main);
       font-family: 'Inter', sans-serif;
       line-height: 1.7;
       overflow-x: hidden;
     }
 
-    /* SOFT MOVING BACKGROUND */
+    /* ===== SUBTLE LUXURY BACKGROUND MOTION ===== */
     body::before {
       content: "";
       position: fixed;
-      inset: 0;
-      width: 200%;
-      height: 200%;
+      inset: -50%;
       background:
-        radial-gradient(circle at 20% 20%, rgba(122,143,91,0.08), transparent 40%),
-        radial-gradient(circle at 80% 30%, rgba(200,180,140,0.08), transparent 45%),
-        radial-gradient(circle at 50% 80%, rgba(122,143,91,0.06), transparent 40%);
-      animation: slowFloat 45s linear infinite;
+        radial-gradient(circle at 30% 30%, rgba(230,165,32,0.06), transparent 40%),
+        radial-gradient(circle at 70% 40%, rgba(123,127,133,0.08), transparent 45%),
+        radial-gradient(circle at 50% 75%, rgba(230,165,32,0.04), transparent 40%);
+      animation: floatBg 50s linear infinite;
       z-index: -1;
     }
 
-    @keyframes slowFloat {
-      0% { transform: translate(0, 0); }
-      50% { transform: translate(-10%, -10%); }
-      100% { transform: translate(0, 0); }
+    @keyframes floatBg {
+      0% { transform: translate(0,0); }
+      50% { transform: translate(-6%, -6%); }
+      100% { transform: translate(0,0); }
     }
 
-    /* HEADER */
+    /* ===== HEADER ===== */
     .brand-header {
       position: fixed;
       top: 0;
       width: 100%;
-      backdrop-filter: blur(10px);
-      background: rgba(242,239,233,0.7);
+      background: rgba(245,246,247,0.75);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(0,0,0,0.05);
       z-index: 1000;
     }
@@ -66,17 +74,18 @@
 
     .brand-name {
       font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      letter-spacing: 2px;
+      font-size: 1.5rem;
+      letter-spacing: 3px;
     }
 
     .brand-tagline {
       font-size: 0.75rem;
-      color: var(--muted);
+      color: var(--text-muted);
     }
 
+    /* ===== SECTIONS ===== */
     section {
-      padding: 110px 10%;
+      padding: 120px 10%;
       opacity: 0;
       transform: translateY(40px);
       transition: 1s ease;
@@ -89,7 +98,7 @@
 
     .hero {
       min-height: 100vh;
-      padding-top: 160px;
+      padding-top: 180px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -99,11 +108,22 @@
       font-family: 'Playfair Display', serif;
     }
 
-    h1 { font-size: 3rem; margin-bottom: 20px; }
-    h2 { font-size: 2.2rem; margin-bottom: 20px; }
+    h1 {
+      font-size: 3.2rem;
+      margin-bottom: 20px;
+    }
 
-    p { color: var(--muted); max-width: 720px; }
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+    }
 
+    p {
+      color: var(--text-muted);
+      max-width: 720px;
+    }
+
+    /* ===== CTA BUTTONS ===== */
     .cta {
       margin-top: 40px;
       display: flex;
@@ -112,11 +132,14 @@
     }
 
     .btn {
-      padding: 14px 30px;
+      padding: 14px 34px;
       border: 1px solid var(--accent);
       background: transparent;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      letter-spacing: 1px;
       cursor: pointer;
-      transition: 0.4s;
+      transition: 0.4s ease;
     }
 
     .btn:hover {
@@ -124,26 +147,38 @@
       color: #fff;
     }
 
+    /* ===== FORM ===== */
     input {
       padding: 14px;
       width: 100%;
       max-width: 420px;
-      border: 1px solid #ccc;
+      border: 1px solid var(--border-soft);
+      background: var(--bg-soft);
       margin-bottom: 16px;
+      font-size: 0.9rem;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: var(--accent);
     }
 
     footer {
-      padding: 60px 10%;
+      padding: 70px 10%;
       text-align: center;
-      color: var(--muted);
+      color: var(--text-muted);
+      font-size: 0.8rem;
     }
 
-    a { color: var(--accent); text-decoration: none; }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
 
     @media(max-width:768px) {
       h1 { font-size: 2.2rem; }
       h2 { font-size: 1.8rem; }
-      section { padding: 80px 7%; }
+      section { padding: 90px 7%; }
     }
   </style>
 </head>
@@ -173,7 +208,7 @@
 <section>
   <h2>Why AMEIO Exists</h2>
   <p>
-    Modern beauty fixes the surface.  
+    Modern beauty fixes the surface.<br>
     But skin listens to the body.
   </p>
 </section>
@@ -181,15 +216,15 @@
 <section>
   <h2>Our Philosophy</h2>
   <p>
-    Skin reflects gut health.  
-    Glow reflects lifestyle.  
+    Skin reflects gut health.<br>
+    Glow reflects lifestyle.<br>
     Confidence reflects inner calm.
   </p>
 </section>
 
 <section id="join">
   <h2>Join the Inner Circle</h2>
-  <p>Early access. Founder updates. No spam.</p>
+  <p>Early access. Founder updates. No noise.</p>
 
   <form id="joinForm" action="https://formspree.io/f/mdagzbeq" method="POST">
     <input type="email" name="email" placeholder="Enter your email" required />
@@ -211,16 +246,15 @@
 </footer>
 
 <script>
-  // Scroll animation
   const sections = document.querySelectorAll("section");
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add("visible");
     });
   }, { threshold: 0.15 });
+
   sections.forEach(section => observer.observe(section));
 
-  // Form submit
   const form = document.getElementById("joinForm");
   const message = document.getElementById("formMessage");
 
@@ -234,8 +268,8 @@
     });
 
     if (res.ok) {
-      message.style.color = "green";
-      message.innerText = "✨ You’re in. Welcome to the AMEIO inner circle.";
+      message.style.color = "#2B2E33";
+      message.innerText = "You’re in. Welcome to the AMEIO inner circle.";
       form.reset();
     } else {
       message.style.color = "red";
