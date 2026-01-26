@@ -3,24 +3,33 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AMEIO | Organic Luxury</title>
+<title>AMEIO | Organic Luxury Collection</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
   /* --- LUXURY GREEN PALETTE --- */
   --bg-main: #0a2119;       /* Deepest Botanical Green */
-  --bg-secondary: #112b22;  /* Slightly lighter */
-  --text-light: #f0f5f3;    /* Soft White */
-  --text-muted: #9fb8ad;    /* Sage Green */
-  --gold-accent: #e6c674;   /* Rich Gold */
+  --bg-secondary: #112b22;  /* Slightly lighter for sections */
+  --text-light: #f0f5f3;    /* Soft off-white */
+  --text-muted: #9fb8ad;    /* Sage green */
+  --gold-accent: #e6c674;   /* Rich gold */
+  --gold-dark: #b39752;
+  
+  --section-spacing: 6rem;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;}
+
+/* --- FIX SCROLL OFFSET (Jaadu yahan hai) --- */
+/* Jab kisi link par click karoge, toh browser upar 120px jagah chhodega */
+section[id] {
+  scroll-margin-top: 120px;
+}
 
 body{
   font-family:'Montserrat',sans-serif;
@@ -28,173 +37,228 @@ body{
   color: var(--text-light);
   min-height:100vh;
   overflow-x:hidden;
+  background-image: linear-gradient(to bottom, #0a2119, #06140f);
 }
 
-/* ================= HEADER (Mobile Fixed) ================= */
+/* ================= HEADER ================= */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1.2rem 3rem;
   position: sticky;
   top: 0;
-  background: rgba(10, 33, 25, 0.95);
+  background: rgba(10, 33, 25, 0.9); /* Thoda aur dark kiya taaki text clear dikhe */
   backdrop-filter: blur(12px);
-  z-index: 100;
-  border-bottom: 1px solid rgba(230, 198, 116, 0.2);
+  z-index: 1000; /* Z-index badha diya taaki sabse upar rahe */
+  border-bottom: 1px solid rgba(230, 198, 116, 0.15);
+  height: 80px; /* Fixed height for calculations */
 }
 
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  letter-spacing: 0.1em;
-  color: var(--gold-accent);
-  text-transform: uppercase;
-}
-
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.nav-links a {
+.nav-left a {
   text-decoration: none;
   color: var(--text-light);
   font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  margin-right: 2rem;
   text-transform: uppercase;
-  transition: 0.3s;
+  transition: color 0.3s ease;
+}
+.nav-left a:hover { color: var(--gold-accent); }
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  letter-spacing: 0.12em;
+  color: var(--gold-accent);
+  font-weight: 600;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-/* ================= HERO SECTION ================= */
+.nav-right {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text-light);
+  opacity: 0.8;
+}
+
+/* ================= SECTIONS ================= */
+.section-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--section-spacing) 1.5rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--text-light);
+}
+.section-title span { font-style: italic; color: var(--gold-accent); }
+
+/* ================= HERO ================= */
 .hero-section {
   text-align: center;
-  padding: 4rem 1.5rem 2rem;
+  padding: 8rem 1rem 4rem;
 }
 .hero-headline {
   font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
   line-height: 1.2;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 .hero-headline span { color: var(--gold-accent); font-style: italic; }
 .hero-subtext {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--text-muted);
-  line-height: 1.6;
-}
-
-/* ================= PRODUCT STACK (1 Column) ================= */
-.section-container {
-  max-width: 600px; /* Limits width so it looks good on PC too */
+  max-width: 600px;
   margin: 0 auto;
-  padding: 3rem 1.5rem;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
 }
 
-.product-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem; /* Gap between products */
+/* ================= PRODUCT GRID ================= */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.5rem;
+  justify-items: center;
 }
 
 .product-card {
+  width: 100%;
   background: var(--bg-secondary);
-  border: 1px solid rgba(230, 198, 116, 0.15);
-  padding-bottom: 2rem;
+  border: 1px solid rgba(230, 198, 116, 0.1);
+  transition: all 0.4s ease;
+  cursor: pointer;
   position: relative;
+}
+.product-card:hover { 
+  border-color: var(--gold-accent);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .image-wrapper {
   width: 100%;
-  aspect-ratio: 4/5; /* Portrait Mode (Taller) */
+  aspect-ratio: 4/5;
   overflow: hidden;
   position: relative;
-  background: #000;
+  background: #05140f;
 }
 
 .product-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.7s ease;
+  opacity: 0.95;
 }
+.product-card:hover .product-img { transform: scale(1.05); opacity: 1; }
 
 .badge {
   position: absolute;
   top: 1rem; left: 1rem;
   background: var(--gold-accent);
   color: var(--bg-main);
-  padding: 0.4rem 0.8rem;
-  font-size: 0.7rem;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.65rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  z-index: 2;
 }
 
 .product-info {
-  margin-top: 1.5rem;
+  padding: 1.8rem 1.5rem;
   text-align: center;
-  padding: 0 1rem;
 }
 .product-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  color: var(--text-light);
+  font-size: 1.4rem;
   margin-bottom: 0.5rem;
-}
-.product-desc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  margin-bottom: 0.8rem;
-}
-.price {
-  color: var(--gold-accent);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-}
-
-/* ================= STORY SECTION (No Image) ================= */
-.narrative-block {
-  text-align: center;
-  padding: 4rem 1.5rem;
-  background: var(--bg-secondary);
-  border-top: 1px solid rgba(230, 198, 116, 0.1);
-  margin-top: 2rem;
-}
-.narrative-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
   color: var(--text-light);
-  margin-bottom: 1.5rem;
+}
+.product-desc { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.8rem; }
+.price { font-size: 0.9rem; font-weight: 600; color: var(--gold-accent); letter-spacing: 0.1em; }
+
+/* ================= PHILOSOPHY & SCIENCE ================= */
+.narrative-block {
+  background: var(--bg-secondary);
+  padding: 4rem;
+  text-align: center;
+  border-top: 1px solid rgba(230, 198, 116, 0.1);
+  border-bottom: 1px solid rgba(230, 198, 116, 0.1);
 }
 .narrative-text {
-  font-size: 0.95rem;
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 2;
   color: var(--text-muted);
-  line-height: 1.8;
 }
 
-/* ================= FOOTER ================= */
+/* ================= WAITLIST & FOOTER ================= */
+.waitlist-section {
+  text-align: center;
+  padding: 6rem 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
+}
+.email-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2rem;
+}
+.email-input {
+  border: 1px solid rgba(230, 198, 116, 0.3);
+  padding: 1rem 1.5rem;
+  width: 320px;
+  background: transparent;
+  color: var(--text-light);
+  font-family: 'Montserrat';
+  font-size: 0.9rem;
+  outline: none;
+  transition: 0.3s;
+}
+.email-input:focus { border-color: var(--gold-accent); }
+.submit-btn {
+  background: var(--gold-accent);
+  color: var(--bg-main);
+  border: none;
+  padding: 0 2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: 0.3s;
+}
+.submit-btn:hover { background: var(--gold-dark); color: #fff; }
+
 .footer {
   text-align: center;
   padding: 3rem;
   font-size: 0.7rem;
   color: var(--text-muted);
   border-top: 1px solid rgba(255,255,255,0.05);
-  margin-top: 2rem;
+  letter-spacing: 0.1em;
 }
 
-/* MOBILE ADJUSTMENTS (Header Fix) */
 @media(max-width: 768px) {
-  .header {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem;
-  }
-  .nav-links {
-    width: 100%;
-    justify-content: center;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding-top: 1rem;
-  }
+  .header { padding: 1rem; }
+  .nav-left, .nav-right { display: none; }
+  .logo { position: static; transform: none; margin: auto; }
+  .product-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .email-form { flex-direction: column; align-items: center; }
+  .email-input { width: 100%; text-align: center; }
+  .submit-btn { width: 100%; padding: 1rem; }
 }
 </style>
 </head>
@@ -202,54 +266,62 @@ body{
 <body>
 
   <header class="header">
-    <div class="logo">AMEIO</div>
-    <nav class="nav-links">
+    <div class="nav-left">
       <a href="#shop">Collection</a>
-      <a href="#story">Story</a>
+      <a href="#philosophy">Our Story</a>
       <a href="#science">Science</a>
-    </nav>
+    </div>
+    
+    <div class="logo">AMEIO</div>
+    
+    <div class="nav-right">
+      <span>Search</span>
+      <span>Bag (0)</span>
+    </div>
   </header>
 
   <section class="hero-section">
     <h1 class="hero-headline">Holistic Luxury, <br>Rooted in <span>Nature.</span></h1>
-    <p class="hero-subtext">Experience beauty that breathes.</p>
+    <p class="hero-subtext">Cosmetics cultivated from the Earth, refined by science, designed for your inner biology.</p>
   </section>
 
   <section id="shop" class="section-container">
-    <div class="product-stack">
+    <h2 class="section-title">The <span>Inaugural</span> Collection</h2>
+    
+    <div class="product-grid">
 
       <div class="product-card">
         <div class="image-wrapper">
-          <span class="badge">Bestseller</span>
-          <img src="./bg-main.jpg" alt="Foundation" class="product-img">
+          <div class="badge">Waitlist</div>
+          <img src="./bg-main.jpg" alt="The Foundation" class="product-img">
         </div>
         <div class="product-info">
-          <h2 class="product-name">The Bio-Foundation</h2>
-          <p class="product-desc">Breathable Coverage · SPF 30</p>
+          <div class="product-name">The Bio-Luminescent Foundation</div>
+          <div class="product-desc">Breathable Coverage · SPF 30</div>
           <div class="price">COMING SOON</div>
         </div>
       </div>
 
       <div class="product-card">
         <div class="image-wrapper">
-          <span class="badge">New</span>
-          <img src="./bg-silk.jpg" alt="Lipstick" class="product-img">
+          <div class="badge">New</div>
+          <img src="./bg-silk.jpg" alt="Velvet Lip" class="product-img">
         </div>
         <div class="product-info">
-          <h2 class="product-name">Velvet Matte Lip</h2>
-          <p class="product-desc">12H Hydration · Pure Pigment</p>
+          <div class="product-name">Velvet Matte Lip Pigment</div>
+          <div class="product-desc">Clean Color · 12H Hydration</div>
           <div class="price">COMING SOON</div>
         </div>
       </div>
 
       <div class="product-card">
         <div class="image-wrapper">
-          <span class="badge">Clinical</span>
-          <img src="./bg-water.jpg" alt="Serum" class="product-img">
+          <div class="badge">Clinical</div>
+          <img src="./bg-water.jpg" alt="Hydra Serum" class="product-img">
         </div>
         <div class="product-info">
-          <h2 class="product-name">Hydra-Cellular Serum</h2>
-          <p class="product-desc">Gut-Skin Axis Technology</p>
+          <div class="product-name">Cellular Hydra-Serum</div>
+          <div class="product-desc">Gut-Skin Axis Technology</div>
           <div class="price">COMING SOON</div>
         </div>
       </div>
@@ -257,16 +329,36 @@ body{
     </div>
   </section>
 
-  <section id="story" class="narrative-block">
-    <h2 class="narrative-title">The Philosophy</h2>
-    <p class="narrative-text">
-      We believe beauty isn't applied; it's cultivated. <br><br>
-      Born from a desire to bridge the gap between clinical dermatology and organic luxury, AMEIO creates products that respect your skin's barrier.
+  <section id="philosophy" class="narrative-block">
+    <div class="section-container" style="padding-top:2rem; padding-bottom:2rem;">
+      <h2 class="section-title">The AMEIO <span>Philosophy</span></h2>
+      <p class="narrative-text">
+        We believe beauty isn't applied; it's cultivated. Born from a desire to bridge the gap between clinical dermatology and organic luxury, AMEIO creates products that respect your skin's barrier.
+        <br><br>
+        Our ecosystem connects Gut Health, Nutrition, and Skincare to deliver a radiance that starts from within.
+      </p>
+    </div>
+  </section>
+
+  <section id="science" class="section-container">
+    <h2 class="section-title">The <span>Clinical</span> Approach</h2>
+    <p class="narrative-text" style="text-align:center;">
+      Our formulations are crafted with dermatologists and metabolic experts. Every topical protects your barrier, while our lifestyle protocols ignite your inner glow.
     </p>
   </section>
 
+  <section class="waitlist-section">
+    <h2 class="section-title" style="font-size: 1.8rem;">Join the <span>Inner Circle</span></h2>
+    <p style="color:var(--text-muted);">Be the first to access the launch.</p>
+
+    <form action="https://formsubmit.co/info@ameiocosmetics.com" method="POST" class="email-form">
+      <input type="email" name="email" class="email-input" placeholder="Your email address" required>
+      <button class="submit-btn">Get Access</button>
+    </form>
+  </section>
+
   <div class="footer">
-    © 2026 AMEIO COSMETICS
+    © 2026 AMEIO COSMETICS | HOLISTIC LUXURY
   </div>
 
 </body>
