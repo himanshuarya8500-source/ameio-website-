@@ -17,11 +17,7 @@
       --accent: #7a8f5b;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background: var(--bg);
@@ -29,7 +25,6 @@
       font-family: 'Inter', sans-serif;
       line-height: 1.7;
       overflow-x: hidden;
-      position: relative;
     }
 
     /* SOFT MOVING BACKGROUND */
@@ -53,43 +48,38 @@
       100% { transform: translate(0, 0); }
     }
 
-    /* BRAND HEADER */
+    /* HEADER */
     .brand-header {
       position: fixed;
       top: 0;
-      left: 0;
       width: 100%;
-      z-index: 999;
       backdrop-filter: blur(10px);
-      background: rgba(242, 239, 233, 0.6);
+      background: rgba(242,239,233,0.7);
       border-bottom: 1px solid rgba(0,0,0,0.05);
+      z-index: 1000;
     }
 
     .brand-inner {
-      padding: 14px 10%;
       text-align: center;
+      padding: 14px 10%;
     }
 
     .brand-name {
       font-family: 'Playfair Display', serif;
       font-size: 1.4rem;
       letter-spacing: 2px;
-      color: var(--text);
     }
 
     .brand-tagline {
       font-size: 0.75rem;
-      letter-spacing: 1px;
       color: var(--muted);
-      margin-top: 2px;
     }
 
     section {
       padding: 110px 10%;
-      border-bottom: 1px solid rgba(0,0,0,0.05);
       opacity: 0;
       transform: translateY(40px);
-      transition: all 1s ease;
+      transition: 1s ease;
     }
 
     section.visible {
@@ -97,34 +87,22 @@
       transform: translateY(0);
     }
 
-    h1, h2 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      letter-spacing: 0.4px;
-    }
-
-    h1 {
-      font-size: 3.2rem;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      font-size: 2.3rem;
-      margin-bottom: 20px;
-    }
-
-    p {
-      color: var(--muted);
-      max-width: 760px;
-    }
-
     .hero {
       min-height: 100vh;
+      padding-top: 160px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-top: 160px;
     }
+
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    h1 { font-size: 3rem; margin-bottom: 20px; }
+    h2 { font-size: 2.2rem; margin-bottom: 20px; }
+
+    p { color: var(--muted); max-width: 720px; }
 
     .cta {
       margin-top: 40px;
@@ -137,12 +115,8 @@
       padding: 14px 30px;
       border: 1px solid var(--accent);
       background: transparent;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 1px;
       cursor: pointer;
-      transition: all 0.4s ease;
+      transition: 0.4s;
     }
 
     .btn:hover {
@@ -150,23 +124,11 @@
       color: #fff;
     }
 
-    ul {
-      margin-top: 30px;
-    }
-
-    ul li {
-      margin-bottom: 12px;
-      list-style: none;
-      color: var(--muted);
-    }
-
     input {
       padding: 14px;
       width: 100%;
       max-width: 420px;
       border: 1px solid #ccc;
-      background: #fff;
-      color: #000;
       margin-bottom: 16px;
     }
 
@@ -174,39 +136,20 @@
       padding: 60px 10%;
       text-align: center;
       color: var(--muted);
-      font-size: 0.85rem;
     }
 
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+    a { color: var(--accent); text-decoration: none; }
 
-    @media(max-width: 768px) {
-      .brand-inner {
-        padding: 12px 6%;
-      }
-
-      .brand-name {
-        font-size: 1.2rem;
-      }
-
-      .brand-tagline {
-        font-size: 0.7rem;
-      }
-
-      section {
-        padding: 80px 7%;
-      }
-
-      h1 { font-size: 2.4rem; }
-      h2 { font-size: 1.9rem; }
+    @media(max-width:768px) {
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.8rem; }
+      section { padding: 80px 7%; }
     }
   </style>
 </head>
+
 <body>
 
-<!-- BRAND HEADER -->
 <header class="brand-header">
   <div class="brand-inner">
     <div class="brand-name">AMEIO</div>
@@ -214,12 +157,11 @@
   </div>
 </header>
 
-<!-- HERO -->
 <section class="hero">
   <h1>Beauty was never meant<br>to be applied alone.</h1>
   <p>
     AMEIO is building a conscious luxury beauty ecosystem where
-    vegan colour cosmetics meet inner healing and wellness.
+    vegan cosmetics meet inner healing and wellness.
   </p>
 
   <div class="cta">
@@ -228,128 +170,76 @@
   </div>
 </section>
 
-<!-- WHY -->
 <section>
   <h2>Why AMEIO Exists</h2>
   <p>
-    Modern beauty fixes the surface.
+    Modern beauty fixes the surface.  
     But skin listens to the body.
-    <br><br>
-    Stress, gut imbalance, lifestyle, and nutrition
-    shape how we look and feel.
   </p>
 </section>
 
-<!-- PHILOSOPHY -->
 <section>
   <h2>Our Philosophy</h2>
   <p>
-    True beauty is a by-product of inner harmony.
-    <br><br>
-    Skin reflects gut health.
-    Glow reflects lifestyle.
+    Skin reflects gut health.  
+    Glow reflects lifestyle.  
     Confidence reflects inner calm.
   </p>
 </section>
 
-<!-- WHAT WE ARE BUILDING -->
-<section>
-  <h2>What We Are Building</h2>
-  <ul>
-    <li>• Vegan, skin-supportive colour cosmetics</li>
-    <li>• Clean luxury formulations</li>
-    <li>• Gut–skin–mind wellness integration</li>
-    <li>• Rituals, not routines</li>
-  </ul>
-</section>
-
-<!-- JOIN -->
 <section id="join">
   <h2>Join the Inner Circle</h2>
-  <p>
-    Be part of AMEIO before the world sees it.
-    <br><br>
-    Early access. Founder updates. Wellness insights.
-  </p>
+  <p>Early access. Founder updates. No spam.</p>
 
-  <form id="joinForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+  <form id="joinForm" action="https://formspree.io/f/mdagzbeq" method="POST">
     <input type="email" name="email" placeholder="Enter your email" required />
     <button class="btn" type="submit">REQUEST ACCESS</button>
-    <p id="formMessage" style="margin-top:20px;"></p>
+    <p id="formMessage"></p>
   </form>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
   <p>
-    Email:
-    <a href="mailto:info@ameiocosmetics.com">info@ameiocosmetics.com</a><br>
-    Instagram:
+    info@ameiocosmetics.com<br>
     <a href="https://instagram.com/ameiocosmetics">@ameiocosmetics</a>
   </p>
 </section>
 
-<!-- TERMS -->
-<section id="terms">
-  <h2>Terms & Conditions</h2>
-  <p>
-    AMEIO is currently in pre-launch.
-    All information is for awareness and community building only.
-  </p>
-</section>
-
-<!-- FOOTER -->
 <footer>
-  © AMEIO COSMETICS <br>
-  Conscious Luxury Beauty <br><br>
-  <a href="#join">Join Us</a> ·
-  <a href="#contact">Contact</a> ·
-  <a href="#terms">Terms</a>
+  © AMEIO COSMETICS — Conscious Luxury Beauty
 </footer>
 
 <script>
-  /* SCROLL FADE ANIMATION */
+  // Scroll animation
   const sections = document.querySelectorAll("section");
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
+      if (entry.isIntersecting) entry.target.classList.add("visible");
     });
   }, { threshold: 0.15 });
-
   sections.forEach(section => observer.observe(section));
 
-  /* FORM SUBMISSION */
+  // Form submit
   const form = document.getElementById("joinForm");
   const message = document.getElementById("formMessage");
 
-  form.addEventListener("submit", async function(e) {
+  form.addEventListener("submit", async e => {
     e.preventDefault();
     const data = new FormData(form);
+    const res = await fetch(form.action, {
+      method: "POST",
+      body: data,
+      headers: { Accept: "application/json" }
+    });
 
-    try {
-      const response = await fetch(form.action, {
-        method: "POST",
-        body: data,
-        headers: { "Accept": "application/json" }
-      });
-
-      if (response.ok) {
-        message.style.color = "var(--accent)";
-        message.innerText =
-          "✨ Thank you for joining AMEIO. You are now part of our inner circle.";
-        form.reset();
-      } else {
-        message.style.color = "red";
-        message.innerText =
-          "Something went wrong. Please try again.";
-      }
-    } catch {
+    if (res.ok) {
+      message.style.color = "green";
+      message.innerText = "✨ You’re in. Welcome to the AMEIO inner circle.";
+      form.reset();
+    } else {
       message.style.color = "red";
-      message.innerText =
-        "Network error. Please try again later.";
+      message.innerText = "Something went wrong. Try again.";
     }
   });
 </script>
