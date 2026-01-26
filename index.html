@@ -12,50 +12,53 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root{--gold:#d4af37}
+/* ===============================
+   BRAND PALETTE (ORGANIC LUXURY)
+================================ */
+:root{
+  --black:#050505;
+  --green-dark:#0b1f17;   /* forest base */
+  --green-soft:#6b8f71;   /* olive accent */
+  --gold:#d4af37;
+}
 
 /* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
 
-/* BODY – FORCE CLEAN */
+/* BODY */
 body{
   font-family:'Montserrat',sans-serif;
-  background:#050505 !important;
-  background-image:none !important;
   color:#fff;
   min-height:100vh;
   overflow-x:hidden;
-}
-
-/* BASE BACKGROUND */
-.bg-base{
-  position:fixed;
-  inset:0;
-  z-index:-5;
   background:
-    radial-gradient(900px 500px at 50% 15%, rgba(212,175,55,.07), transparent 70%),
-    linear-gradient(180deg,#050505,#000);
+    radial-gradient(
+      900px 500px at 50% 15%,
+      rgba(11,31,23,.55),
+      transparent 70%
+    ),
+    var(--black);
 }
 
-/* GOLD BROKEN STAR / DUST FALL */
-.stars{
+/* SOFT BREATHING ORGANIC GLOW */
+body::before{
+  content:"";
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:-4;
+  z-index:-1;
   background:
-    repeating-radial-gradient(
-      circle,
-      rgba(212,175,55,.7) 0 1px,
-      transparent 2px 90px
+    radial-gradient(
+      600px 350px at 60% 30%,
+      rgba(107,143,113,.18),
+      transparent 70%
     );
-  animation:fall 32s linear infinite;
-  opacity:.75;
+  animation:breathe 14s ease-in-out infinite alternate;
 }
 
-@keyframes fall{
-  from{background-position:0 -1600px}
-  to{background-position:0 0}
+@keyframes breathe{
+  from{opacity:.55}
+  to{opacity:.9}
 }
 
 /* MAIN */
@@ -70,7 +73,12 @@ body{
 .logo{
   font-family:'Playfair Display',serif;
   font-size:clamp(3.5rem,12vw,7rem);
-  background:linear-gradient(135deg,#fff,var(--gold),#fff);
+  background:linear-gradient(
+    135deg,
+    #ffffff,
+    var(--gold),
+    #ffffff
+  );
   background-size:200%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -82,18 +90,20 @@ body{
   margin-top:.4rem;
   font-size:.85rem;
   letter-spacing:.4em;
-  color:rgba(212,175,55,.9);
+  color:var(--green-soft);
 }
+
 .brand-subtitle{
   letter-spacing:.45em;
   font-size:.8rem;
   opacity:.6;
   margin-bottom:3rem;
 }
+
 .tagline{
   font-family:'Playfair Display',serif;
   font-style:italic;
-  color:#eaddcf;
+  color:#e7f1ec;
   margin-bottom:4rem;
 }
 
@@ -106,7 +116,7 @@ body{
   color:rgba(255,255,255,.85);
 }
 .motto strong{
-  color:var(--gold);
+  color:var(--green-soft);
   letter-spacing:.12em;
 }
 
@@ -124,17 +134,21 @@ body{
 .time-label{
   font-size:.65rem;
   letter-spacing:.2em;
-  color:var(--gold);
+  color:var(--green-soft);
 }
 
 /* FORM */
 .form-wrapper{max-width:500px;margin:auto}
+
 .input-group{
   display:flex;
-  background:rgba(255,255,255,.08);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(107,143,113,.35);
   border-radius:50px;
   padding:6px;
+  backdrop-filter:blur(10px);
 }
+
 .email-input{
   flex:1;
   background:transparent;
@@ -143,13 +157,25 @@ body{
   color:#fff;
   outline:none;
 }
+
 .submit-btn{
-  background:linear-gradient(135deg,var(--gold),#b08d2b);
+  background:linear-gradient(
+    135deg,
+    var(--green-soft),
+    var(--gold)
+  );
   border:none;
   padding:1rem 2.5rem;
   border-radius:40px;
   font-weight:600;
   cursor:pointer;
+  color:#04140f;
+  transition:.35s ease;
+}
+
+.submit-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 28px rgba(107,143,113,.45);
 }
 
 /* FOOTER */
@@ -158,6 +184,7 @@ body{
   padding:3rem 1.5rem 3.5rem;
   text-align:center;
 }
+
 .footer-links{
   display:flex;
   justify-content:center;
@@ -165,11 +192,12 @@ body{
   flex-wrap:wrap;
   margin-bottom:2rem;
 }
+
 .footer-links a{
   padding:.85rem 1.7rem;
   border-radius:50px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(212,175,55,.4);
+  background:rgba(11,31,23,.6);
+  border:1px solid rgba(107,143,113,.45);
   color:#fff;
   font-size:.65rem;
   letter-spacing:.18em;
@@ -177,21 +205,26 @@ body{
   text-decoration:none;
   transition:.3s;
 }
+
 .footer-links a:hover{
-  background:rgba(212,175,55,.15);
-  box-shadow:0 0 22px rgba(212,175,55,.3);
-  transform:translateY(-2px);
+  background:rgba(107,143,113,.25);
+  box-shadow:0 0 20px rgba(107,143,113,.4);
 }
+
 .footer-brand{
   font-family:'Playfair Display',serif;
   font-size:.75rem;
   letter-spacing:.32em;
-  color:var(--gold);
+  color:var(--green-soft);
 }
 
+/* MOBILE */
 @media(max-width:600px){
   .countdown{gap:1rem}
-  .input-group{flex-direction:column;border-radius:20px}
+  .input-group{
+    flex-direction:column;
+    border-radius:20px;
+  }
   .submit-btn{width:100%}
 }
 </style>
@@ -199,11 +232,6 @@ body{
 
 <body>
 
-<!-- BACKGROUND -->
-<div class="bg-base"></div>
-<div class="stars"></div>
-
-<!-- CONTENT -->
 <div class="container">
   <h1 class="logo">AMEIO</h1>
   <div class="brand-name">AMEIO COSMETICS</div>
