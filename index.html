@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AMEIO Cosmetics | Holistic Luxury</title>
-<meta name="description" content="AMEIO Cosmetics – Beyond surface beauty. Gut health, lifestyle, and organic luxury." />
+<title>AMEIO | Organic Luxury</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,422 +11,353 @@
 
 <style>
 :root{
-  --black: #050505;
-  --green-dark: #0b1f17;
-  --green-soft: #8cae92;
-  --gold: #d4af37;
-  --gold-light: #f3e5ab;
-  --text-gray: rgba(255,255,255,0.7);
+  /* PSYCHOLOGICAL PALETTE */
+  --bg-color: #0b1f17;       /* Deep Forest Green (Base) */
+  --card-bg: #122920;        /* Slightly lighter green for cards */
+  --text-main: #ffffff;      /* Pure White for contrast */
+  --text-muted: #8cae92;     /* Sage Green for secondary text */
+  --gold: #d4af37;           /* Luxury Accent */
+  --gold-hover: #b5952f;
+  --badge-bg: #ffffff;
+  --badge-text: #0b1f17;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
   font-family:'Montserrat',sans-serif;
-  color:#fff;
+  background-color: var(--bg-color);
+  color: var(--text-main);
   min-height:100vh;
   overflow-x:hidden;
-  background-color: var(--black);
-  position: relative;
 }
 
-/* =========================================
-   1. MAIN BACKGROUND (Gold Bottle)
-   ========================================= */
-.bg-image {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  
-  /* Yahan aapki upload ki hui Gold Bottle aayegi */
-  background: url('./bg-main.jpg') no-repeat center center/cover;
-
-  /* Luxury Dark Filter to make text readable */
-  opacity: 0.4; 
-  z-index: -2;
-  filter: grayscale(20%) contrast(110%) brightness(60%);
-  transition: transform 10s ease;
-}
-
-/* Zoom Effect */
-body:hover .bg-image { transform: scale(1.05); }
-
-/* Noise Texture (Paper Feel) */
-body::after {
+/* Subtle Organic Texture (Optional - adds depth) */
+body::before {
   content: "";
   position: fixed;
   inset: 0;
+  background: radial-gradient(circle at 50% 0%, #1a382b 0%, var(--bg-color) 70%);
   z-index: -1;
-  opacity: 0.08;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-.container{
-  max-width:900px;
-  margin:auto;
-  padding: 5rem 2rem 4rem;
-  text-align:center;
+/* ================= HEADER ================= */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  position: sticky;
+  top: 0;
+  background: rgba(11, 31, 23, 0.95); /* Glassy Green */
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* ANIMATIONS */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1s ease forwards;
-}
-@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-
-.d-1 { animation-delay: 0.2s; }
-.d-2 { animation-delay: 0.4s; }
-.d-3 { animation-delay: 0.6s; }
-.d-4 { animation-delay: 0.8s; }
-
-/* TYPOGRAPHY */
-.logo{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(3.5rem,12vw,6.5rem);
-  background:linear-gradient(135deg, #fff 20%, var(--gold) 50%, #fff 80%);
-  background-size: 200% auto;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation: shine 6s linear infinite;
-  margin-bottom: 0.2rem;
-}
-@keyframes shine{ to{background-position:200% center} }
-
-.brand-subtitle{
-  font-size: 0.75rem;
-  letter-spacing: 0.5em;
-  text-transform: uppercase;
-  color: var(--green-soft);
-  margin-bottom: 2rem;
-  display: block;
-}
-
-.tagline{
-  font-family:'Playfair Display',serif;
-  font-style:italic;
-  font-size: clamp(1.1rem, 3vw, 1.4rem);
-  color: #e7f1ec;
-  margin-bottom: 3rem;
-  opacity: 0.95;
-  line-height: 1.6;
-}
-
-/* ECOSYSTEM SECTION */
-.ecosystem-section {
-  margin: 3rem auto 4rem;
-  padding: 2rem 0;
-  border-top: 1px solid rgba(212,175,55,0.2);
-  border-bottom: 1px solid rgba(212,175,55,0.2);
-}
-
-.ecosystem-title {
+.nav-left a {
+  text-decoration: none;
+  color: var(--text-main);
   font-size: 0.7rem;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  margin-right: 1.5rem;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 2rem;
+  transition: 0.3s;
+  opacity: 0.8;
+}
+.nav-left a:hover { color: var(--gold); opacity: 1; }
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
+  color: var(--gold); /* Gold Logo on Green looks very rich */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.pillars-grid {
+.nav-right {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text-main);
+}
+
+/* ================= HERO TEXT ================= */
+.hero-text {
+  text-align: center;
+  margin-top: 4rem;
+  padding: 0 1rem;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: #fff;
+}
+.hero-title span { color: var(--gold); font-style: italic; }
+.hero-sub {
+  color: var(--text-muted);
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+
+/* ================= PRODUCT GRID ================= */
+.main-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  position: relative;
+  cursor: pointer;
+  background: var(--card-bg); /* Box Effect */
+  padding-bottom: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: transform 0.3s, border-color 0.3s;
+}
+.product-card:hover { 
+  transform: translateY(-5px); 
+  border-color: var(--gold);
+}
+
+.image-wrapper {
+  width: 100%;
+  aspect-ratio: 1/1.1;
+  overflow: hidden;
+  position: relative;
+  background: #000;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  opacity: 0.9; /* Slightly dim image to blend with dark theme */
+}
+.product-card:hover .product-img { transform: scale(1.03); opacity: 1; }
+
+/* BADGES */
+.badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: var(--badge-bg);
+  padding: 0.4rem 0.8rem;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--badge-text);
+  z-index: 2;
+}
+
+/* PRODUCT INFO */
+.product-info {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.product-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--text-main);
+  margin-bottom: 0.4rem;
+}
+
+.product-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.6rem;
+}
+
+.price {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+/* ================= LAUNCH BANNER ================= */
+.launch-banner {
+  text-align: center;
+  margin: 6rem auto 2rem;
+  padding: 4rem 1rem;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  background: linear-gradient(to top, #091a13, transparent);
+}
+
+.launch-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.countdown {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.pillar-card {
-  flex: 1;
-  min-width: 200px;
-  max-width: 250px;
-  padding: 1rem;
-  background: rgba(255,255,255,0.03);
-  border-radius: 8px;
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255,255,255,0.05);
-}
-
-.pillar-icon {
-  font-size: 1.5rem;
-  color: var(--green-soft);
-  margin-bottom: 0.8rem;
   font-family: 'Playfair Display', serif;
-}
-
-.pillar-head {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #fff;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-}
-
-.pillar-desc {
-  font-size: 0.75rem;
-  color: var(--text-gray);
-  line-height: 1.6;
-}
-
-/* NARRATIVE SECTION (Text) */
-.narrative-section {
-  max-width: 700px;
-  margin: 0 auto 5rem;
-  text-align: center;
-  padding: 0 1rem;
-}
-
-.narrative-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 5vw, 2.8rem);
-  color: #fff;
-  line-height: 1.3;
-  margin-bottom: 2rem;
-}
-
-.narrative-title span {
-  font-style: italic;
+  font-size: 2rem;
   color: var(--gold);
+  margin: 2rem 0;
 }
-
-.narrative-text {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem;
-  line-height: 1.8;
-  color: rgba(255, 255, 255, 0.85);
-  margin-bottom: 1.5rem;
-  font-weight: 300;
-}
-
-/* NEW "EST. 2026" SECTION (Silk Box) */
-.est-container {
-  /* Silk Image Background */
-  background: url('./bg-silk.jpg') no-repeat center center/cover;
-  height: 250px;
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto 4rem;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-/* The Glass Box Overlay */
-.est-glass-box {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  padding: 1.5rem 3rem;
-  color: #fff;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-}
-
-/* COUNTDOWN */
-.countdown{
-  display:flex;
-  justify-content:center;
-  gap:2rem;
-  margin-bottom:3.5rem;
-}
-.time-val{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(1.8rem,4vw,2.5rem);
-  color: var(--gold);
-}
-.time-label{
-  font-size:0.55rem;
-  letter-spacing:0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
-  margin-top: 5px;
-}
+.time-unit { text-align: center; }
+.time-label { font-family: 'Montserrat'; font-size: 0.6rem; color: var(--text-muted); letter-spacing: 0.2em; display: block; margin-top: 5px; }
 
 /* FORM */
-.form-wrapper{max-width:450px;margin:auto;}
-.input-group{
-  display:flex;
-  background: rgba(255,255,255,0.03);
+.email-form {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2rem;
+}
+.email-input {
   border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 50px;
-  padding: 5px;
-  transition: 0.3s;
-}
-.input-group:focus-within {
-  border-color: var(--green-soft);
-  background: rgba(255,255,255,0.08);
-}
-.email-input{
-  flex:1;
-  background:transparent;
-  border:none;
-  padding:1rem 1.5rem;
-  color:#fff;
-  outline:none;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem;
-}
-.submit-btn{
-  background: var(--gold);
-  color: #000;
-  border:none;
-  padding: 0 2rem;
-  border-radius:40px;
-  font-weight:600;
+  padding: 0.8rem 1rem;
+  width: 300px;
+  background: transparent;
+  color: #fff;
+  font-family: 'Montserrat';
   font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  cursor:pointer;
-  transition: all 0.3s;
+  outline: none;
 }
-.submit-btn:hover{ background: #fff; }
+.email-input::placeholder { color: rgba(255,255,255,0.4); }
+
+.submit-btn {
+  background: var(--gold);
+  color: #0b1f17;
+  border: none;
+  padding: 0 1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: 0.3s;
+  font-weight: 600;
+}
+.submit-btn:hover { background: #fff; }
 
 /* FOOTER */
-.footer{ margin-top:5rem; padding-bottom: 2rem; }
-.footer-links button, .footer-links a{
-  background: none; border: none; color: rgba(255,255,255,0.6);
-  font-size: 0.7rem; letter-spacing: 0.1em; cursor: pointer;
-  margin: 0 10px; transition: 0.3s; text-decoration: none;
-  font-family: 'Montserrat', sans-serif;
+.footer {
+  text-align: center;
+  padding: 3rem;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
-.footer-links button:hover, .footer-links a:hover{ color: var(--gold); }
-.copyright { font-size: 0.6rem; letter-spacing: 0.2em; opacity: 0.4; margin-top: 1.5rem; }
 
-/* MODAL STYLES */
-.modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.9);
-  backdrop-filter: blur(10px); z-index: 999;
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none; transition: 0.4s;
-}
-.modal-overlay.active { opacity: 1; pointer-events: auto; }
-.modal-content {
-  background: #0b1410; border: 1px solid var(--gold);
-  max-width: 600px; padding: 3rem 2rem; border-radius: 4px;
-  position: relative; width: 90%;
-}
-.close-modal-btn {
-  position: absolute; top: 1rem; right: 1rem; background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer;
-}
-.modal-title { font-family:'Playfair Display'; color:var(--gold); margin-bottom:1rem; font-size:1.5rem;}
-.modal-text { font-size:0.85rem; line-height:1.7; color:#ddd; margin-bottom: 1.5rem; text-align: left; }
-
-@media(max-width:600px){
-  .input-group{ flex-direction:column; background: transparent; border:none; }
-  .email-input{ background: rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 10px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
-  .submit-btn{ width:100%; padding: 1rem; }
-  .pillar-card { min-width: 100%; margin-bottom: 10px; }
-  .narrative-title { font-size: 1.8rem; }
+/* MOBILE */
+@media(max-width: 768px) {
+  .header { padding: 1rem; }
+  .nav-left, .nav-right { display: none; }
+  .logo { position: static; transform: none; margin: auto; }
+  .product-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .email-form { flex-direction: column; align-items: center; }
+  .email-input { width: 100%; text-align: center; }
+  .submit-btn { width: 100%; padding: 1rem; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg-image"></div>
-
-<div class="container">
-  
-  <div class="header-section reveal d-1">
-    <h1 class="logo">AMEIO</h1>
-    <span class="brand-subtitle">The Holistic Standard</span>
-  </div>
-
-  <div class="reveal d-2">
-    <p class="tagline">“True cosmetic luxury isn't just painted on.<br>It is cultivated from within.”</p>
-  </div>
-
-  <div class="ecosystem-section reveal d-3">
-    <div class="ecosystem-title">The Ameio Ecosystem</div>
+  <header class="header">
+    <div class="nav-left">
+      <a href="#">Shop</a>
+      <a href="#">Story</a>
+      <a href="#">Science</a>
+    </div>
     
-    <div class="pillars-grid">
-      <div class="pillar-card">
-        <div class="pillar-icon">✦</div>
-        <div class="pillar-head">Gut & Internal</div>
-        <div class="pillar-desc">Formulations that balance your inner microbiome for outer radiance.</div>
-      </div>
-      
-      <div class="pillar-card">
-        <div class="pillar-icon">●</div>
-        <div class="pillar-head">Clinical Skincare</div>
-        <div class="pillar-desc">Organic, breathable topicals designed to protect and nourish.</div>
+    <div class="logo">AMEIO</div>
+    
+    <div class="nav-right">
+      <span>Search</span>
+      <span>Bag (0)</span>
+    </div>
+  </header>
+
+  <div class="hero-text">
+    <h1 class="hero-title">Experience <span>Organic</span> Luxury.</h1>
+    <p class="hero-sub">Rooted in Earth. Refined by Science.</p>
+  </div>
+
+  <div class="main-container">
+    <div class="product-grid">
+
+      <div class="product-card">
+        <div class="image-wrapper">
+          <div class="badge">Bestseller</div>
+          <img src="./bg-main.jpg" alt="The Foundation" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">The Skin Foundation</div>
+          <div class="product-desc">Breathable Coverage · SPF 30</div>
+          <div class="price">COMING SOON</div>
+        </div>
       </div>
 
-      <div class="pillar-card">
-        <div class="pillar-icon">≋</div>
-        <div class="pillar-head">Diet & Motion</div>
-        <div class="pillar-desc">Curated guides on nutrition and movement to fuel your glow.</div>
+      <div class="product-card">
+        <div class="image-wrapper">
+          <div class="badge">New Shade</div>
+          <img src="./bg-silk.jpg" alt="Velvet Lip" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Velvet Matte Lip</div>
+          <div class="product-desc">Hydrating Pigment · 12H Wear</div>
+          <div class="price">COMING SOON</div>
+        </div>
       </div>
+
+      <div class="product-card">
+        <div class="image-wrapper">
+          <div class="badge">Clinical</div>
+          <img src="./bg-water.jpg" alt="Hydra Serum" class="product-img">
+        </div>
+        <div class="product-info">
+          <div class="product-name">Bio-Active Serum</div>
+          <div class="product-desc">Gut-Skin Axis Technology</div>
+          <div class="price">COMING SOON</div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="narrative-section reveal d-3">
-    <h2 class="narrative-title">
-      Where Holistic Science Meets <br>
-      <span>Organic Luxury.</span>
-    </h2>
-
-    <p class="narrative-text">
-      AMEIO was born from a singular vision: to dismantle the wall between internal health and external radiance. We believe that true luxury isn't a mask—it is the visible resonance of a balanced gut, a nourished body, and a calm mind.
-    </p>
-
-    <p class="narrative-text">
-      Our ecosystem is crafted in collaboration with clinical dermatologists and metabolic experts. Every AMEIO topical protects your skin’s barrier, while our lifestyle protocols ignite your inner glow. This is not just makeup; it is a biological celebration of you.
-    </p>
-  </div>
-
-  <div class="est-container reveal d-3">
-    <div class="est-glass-box">
-      EST. 2026
+  <div class="launch-banner">
+    <div class="launch-title">The Collection Drops In</div>
+    
+    <div class="countdown">
+      <div class="time-unit"><span id="days">00</span><span class="time-label">DAYS</span></div>
+      <div class="time-unit"><span id="hours">00</span><span class="time-label">HRS</span></div>
+      <div class="time-unit"><span id="minutes">00</span><span class="time-label">MIN</span></div>
     </div>
-  </div>
 
-  <div class="countdown reveal d-4">
-    <div><div class="time-val" id="days">00</div><div class="time-label">Days</div></div>
-    <div><div class="time-val" id="hours">00</div><div class="time-label">Hrs</div></div>
-    <div><div class="time-val" id="minutes">00</div><div class="time-label">Min</div></div>
-    <div><div class="time-val" id="seconds">00</div><div class="time-label">Sec</div></div>
-  </div>
-
-  <div class="form-wrapper reveal d-4">
-    <form action="https://formsubmit.co/info@ameiocosmetics.com" method="POST">
-      <input type="hidden" name="_captcha" value="false">
-      <div class="input-group">
-        <input class="email-input" type="email" name="email" placeholder="Join the inner circle" required>
-        <button class="submit-btn">GET ACCESS</button>
-      </div>
+    <form action="https://formsubmit.co/info@ameiocosmetics.com" method="POST" class="email-form">
+      <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+      <button class="submit-btn">Get Early Access</button>
     </form>
-    <p style="font-size: 0.6rem; opacity: 0.5; margin-top: 15px; letter-spacing: 0.05em;">Be the first to experience the network.</p>
   </div>
 
-  <div class="footer reveal d-4">
-    <div class="footer-links">
-      <a href="https://instagram.com/ameiocosmetics" target="_blank">INSTAGRAM</a>
-      <a href="mailto:info@ameiocosmetics.com">CONTACT</a>
-      <button onclick="openModal('termsModal')">TERMS</button>
-    </div>
-    <div class="copyright">© 2026 AMEIO COSMETICS</div>
+  <div class="footer">
+    © 2026 AMEIO COSMETICS | PATNA, BIHAR
   </div>
-</div>
-
-<div id="termsModal" class="modal-overlay" onclick="if(event.target==this)this.classList.remove('active')">
-  <div class="modal-content">
-    <button class="close-modal-btn" onclick="document.getElementById('termsModal').classList.remove('active')">&times;</button>
-    <h2 class="modal-title">Terms & Privacy</h2>
-    <div class="modal-text">
-      <p><strong>The AMEIO Promise:</strong><br>We do not sell your data. We use your email solely to notify you of our launch.</p>
-      <p><strong>Disclaimer:</strong><br>Our holistic advice is for educational purposes and complements our cosmetic line.</p>
-    </div>
-  </div>
-</div>
 
 <script>
+/* COUNTDOWN LOGIC */
 const launchDate = new Date("March 15, 2026 00:00:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
@@ -436,11 +366,8 @@ setInterval(() => {
     document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
     document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
     document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-    document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000).toString().padStart(2, '0');
   }
 }, 1000);
-
-function openModal(id) { document.getElementById(id).classList.add('active'); }
 </script>
 
 </body>
