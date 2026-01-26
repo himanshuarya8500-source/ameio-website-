@@ -19,7 +19,7 @@
   --gold-accent: #d4af37;   
   --gold-dim: #8a763a;
   
-  --section-spacing: 8rem; /* More breathing room */
+  --section-spacing: 8rem;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -34,18 +34,39 @@ body{
   overflow-x:hidden;
 }
 
+/* ================= MARQUEE (HYPE STRIP) ================= */
+.hype-strip {
+  background: var(--gold-accent);
+  color: var(--bg-main);
+  padding: 0.6rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1001;
+}
+.marquee-content {
+  display: inline-block;
+  animation: scroll 25s linear infinite;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
 /* ================= HEADER ================= */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 4%;
+  padding: 1rem 4%;
   position: sticky;
   top: 0;
   background: rgba(10, 33, 25, 0.95);
   backdrop-filter: blur(15px);
   z-index: 1000;
   border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  height: 80px;
 }
 
 .nav-links a {
@@ -69,28 +90,12 @@ body{
   left: 50%;
   transform: translateX(-50%);
   font-weight: 600;
+  text-decoration: none;
 }
 
 .nav-icons { font-size: 1rem; color: var(--text-light); display: flex; gap: 1.5rem; }
 
-/* ================= HERO & MARQUEE ================= */
-.hype-strip {
-  background: var(--gold-accent);
-  color: var(--bg-main);
-  padding: 0.6rem 0;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.marquee-content {
-  display: inline-block;
-  animation: scroll 25s linear infinite;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-}
-@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
+/* ================= HERO SECTION ================= */
 .hero-section {
   text-align: center;
   padding: 8rem 1rem 5rem;
@@ -126,16 +131,15 @@ body{
 
 /* ================= PRODUCT GRID ================= */
 .section-container { max-width: 1200px; margin: 0 auto; padding: var(--section-spacing) 1.5rem; }
-.section-header { text-align: center; margin-bottom: 4rem; position: relative; }
+.section-header { text-align: center; margin-bottom: 4rem; }
 .section-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--text-light); }
 .section-title span { font-style: italic; color: var(--gold-accent); }
 .section-subtitle { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 1rem; display: block; }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* Default: 3 columns for Laptop */
   gap: 2rem;
-  justify-items: center;
 }
 
 .product-card {
@@ -171,8 +175,8 @@ body{
 }
 
 .product-info { padding: 1.5rem 0; text-align: center; }
-.product-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.4rem; color: var(--text-light); }
-.product-desc { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.8rem; }
+.product-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.4rem; color: var(--text-light); }
+.product-desc { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.8rem; }
 .price { font-size: 0.8rem; font-weight: 600; color: var(--gold-accent); letter-spacing: 0.15em; }
 
 /* ================= PHILOSOPHY (EDITORIAL STYLE) ================= */
@@ -186,12 +190,11 @@ body{
 .narrative-content {
   max-width: 800px;
   text-align: center;
-  border: 1px solid rgba(212, 175, 55, 0.3); /* The Frame */
+  border: 1px solid rgba(212, 175, 55, 0.3);
   padding: 4rem 2rem;
   position: relative;
 }
 
-/* Decorative diamond on top border */
 .narrative-content::before {
   content: "✦";
   position: absolute;
@@ -210,7 +213,7 @@ body{
   font-weight: 300;
 }
 
-/* ================= FOOTER (STRUCTURED) ================= */
+/* ================= FOOTER ================= */
 .footer {
   background: #05120d;
   padding: 5rem 2rem 2rem;
@@ -237,12 +240,9 @@ body{
   text-decoration: none;
   font-family: 'Montserrat';
   transition: 0.3s;
-  padding-bottom: 5px;
-  border-bottom: 1px solid transparent;
 }
-.footer-link:hover { border-color: var(--gold-accent); color: var(--gold-accent); }
+.footer-link:hover { color: var(--gold-accent); }
 
-/* Divider Line */
 .footer-divider {
   width: 50px;
   height: 1px;
@@ -256,7 +256,6 @@ body{
   display: inline-block;
   margin-bottom: 3rem;
 }
-.insta-icon:hover { transform: scale(1.1); color: #fff; }
 
 .footer-bottom {
   font-size: 0.65rem;
@@ -298,7 +297,6 @@ body{
   font-weight: 600;
   text-transform: uppercase;
 }
-.submit-btn:hover { background: #fff; }
 
 /* MODALS */
 .modal-overlay {
@@ -311,20 +309,46 @@ body{
 .modal-content {
   background: var(--bg-secondary); border: 1px solid var(--gold-accent);
   max-width: 500px; padding: 3rem; text-align: center;
+  width: 90%; /* Responsive width for modal */
 }
 .close-modal-btn {
   position: absolute; top: 1rem; right: 1rem;
   background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer;
 }
 
-@media(max-width: 768px) {
-  .nav-links { display: none; }
-  .logo { position: static; transform: none; margin: auto; }
-  .hero-headline { font-size: 2.8rem; }
-  .timer-container { width: 100%; gap: 1rem; padding: 1rem; justify-content: space-around; }
-  .narrative-content { padding: 2rem 1rem; border: none; border-top: 1px solid var(--gold-dim); border-bottom: 1px solid var(--gold-dim); }
+/* =========================================
+   MOBILE RESPONSIVENESS (The Fix)
+   ========================================= */
+@media(max-width: 900px) {
+  /* Header Adjustments */
+  .nav-links { display: none; } /* Hide text links on mobile */
+  .logo { position: static; transform: none; margin: 0 auto; } /* Center logo */
+  .nav-icons { display: none; } /* Hide icons to keep it clean, or keep if you want */
+  .header { justify-content: center; padding: 1rem; }
+
+  /* Typography */
+  .hero-headline { font-size: 2.5rem; }
+  .section-title { font-size: 1.8rem; }
+  
+  /* Product Grid: 1 Column on Mobile */
+  .product-grid { grid-template-columns: 1fr; gap: 4rem; } 
+  .product-card { max-width: 350px; margin: 0 auto; } /* Center card */
+
+  /* Philosophy Box */
+  .narrative-content { border: none; padding: 2rem 0; border-top: 1px solid var(--gold-dim); border-bottom: 1px solid var(--gold-dim); }
   .narrative-content::before { display: none; }
-  .footer-nav { flex-direction: column; gap: 1.5rem; }
+
+  /* Timer */
+  .timer-container { width: 100%; gap: 1rem; padding: 1rem; justify-content: center; border: none; }
+  .time-val { font-size: 1.5rem; }
+
+  /* Form */
+  .email-form { flex-direction: column; align-items: center; gap: 10px; }
+  .email-input { width: 100%; border-right: 1px solid rgba(255,255,255,0.2); text-align: center; }
+  .submit-btn { width: 100%; padding: 1rem; }
+  
+  /* Spacing */
+  :root { --section-spacing: 4rem; }
 }
 </style>
 </head>
