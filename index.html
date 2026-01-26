@@ -12,42 +12,56 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
+/* ===============================
+   BRAND PALETTE (ORGANIC LUXURY)
+================================ */
 :root{
   --black:#050505;
-  --green-dark:#0b1f17;
-  --green-soft:#6b8f71;
+  --green-dark:#0b1f17;   /* forest base */
+  --green-soft:#6b8f71;   /* olive accent */
   --gold:#d4af37;
 }
 
+/* RESET */
 *{margin:0;padding:0;box-sizing:border-box}
 
+/* BODY */
 body{
   font-family:'Montserrat',sans-serif;
   color:#fff;
   min-height:100vh;
   overflow-x:hidden;
   background:
-    radial-gradient(900px 500px at 50% 15%, rgba(11,31,23,.55), transparent 70%),
+    radial-gradient(
+      900px 500px at 50% 15%,
+      rgba(11,31,23,.55),
+      transparent 70%
+    ),
     var(--black);
 }
 
-/* breathing organic glow */
+/* SOFT BREATHING ORGANIC GLOW */
 body::before{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-1;
   pointer-events:none;
+  z-index:-1;
   background:
-    radial-gradient(600px 350px at 60% 30%, rgba(107,143,113,.18), transparent 70%);
+    radial-gradient(
+      600px 350px at 60% 30%,
+      rgba(107,143,113,.18),
+      transparent 70%
+    );
   animation:breathe 14s ease-in-out infinite alternate;
 }
+
 @keyframes breathe{
   from{opacity:.55}
   to{opacity:.9}
 }
 
-/* layout */
+/* MAIN */
 .container{
   max-width:900px;
   margin:auto;
@@ -55,11 +69,16 @@ body::before{
   text-align:center;
 }
 
-/* logo */
+/* LOGO */
 .logo{
   font-family:'Playfair Display',serif;
   font-size:clamp(3.5rem,12vw,7rem);
-  background:linear-gradient(135deg,#fff,var(--gold),#fff);
+  background:linear-gradient(
+    135deg,
+    #ffffff,
+    var(--gold),
+    #ffffff
+  );
   background-size:200%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
@@ -73,12 +92,14 @@ body::before{
   letter-spacing:.4em;
   color:var(--green-soft);
 }
+
 .brand-subtitle{
   letter-spacing:.45em;
   font-size:.8rem;
   opacity:.6;
   margin-bottom:3rem;
 }
+
 .tagline{
   font-family:'Playfair Display',serif;
   font-style:italic;
@@ -86,7 +107,7 @@ body::before{
   margin-bottom:4rem;
 }
 
-/* why ameio */
+/* WHY AMEIO */
 .motto{
   max-width:700px;
   margin:0 auto 5rem;
@@ -99,7 +120,7 @@ body::before{
   letter-spacing:.12em;
 }
 
-/* countdown */
+/* COUNTDOWN */
 .countdown{
   display:flex;
   justify-content:center;
@@ -116,8 +137,9 @@ body::before{
   color:var(--green-soft);
 }
 
-/* form */
+/* FORM */
 .form-wrapper{max-width:500px;margin:auto}
+
 .input-group{
   display:flex;
   background:rgba(255,255,255,.06);
@@ -126,6 +148,7 @@ body::before{
   padding:6px;
   backdrop-filter:blur(10px);
 }
+
 .email-input{
   flex:1;
   background:transparent;
@@ -134,8 +157,13 @@ body::before{
   color:#fff;
   outline:none;
 }
+
 .submit-btn{
-  background:linear-gradient(135deg,var(--green-soft),var(--gold));
+  background:linear-gradient(
+    135deg,
+    var(--green-soft),
+    var(--gold)
+  );
   border:none;
   padding:1rem 2.5rem;
   border-radius:40px;
@@ -144,17 +172,19 @@ body::before{
   color:#04140f;
   transition:.35s ease;
 }
+
 .submit-btn:hover{
   transform:translateY(-2px);
   box-shadow:0 0 28px rgba(107,143,113,.45);
 }
 
-/* footer */
+/* FOOTER */
 .footer{
   margin-top:5rem;
   padding:3rem 1.5rem 3.5rem;
   text-align:center;
 }
+
 .footer-links{
   display:flex;
   justify-content:center;
@@ -162,6 +192,7 @@ body::before{
   flex-wrap:wrap;
   margin-bottom:2rem;
 }
+
 .footer-links a{
   padding:.85rem 1.7rem;
   border-radius:50px;
@@ -174,10 +205,12 @@ body::before{
   text-decoration:none;
   transition:.3s;
 }
+
 .footer-links a:hover{
   background:rgba(107,143,113,.25);
   box-shadow:0 0 20px rgba(107,143,113,.4);
 }
+
 .footer-brand{
   font-family:'Playfair Display',serif;
   font-size:.75rem;
@@ -185,40 +218,13 @@ body::before{
   color:var(--green-soft);
 }
 
-/* modals */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.75);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:999;
-}
-.modal-box{
-  background:#0b1f17;
-  border:1px solid #6b8f71;
-  padding:2rem;
-  max-width:420px;
-  border-radius:12px;
-  text-align:center;
-}
-.modal-box h3{
-  color:#d4af37;
-  margin-bottom:1rem;
-}
-.modal-box button{
-  margin-top:1.5rem;
-  background:#6b8f71;
-  border:none;
-  padding:.6rem 1.4rem;
-  border-radius:20px;
-  cursor:pointer;
-}
-
+/* MOBILE */
 @media(max-width:600px){
   .countdown{gap:1rem}
-  .input-group{flex-direction:column;border-radius:20px}
+  .input-group{
+    flex-direction:column;
+    border-radius:20px;
+  }
   .submit-btn{width:100%}
 }
 </style>
@@ -249,13 +255,9 @@ body::before{
   <div class="form-wrapper">
     <form action="https://formsubmit.co/info@ameiocosmetics.com" method="POST">
       <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="AMEIO Early Access Signup">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://www.ameiocosmetics.com/?success=true">
-
       <div class="input-group">
         <input class="email-input" type="email" name="email" placeholder="Enter your email" required>
-        <button class="submit-btn" type="submit">Get Early Access</button>
+        <button class="submit-btn">Get Early Access</button>
       </div>
     </form>
   </div>
@@ -264,38 +266,13 @@ body::before{
     <div class="footer-links">
       <a href="https://instagram.com/ameiocosmetics" target="_blank">Instagram</a>
       <a href="mailto:info@ameiocosmetics.com">Contact Us</a>
-      <a href="#" onclick="openModal('terms')">Terms</a>
-      <a href="#" onclick="openModal('privacy')">Privacy</a>
     </div>
     <div class="footer-brand">© 2026 AMEIO COSMETICS</div>
   </div>
 </div>
 
-<!-- MODALS -->
-<div id="terms" class="modal">
-  <div class="modal-box">
-    <h3>Terms & Conditions</h3>
-    <p>
-      By joining AMEIO’s early access list, you agree to receive product updates,
-      launch notifications, and brand communications. You may unsubscribe anytime.
-    </p>
-    <button onclick="closeModal('terms')">Close</button>
-  </div>
-</div>
-
-<div id="privacy" class="modal">
-  <div class="modal-box">
-    <h3>Privacy Policy</h3>
-    <p>
-      Your email is used only for AMEIO updates. We never sell, rent, or share
-      your personal data. Your privacy is fully respected.
-    </p>
-    <button onclick="closeModal('privacy')">Close</button>
-  </div>
-</div>
-
 <script>
-/* countdown */
+/* COUNTDOWN – 30 DAYS */
 document.addEventListener("DOMContentLoaded",()=>{
   const target=Date.now()+30*24*60*60*1000;
   setInterval(()=>{
@@ -306,14 +283,6 @@ document.addEventListener("DOMContentLoaded",()=>{
     seconds.textContent=Math.floor(diff/1000%60).toString().padStart(2,'0');
   },1000);
 });
-
-/* modals */
-function openModal(id){
-  document.getElementById(id).style.display="flex";
-}
-function closeModal(id){
-  document.getElementById(id).style.display="none";
-}
 </script>
 
 </body>
