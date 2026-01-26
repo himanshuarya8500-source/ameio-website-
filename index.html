@@ -7,24 +7,34 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
 <style>
 :root{
   /* --- LUXURY PALETTE --- */
-  --bg-main: #0a2119;       
-  --bg-secondary: #0f2920; 
+  --bg-main: #081c15;       /* Darker, richer green */
+  --bg-secondary: #0d261d; 
   --text-light: #f4f4f4;    
-  --text-muted: #a3b8b0;    
+  --text-muted: #aabfb5;    
   --gold-accent: #d4af37;   
   --gold-dim: #8a763a;
   
-  --section-spacing: 8rem;
+  --section-spacing: 10rem; /* International brands use lots of space */
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;}
-section[id] { scroll-margin-top: 100px; }
+
+/* SCROLL ANIMATION CLASSES */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 body{
   font-family:'Montserrat',sans-serif;
@@ -32,323 +42,299 @@ body{
   color: var(--text-light);
   min-height:100vh;
   overflow-x:hidden;
+  /* Very subtle grain texture overlay */
+  background-image: radial-gradient(circle at 50% 0%, #132e24 0%, #081c15 80%);
 }
-
-/* ================= MARQUEE (HYPE STRIP) ================= */
-.hype-strip {
-  background: var(--gold-accent);
-  color: var(--bg-main);
-  padding: 0.6rem 0;
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
-  z-index: 1001;
-}
-.marquee-content {
-  display: inline-block;
-  animation: scroll 25s linear infinite;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-}
-@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ================= HEADER ================= */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 4%;
+  padding: 1.5rem 5%;
   position: sticky;
   top: 0;
-  background: rgba(10, 33, 25, 0.95);
-  backdrop-filter: blur(15px);
+  background: rgba(8, 28, 21, 0.85); /* Highly translucent */
+  backdrop-filter: blur(20px); /* Heavy blur for premium feel */
   z-index: 1000;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
-  height: 80px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  transition: all 0.3s ease;
 }
 
 .nav-links a {
   text-decoration: none;
   color: var(--text-light);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
   font-weight: 500;
-  margin-right: 2rem;
+  margin-right: 2.5rem;
   text-transform: uppercase;
   transition: 0.3s;
+  opacity: 0.8;
 }
-.nav-links a:hover { color: var(--gold-accent); }
+.nav-links a:hover { color: var(--gold-accent); opacity: 1; }
 
 .logo {
   font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
+  font-size: 2rem;
   letter-spacing: 0.15em;
   color: var(--gold-accent);
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  font-weight: 600;
-  text-decoration: none;
+  font-weight: 500;
 }
 
-.nav-icons { font-size: 1rem; color: var(--text-light); display: flex; gap: 1.5rem; }
+.nav-icons { font-size: 0.9rem; color: var(--text-light); display: flex; gap: 2rem; opacity: 0.8; }
 
-/* ================= HERO SECTION ================= */
+/* ================= HERO & MARQUEE ================= */
+.hype-strip {
+  background: var(--gold-accent);
+  color: #05120d;
+  padding: 0.5rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-content {
+  display: inline-block;
+  animation: scroll 30s linear infinite;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
 .hero-section {
   text-align: center;
-  padding: 8rem 1rem 5rem;
-  background: radial-gradient(circle at center, #132e24 0%, var(--bg-main) 70%);
+  padding: 10rem 1rem 6rem;
 }
 .hero-headline {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(3rem, 6vw, 5rem);
   line-height: 1.1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
+  font-weight: 400;
 }
 .hero-headline span { color: var(--gold-accent); font-style: italic; }
 .hero-subtext {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
-  max-width: 550px;
+  max-width: 600px;
   margin: 0 auto;
-  line-height: 1.8;
+  line-height: 1.9;
   letter-spacing: 0.05em;
+  font-weight: 300;
 }
 
 /* TIMER */
 .timer-container {
   display: inline-flex;
-  gap: 3rem;
-  margin-top: 3.5rem;
-  padding: 1.5rem 3rem;
-  border-top: 1px solid rgba(212, 175, 55, 0.3);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  gap: 4rem;
+  margin-top: 4rem;
+  padding: 2rem 4rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
 }
-.time-val { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold-accent); display: block; line-height: 1; }
-.time-label { font-size: 0.6rem; letter-spacing: 0.2em; color: var(--text-muted); margin-top: 8px; display: block; }
+.time-val { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold-accent); display: block; line-height: 1; }
+.time-label { font-size: 0.55rem; letter-spacing: 0.3em; color: var(--text-muted); margin-top: 10px; display: block; text-transform: uppercase; }
 
 /* ================= PRODUCT GRID ================= */
-.section-container { max-width: 1200px; margin: 0 auto; padding: var(--section-spacing) 1.5rem; }
-.section-header { text-align: center; margin-bottom: 4rem; }
-.section-title { font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--text-light); }
+.section-container { max-width: 1400px; margin: 0 auto; padding: var(--section-spacing) 2rem; }
+.section-header { text-align: center; margin-bottom: 5rem; }
+.section-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--text-light); font-weight: 400; }
 .section-title span { font-style: italic; color: var(--gold-accent); }
-.section-subtitle { font-size: 0.7rem; letter-spacing: 0.3em; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 1rem; display: block; }
+.section-subtitle { font-size: 0.65rem; letter-spacing: 0.4em; color: var(--gold-dim); text-transform: uppercase; margin-bottom: 1.5rem; display: block; }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Default: 3 columns for Laptop */
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 3rem;
 }
 
 .product-card {
   width: 100%;
-  background: var(--bg-secondary);
-  transition: all 0.5s ease;
   cursor: pointer;
   position: relative;
-  border: 1px solid transparent;
+  group: hover;
 }
-.product-card:hover { border-color: rgba(212, 175, 55, 0.3); transform: translateY(-5px); }
 
 .image-wrapper {
   width: 100%;
   aspect-ratio: 4/5;
   overflow: hidden;
   position: relative;
-  background: #000;
+  background: #0d261d;
 }
-.product-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; opacity: 0.9; }
-.product-card:hover .product-img { transform: scale(1.05); opacity: 1; }
+.product-img { 
+  width: 100%; height: 100%; object-fit: cover; 
+  transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s; 
+  opacity: 0.95; 
+}
+.product-card:hover .product-img { transform: scale(1.08); opacity: 1; }
 
 .badge {
   position: absolute;
-  top: 0; left: 0;
-  background: var(--text-light);
-  color: var(--bg-main);
-  padding: 0.5rem 1rem;
-  font-size: 0.6rem;
+  top: 1.5rem; left: 1.5rem;
+  background: #fff;
+  color: #000;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.55rem;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
-.product-info { padding: 1.5rem 0; text-align: center; }
-.product-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 0.4rem; color: var(--text-light); }
-.product-desc { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.8rem; }
+.product-info { padding: 2rem 0; text-align: center; transition: 0.3s; }
+.product-card:hover .product-info { transform: translateY(-5px); }
+
+.product-name { font-family: 'Playfair Display', serif; font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--text-light); }
+.product-desc { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em; margin-bottom: 0.8rem; }
 .price { font-size: 0.8rem; font-weight: 600; color: var(--gold-accent); letter-spacing: 0.15em; }
 
 /* ================= PHILOSOPHY (EDITORIAL STYLE) ================= */
 .narrative-block {
   background: var(--bg-secondary);
-  padding: 6rem 1.5rem;
+  padding: 8rem 2rem;
   display: flex;
   justify-content: center;
+  position: relative;
 }
 
 .narrative-content {
   max-width: 800px;
   text-align: center;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  padding: 4rem 2rem;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 5rem 3rem;
   position: relative;
 }
-
-.narrative-content::before {
-  content: "✦";
+/* Diamond Accent */
+.narrative-content::after {
+  content: "";
   position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--bg-secondary);
-  padding: 0 10px;
-  color: var(--gold-accent);
+  bottom: -6px; left: 50%; transform: translateX(-50%) rotate(45deg);
+  width: 12px; height: 12px;
+  background: var(--gold-accent);
 }
 
 .narrative-text {
-  font-size: 1.1rem;
-  line-height: 2;
+  font-size: 1.15rem;
+  line-height: 2.2;
   color: var(--text-muted);
   font-weight: 300;
+  /* NO IMAGE TAG HERE - PROBLEM SOLVED */
 }
 
-/* ================= FOOTER ================= */
+/* ================= FOOTER (STRUCTURED) ================= */
 .footer {
-  background: #05120d;
-  padding: 5rem 2rem 2rem;
+  background: #040f0b;
+  padding: 6rem 2rem 3rem;
   text-align: center;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  border-top: 1px solid rgba(255,255,255,0.03);
 }
 
 .footer-nav {
   display: flex;
   justify-content: center;
-  gap: 3rem;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
+  gap: 4rem;
+  margin-bottom: 4rem;
 }
 
 .footer-link {
   background: none;
   border: none;
-  color: var(--text-light);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   cursor: pointer;
   text-decoration: none;
-  font-family: 'Montserrat';
   transition: 0.3s;
 }
 .footer-link:hover { color: var(--gold-accent); }
 
-.footer-divider {
-  width: 50px;
-  height: 1px;
-  background: var(--gold-dim);
-  margin: 0 auto 3rem;
-}
-
-.insta-icon {
-  color: var(--gold-accent);
-  transition: 0.3s;
+/* The "From Bihar" Stamp */
+.bihar-stamp {
   display: inline-block;
-  margin-bottom: 3rem;
+  border: 1px solid var(--gold-dim);
+  padding: 0.8rem 2rem;
+  color: var(--gold-accent);
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  margin-bottom: 2rem;
+  opacity: 0.8;
 }
 
-.footer-bottom {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-  line-height: 1.8;
-  opacity: 0.6;
-}
-.bihar-tag {
-  color: var(--gold-accent);
-  letter-spacing: 0.25em;
+.copyright {
   font-size: 0.6rem;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  display: block;
+  color: var(--text-muted);
+  opacity: 0.4;
+  letter-spacing: 0.2em;
 }
 
 /* FORM */
-.email-form { display: flex; justify-content: center; gap: 0; margin-top: 2rem; }
+.email-form { display: flex; justify-content: center; gap: 0; margin-top: 3rem; }
 .email-input {
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.1);
   border-right: none;
-  padding: 1rem;
-  width: 250px;
+  padding: 1.2rem;
+  width: 300px;
   background: transparent;
   color: #fff;
   font-family: 'Montserrat';
   font-size: 0.8rem;
   outline: none;
+  transition: 0.3s;
 }
+.email-input:focus { border-color: var(--gold-accent); background: rgba(255,255,255,0.02); }
 .submit-btn {
   background: var(--gold-accent);
   color: #000;
   border: none;
-  padding: 0 1.5rem;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
+  padding: 0 2rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
   cursor: pointer;
   font-weight: 600;
   text-transform: uppercase;
+  transition: 0.3s;
 }
+.submit-btn:hover { background: #fff; }
 
 /* MODALS */
 .modal-overlay {
   position: fixed; inset: 0; background: rgba(0,0,0,0.95);
-  backdrop-filter: blur(5px); z-index: 2000;
+  backdrop-filter: blur(10px); z-index: 2000;
   display: flex; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none; transition: 0.4s;
 }
 .modal-overlay.active { opacity: 1; pointer-events: auto; }
 .modal-content {
   background: var(--bg-secondary); border: 1px solid var(--gold-accent);
-  max-width: 500px; padding: 3rem; text-align: center;
-  width: 90%; /* Responsive width for modal */
+  max-width: 500px; padding: 4rem; text-align: center;
+  width: 90%;
 }
 .close-modal-btn {
-  position: absolute; top: 1rem; right: 1rem;
-  background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer;
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background:none; border:none; color:var(--gold-accent); font-size:1.5rem; cursor:pointer;
 }
 
-/* =========================================
-   MOBILE RESPONSIVENESS (The Fix)
-   ========================================= */
+/* RESPONSIVE */
 @media(max-width: 900px) {
-  /* Header Adjustments */
-  .nav-links { display: none; } /* Hide text links on mobile */
-  .logo { position: static; transform: none; margin: 0 auto; } /* Center logo */
-  .nav-icons { display: none; } /* Hide icons to keep it clean, or keep if you want */
-  .header { justify-content: center; padding: 1rem; }
-
-  /* Typography */
-  .hero-headline { font-size: 2.5rem; }
-  .section-title { font-size: 1.8rem; }
-  
-  /* Product Grid: 1 Column on Mobile */
-  .product-grid { grid-template-columns: 1fr; gap: 4rem; } 
-  .product-card { max-width: 350px; margin: 0 auto; } /* Center card */
-
-  /* Philosophy Box */
-  .narrative-content { border: none; padding: 2rem 0; border-top: 1px solid var(--gold-dim); border-bottom: 1px solid var(--gold-dim); }
-  .narrative-content::before { display: none; }
-
-  /* Timer */
-  .timer-container { width: 100%; gap: 1rem; padding: 1rem; justify-content: center; border: none; }
-  .time-val { font-size: 1.5rem; }
-
-  /* Form */
-  .email-form { flex-direction: column; align-items: center; gap: 10px; }
-  .email-input { width: 100%; border-right: 1px solid rgba(255,255,255,0.2); text-align: center; }
+  .nav-links, .nav-icons { display: none; }
+  .logo { position: static; transform: none; margin: 0 auto; }
+  .header { justify-content: center; }
+  .hero-headline { font-size: 3rem; }
+  .timer-container { width: 100%; gap: 1rem; padding: 1.5rem 1rem; justify-content: center; border: 1px solid rgba(212,175,55,0.2); }
+  .product-grid { grid-template-columns: 1fr; gap: 4rem; }
+  .email-form { flex-direction: column; align-items: center; }
+  .email-input { width: 100%; border-right: 1px solid rgba(255,255,255,0.1); text-align: center; }
   .submit-btn { width: 100%; padding: 1rem; }
-  
-  /* Spacing */
-  :root { --section-spacing: 4rem; }
+  .footer-nav { flex-direction: column; gap: 1.5rem; }
+  .narrative-content { border: none; padding: 0; }
+  .narrative-content::after { display: none; }
 }
 </style>
 </head>
@@ -357,7 +343,7 @@ body{
 
   <div class="hype-strip">
     <div class="marquee-content">
-      Organic Luxury &nbsp; • &nbsp; Clinical Performance &nbsp; • &nbsp; Launching 2026 &nbsp; • &nbsp; Gut-Skin Axis &nbsp; • &nbsp; AMEIO Cosmetics &nbsp; • &nbsp; From Bihar to the World &nbsp; • &nbsp; Launching 2026
+      Organic Luxury &nbsp; ✦ &nbsp; Clinical Performance &nbsp; ✦ &nbsp; Launching 2026 &nbsp; ✦ &nbsp; Gut-Skin Axis &nbsp; ✦ &nbsp; AMEIO Cosmetics &nbsp; ✦ &nbsp; From Bihar to the World
     </div>
   </div>
 
@@ -374,7 +360,7 @@ body{
     </div>
   </header>
 
-  <section class="hero-section">
+  <section class="hero-section reveal-on-scroll">
     <h1 class="hero-headline">Holistic Luxury, <br>Rooted in <span>Nature.</span></h1>
     <p class="hero-subtext">Cosmetics cultivated from the Earth, refined by science, designed for your inner biology.</p>
     
@@ -385,7 +371,7 @@ body{
     </div>
   </section>
 
-  <section id="shop" class="section-container">
+  <section id="shop" class="section-container reveal-on-scroll">
     <div class="section-header">
       <span class="section-subtitle">The Inaugural Launch</span>
       <h2 class="section-title">The <span>Collection</span></h2>
@@ -430,7 +416,7 @@ body{
     </div>
   </section>
 
-  <section id="philosophy" class="narrative-block">
+  <section id="philosophy" class="narrative-block reveal-on-scroll">
     <div class="narrative-content">
       <h2 class="section-title" style="margin-bottom: 2rem;">The AMEIO <span>Standard</span></h2>
       <p class="narrative-text">
@@ -441,14 +427,14 @@ body{
     </div>
   </section>
 
-  <section id="science" class="section-container" style="text-align: center;">
+  <section id="science" class="section-container reveal-on-scroll" style="text-align: center;">
     <span class="section-subtitle">Clinical Performance</span>
     <h2 class="section-title">Backed by <span>Science</span></h2>
     <p class="hero-subtext">
       Our formulations are crafted with dermatologists and metabolic experts. Every topical protects your barrier, while our lifestyle protocols ignite your inner glow.
     </p>
 
-    <div style="margin-top: 4rem;">
+    <div style="margin-top: 5rem;">
       <p style="color:var(--gold-accent); letter-spacing:0.2em; font-size:0.7rem; margin-bottom:1rem;">JOIN THE INNER CIRCLE</p>
       <form action="https://formsubmit.co/info@ameiocosmetics.com" method="POST" class="email-form">
         <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
@@ -457,11 +443,9 @@ body{
     </div>
   </section>
 
-  <footer class="footer">
+  <footer class="footer reveal-on-scroll">
     
-    <a href="https://instagram.com/ameiocosmetics" target="_blank" class="insta-icon">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-    </a>
+    <div class="bihar-stamp">Est. 2026 — From Bihar to the World</div>
 
     <div class="footer-nav">
       <button class="footer-link" onclick="openModal('termsModal')">Terms & Conditions</button>
@@ -469,10 +453,11 @@ body{
       <a href="mailto:info@ameiocosmetics.com" class="footer-link">Contact Us</a>
     </div>
 
-    <div class="footer-divider"></div>
+    <a href="https://instagram.com/ameiocosmetics" target="_blank" style="color:var(--gold-accent); display:block; margin-bottom:2rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+    </a>
 
-    <div class="footer-bottom">
-      <span class="bihar-tag">From Bihar to the World</span>
+    <div class="copyright">
       © 2026 AMEIO COSMETICS. ALL RIGHTS RESERVED.
     </div>
   </footer>
@@ -494,6 +479,7 @@ body{
   </div>
 
 <script>
+/* COUNTDOWN LOGIC */
 const launchDate = new Date("March 15, 2026 00:00:00").getTime();
 setInterval(() => {
   const now = new Date().getTime();
@@ -505,7 +491,19 @@ setInterval(() => {
   }
 }, 1000);
 
+/* MODAL LOGIC */
 function openModal(id) { document.getElementById(id).classList.add('active'); }
+
+/* SCROLL REVEAL LOGIC */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal-on-scroll').forEach((el) => observer.observe(el));
 </script>
 
 </body>
