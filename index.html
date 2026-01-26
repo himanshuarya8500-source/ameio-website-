@@ -29,6 +29,59 @@
       font-family: 'Inter', sans-serif;
       line-height: 1.7;
       overflow-x: hidden;
+      position: relative;
+    }
+
+    /* SOFT MOVING BACKGROUND */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      width: 200%;
+      height: 200%;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(122,143,91,0.08), transparent 40%),
+        radial-gradient(circle at 80% 30%, rgba(200,180,140,0.08), transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(122,143,91,0.06), transparent 40%);
+      animation: slowFloat 45s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes slowFloat {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-10%, -10%); }
+      100% { transform: translate(0, 0); }
+    }
+
+    /* BRAND HEADER */
+    .brand-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 999;
+      backdrop-filter: blur(10px);
+      background: rgba(242, 239, 233, 0.6);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .brand-inner {
+      padding: 14px 10%;
+      text-align: center;
+    }
+
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: var(--text);
+    }
+
+    .brand-tagline {
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-top: 2px;
     }
 
     section {
@@ -70,6 +123,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding-top: 160px;
     }
 
     .cta {
@@ -129,21 +183,36 @@
     }
 
     @media(max-width: 768px) {
+      .brand-inner {
+        padding: 12px 6%;
+      }
+
+      .brand-name {
+        font-size: 1.2rem;
+      }
+
+      .brand-tagline {
+        font-size: 0.7rem;
+      }
+
       section {
         padding: 80px 7%;
       }
 
-      h1 {
-        font-size: 2.4rem;
-      }
-
-      h2 {
-        font-size: 1.9rem;
-      }
+      h1 { font-size: 2.4rem; }
+      h2 { font-size: 1.9rem; }
     }
   </style>
 </head>
 <body>
+
+<!-- BRAND HEADER -->
+<header class="brand-header">
+  <div class="brand-inner">
+    <div class="brand-name">AMEIO</div>
+    <div class="brand-tagline">Beauty that breathes. Begins from within.</div>
+  </div>
+</header>
 
 <!-- HERO -->
 <section class="hero">
@@ -163,13 +232,11 @@
 <section>
   <h2>Why AMEIO Exists</h2>
   <p>
-    Modern beauty fixes the surface.  
+    Modern beauty fixes the surface.
     But skin listens to the body.
     <br><br>
     Stress, gut imbalance, lifestyle, and nutrition
     shape how we look and feel.
-    <br><br>
-    AMEIO exists to restore balance — not mask symptoms.
   </p>
 </section>
 
@@ -179,8 +246,8 @@
   <p>
     True beauty is a by-product of inner harmony.
     <br><br>
-    Skin reflects gut health.  
-    Glow reflects lifestyle.  
+    Skin reflects gut health.
+    Glow reflects lifestyle.
     Confidence reflects inner calm.
   </p>
 </section>
@@ -205,7 +272,7 @@
     Early access. Founder updates. Wellness insights.
   </p>
 
-  <form id="joinForm" action="https://formspree.io/f/xyzabcde" method="POST">
+  <form id="joinForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
     <input type="email" name="email" placeholder="Enter your email" required />
     <button class="btn" type="submit">REQUEST ACCESS</button>
     <p id="formMessage" style="margin-top:20px;"></p>
@@ -216,8 +283,10 @@
 <section id="contact">
   <h2>Contact</h2>
   <p>
-    Email: <a href="mailto:info@ameiocosmetics.com">info@ameiocosmetics.com</a><br>
-    Instagram: <a href="https://instagram.com/ameiocosmetics">@ameiocosmetics</a>
+    Email:
+    <a href="mailto:info@ameiocosmetics.com">info@ameiocosmetics.com</a><br>
+    Instagram:
+    <a href="https://instagram.com/ameiocosmetics">@ameiocosmetics</a>
   </p>
 </section>
 
@@ -226,7 +295,7 @@
   <h2>Terms & Conditions</h2>
   <p>
     AMEIO is currently in pre-launch.
-    Information shared is for awareness and community building only.
+    All information is for awareness and community building only.
   </p>
 </section>
 
@@ -240,7 +309,7 @@
 </footer>
 
 <script>
-  // Scroll animation
+  /* SCROLL FADE ANIMATION */
   const sections = document.querySelectorAll("section");
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -252,7 +321,7 @@
 
   sections.forEach(section => observer.observe(section));
 
-  // Form submission
+  /* FORM SUBMISSION */
   const form = document.getElementById("joinForm");
   const message = document.getElementById("formMessage");
 
@@ -269,15 +338,18 @@
 
       if (response.ok) {
         message.style.color = "var(--accent)";
-        message.innerText = "✨ Thank you for joining AMEIO. You are now part of our inner circle.";
+        message.innerText =
+          "✨ Thank you for joining AMEIO. You are now part of our inner circle.";
         form.reset();
       } else {
         message.style.color = "red";
-        message.innerText = "Something went wrong. Please try again.";
+        message.innerText =
+          "Something went wrong. Please try again.";
       }
     } catch {
       message.style.color = "red";
-      message.innerText = "Network error. Please try later.";
+      message.innerText =
+        "Network error. Please try again later.";
     }
   });
 </script>
