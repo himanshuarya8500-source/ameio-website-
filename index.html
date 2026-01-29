@@ -95,7 +95,7 @@
 
     h1, h2 { font-family: 'Playfair Display', serif; }
 
-    h1 { font-size: 3rem; margin-bottom: 20px; }
+    h1 { font-size: 3.2rem; margin-bottom: 20px; }
     h2 { font-size: 2.2rem; margin-bottom: 18px; }
 
     p { color: var(--text-muted); max-width: 720px; }
@@ -115,7 +115,7 @@
       font-size: 0.85rem;
       letter-spacing: 1px;
       cursor: pointer;
-      transition: 0.4s;
+      transition: 0.4s ease;
     }
 
     .btn:hover {
@@ -142,85 +142,10 @@
 
     a { color: var(--accent); text-decoration: none; }
 
-    /* ===== CLAWDBOT ===== */
-    #clawdbot {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 9999;
-      font-family: 'Inter', sans-serif;
-    }
-
-    #clawdbot-toggle {
-      background: #e6d8c9;
-      color: #2b2e33;
-      padding: 12px 14px;
-      border-radius: 50%;
-      font-size: 11px;
-      text-align: center;
-      cursor: pointer;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-
-    #clawdbot-toggle span {
-      font-size: 9px;
-      opacity: 0.7;
-    }
-
-    #clawdbot-panel {
-      width: 300px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      position: absolute;
-      bottom: 70px;
-      right: 0;
-      display: none;
-      overflow: hidden;
-    }
-
-    .cb-header {
-      padding: 14px;
-      background: #f5f6f7;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .cb-header span {
-      font-size: 11px;
-      color: #7b7f85;
-    }
-
-    .cb-header button {
-      background: none;
-      border: none;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    .cb-body { padding: 16px; }
-
-    .cb-body button {
-      width: 100%;
-      margin-bottom: 8px;
-      padding: 10px;
-      border: 1px solid var(--accent);
-      background: transparent;
-      font-size: 12px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .cb-body button:hover {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    #cb-response {
-      margin-top: 12px;
-      font-size: 12px;
-      color: #444;
+    @media(max-width:768px) {
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.8rem; }
+      section { padding: 90px 7%; }
     }
   </style>
 </head>
@@ -247,6 +172,23 @@
   </div>
 </section>
 
+<section>
+  <h2>Why AMEIO Exists</h2>
+  <p>
+    Modern beauty fixes the surface.<br>
+    But skin listens to the body.
+  </p>
+</section>
+
+<section>
+  <h2>Our Philosophy</h2>
+  <p>
+    Skin reflects gut health.<br>
+    Glow reflects lifestyle.<br>
+    Confidence reflects inner calm.
+  </p>
+</section>
+
 <section id="join">
   <h2>Join the Inner Circle</h2>
   <p>Early access. Founder updates. No noise.</p>
@@ -258,29 +200,17 @@
   </form>
 </section>
 
+<section id="contact">
+  <h2>Contact</h2>
+  <p>
+    info@ameiocosmetics.com<br>
+    <a href="https://instagram.com/ameiocosmetics">@ameiocosmetics</a>
+  </p>
+</section>
+
 <footer>
   © AMEIO COSMETICS — Conscious Luxury Beauty
 </footer>
-
-<!-- CLAWDBOT -->
-<div id="clawdbot">
-  <div id="clawdbot-toggle">AMEIO<br><span>Concierge</span></div>
-  <div id="clawdbot-panel">
-    <div class="cb-header">
-      <strong>AMEIO</strong>
-      <span>Beauty that breathes.</span>
-      <button onclick="toggleClawdbot()">×</button>
-    </div>
-    <div class="cb-body">
-      <p>Welcome to AMEIO.<br>Beauty that breathes. Begins from within.</p>
-      <button onclick="cbReply('about')">What is AMEIO?</button>
-      <button onclick="cbReply('philosophy')">Our Philosophy</button>
-      <button onclick="cbReply('inner')">Inner Circle Access</button>
-      <button onclick="cbReply('contact')">Talk to Us</button>
-      <div id="cb-response"></div>
-    </div>
-  </div>
-</div>
 
 <script>
   const sections = document.querySelectorAll("section");
@@ -289,6 +219,7 @@
       if (entry.isIntersecting) entry.target.classList.add("visible");
     });
   }, { threshold: 0.15 });
+
   sections.forEach(section => observer.observe(section));
 
   const form = document.getElementById("joinForm");
@@ -297,10 +228,11 @@
   form.addEventListener("submit", async e => {
     e.preventDefault();
     const data = new FormData(form);
+
     const res = await fetch(form.action, {
       method: "POST",
       body: data,
-      headers: { Accept: "application/json" }
+      headers: { "Accept": "application/json" }
     });
 
     if (res.ok) {
@@ -312,19 +244,6 @@
       message.innerText = "Something went wrong. Try again.";
     }
   });
-
-  function toggleClawdbot() {
-    const panel = document.getElementById("clawdbot-panel");
-    panel.style.display = panel.style.display === "block" ? "none" : "block";
-  }
-
-  function cbReply(type) {
-    const box = document.getElementById("cb-response");
-    if (type === "about") box.innerHTML = "AMEIO is a conscious luxury beauty ecosystem.";
-    if (type === "philosophy") box.innerHTML = "Beauty is cultivated, not applied.";
-    if (type === "inner") box.innerHTML = "Early access, private updates.<br><a href='#join'>Join the Inner Circle →</a>";
-    if (type === "contact") box.innerHTML = "Email us at <strong>info@ameiocosmetics.com</strong>";
-  }
 </script>
 
 </body>
