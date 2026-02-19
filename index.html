@@ -1,137 +1,438 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AMEIO — Aura Ring</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AMEIO Jewells | The Art of Identity</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --bg-color: #FDFBF7; /* Alabaster */
+            --text-color: #1A1A1A; /* Obsidian */
+            --accent-color: #8C7B63; /* Antique Bronze */
+            --subtle-gray: #E5E5E5;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+            --spacing-unit: 8px;
+            --transition-slow: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-med: 0.6s ease-out;
+        }
 
-<style>
-body{
- margin:0;
- background:#0b0b0c;
- color:#eee;
- font-family:Inter,sans-serif;
-}
-h1,h2{font-family:"Playfair Display",serif}
-section{padding:90px 8%}
-.container{max-width:1200px;margin:auto}
+        /* --- RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
 
-/* HERO */
-.hero{
- height:100vh;
- display:flex;
- align-items:center;
- background:
- linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.7)),
- url("YOUR_REAL_PRODUCT_HERO.jpg") center/cover fixed;
-}
-.hero h1{font-size:52px;max-width:550px}
-.hero p{color:#cfcac3;margin:18px 0 28px}
-.price{font-size:24px;margin-bottom:20px}
-.buy{
- padding:16px 34px;
- border:none;
- background:#c8a96a;
- color:#0b0b0c;
- font-size:16px;
- cursor:pointer;
-}
+        h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; }
+        img { display: block; width: 100%; height: auto; object-fit: cover; }
+        a { text-decoration: none; color: inherit; transition: opacity 0.3s; }
 
-/* IMAGE STORY */
-.story-grid{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:60px;
- align-items:center;
-}
-.story-grid img{width:100%;border-radius:10px}
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
 
-/* TRUST */
-.trust{
- background:#0f0f10;
- text-align:center;
-}
-.trust-box{
- display:flex;
- justify-content:center;
- flex-wrap:wrap;
- gap:40px;
- margin-top:40px;
- color:#bdb8b0;
-}
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition-slow);
+        }
 
-/* FOOTER CTA */
-.cta{
- text-align:center;
-}
-.cta button{
- padding:18px 42px;
- background:#c8a96a;
- border:none;
- color:#0b0b0c;
- font-size:18px;
- cursor:pointer;
-}
-</style>
+        .reveal-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            mix-blend-mode: difference;
+            color: white;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-links { display: flex; gap: 3rem; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; }
+        
+        @media(max-width: 768px) { .nav-links { display: none; } }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 110%; /* Parallax buffer */
+            background-image: url('https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2675&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
+            filter: brightness(0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 6rem);
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 span { font-style: italic; font-weight: 400; }
+
+        .btn-hero {
+            display: inline-block;
+            padding: 1rem 3rem;
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            transition: all 0.4s ease;
+        }
+
+        .btn-hero:hover {
+            background: white;
+            color: black;
+            border-color: white;
+        }
+
+        /* --- MANIFESTO (Storytelling) --- */
+        .manifesto {
+            padding: 10rem 0;
+            position: relative;
+        }
+
+        .manifesto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .manifesto-text h2 {
+            font-size: clamp(2rem, 3vw, 3.5rem);
+            margin-bottom: 2rem;
+        }
+
+        .manifesto-text p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+            max-width: 400px;
+        }
+
+        .manifesto-image {
+            height: 70vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manifesto-image img {
+            height: 100%;
+            width: 100%;
+            transition: transform 1.5s ease;
+        }
+
+        .manifesto-image:hover img { transform: scale(1.05); }
+
+        /* --- SIGNATURE COLLECTION --- */
+        .collection {
+            padding: 8rem 0;
+            background: #111;
+            color: white;
+        }
+
+        .collection-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 10rem;
+        }
+
+        .product-showcase.reverse { grid-template-columns: 1fr 1.5fr; }
+
+        .product-visual {
+            height: 80vh;
+            background-color: #1a1a1a;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-info h3 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+        
+        .product-info .subtitle {
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .product-info p {
+            color: #aaa;
+            margin-bottom: 3rem;
+            max-width: 350px;
+        }
+
+        .btn-link {
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.75rem;
+        }
+
+        /* --- CRAFT & TRUST --- */
+        .craft {
+            padding: 10rem 0;
+            text-align: center;
+        }
+
+        .craft-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            margin-top: 5rem;
+        }
+
+        .craft-item h4 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .craft-item p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* --- CONVERSION --- */
+        .invitation {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #F5F3EF;
+            text-align: center;
+        }
+
+        .invitation-content { max-width: 600px; }
+
+        .invitation h2 { font-size: 4rem; margin-bottom: 2rem; }
+        
+        /* --- RESPONSIVE ADJUSTMENTS --- */
+        @media(max-width: 900px) {
+            .manifesto-grid, .product-showcase, .product-showcase.reverse, .craft-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .hero-content { padding: 0 20px; }
+            .product-visual { height: 50vh; }
+            .manifesto-image { height: 50vh; }
+            .craft-grid { gap: 4rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-<section class="hero">
-<div class="container">
-<h1>Solitaire Aura Ring</h1>
-<p>Crafted for presence, not attention.</p>
-<div class="price">₹12,000</div>
-<button class="buy">Own This Piece</button>
-</div>
-</section>
+    <nav>
+        <div class="logo">Ameio.</div>
+        <div class="nav-links">
+            <a href="#">Collections</a>
+            <a href="#">Maison</a>
+            <a href="#">Bespoke</a>
+        </div>
+        <div class="nav-links">
+            <a href="#">Account</a>
+            <a href="#">Bag (0)</a>
+        </div>
+    </nav>
 
-<section>
-<div class="container story-grid">
-<img src="YOUR_MACRO_CLOSEUP.jpg">
-<div>
-<h2>See the Detail</h2>
-<p>
-Each surface is polished to reflect light softly, giving the ring its signature glow.
-Designed to feel effortless, yet unmistakably refined.
-</p>
-</div>
-</div>
-</section>
+    <header class="hero">
+        <div class="hero-bg" id="parallax-bg"></div>
+        <div class="hero-content">
+            <h1 class="reveal-text">More than adornment. <br> <span>A dialogue with the self.</span></h1>
+            <div class="reveal-text" style="transition-delay: 0.2s;">
+                <a href="#manifesto" class="btn-hero">Enter the Maison</a>
+            </div>
+        </div>
+    </header>
 
-<section>
-<div class="container story-grid">
-<div>
-<h2>Made to be Kept</h2>
-<p>
-Delivered in a tactile premium box with authenticity card,
-ensuring every piece remains part of your story.
-</p>
-</div>
-<img src="YOUR_PACKAGING_SHOT.jpg">
-</div>
-</section>
+    <section class="manifesto" id="manifesto">
+        <div class="container">
+            <div class="manifesto-grid">
+                <div class="manifesto-text reveal-text">
+                    <h2>Silence in a <br><em>Noisy World.</em></h2>
+                    <p>True luxury does not shout. It whispers. AMEIO is crafted for the individual who seeks meaning in the material. We strip away the unnecessary to reveal the essential structure of elegance.</p>
+                </div>
+                <div class="manifesto-image reveal-text" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1615655406736-b37c4fabf923?q=80&w=2670&auto=format&fit=crop" alt="AMEIO texture detail">
+                </div>
+            </div>
+        </div>
+    </section>
 
-<section class="trust">
-<div class="container">
-<h2>Crafted with Assurance</h2>
-<div class="trust-box">
-<div>✔ Lifetime authenticity</div>
-<div>✔ Secure checkout</div>
-<div>✔ Premium packaging</div>
-<div>✔ Easy exchange</div>
-</div>
-</div>
-</section>
+    <section class="collection">
+        <div class="container">
+            <div class="collection-header reveal-text">
+                <h2>The Signature Series</h2>
+            </div>
 
-<section class="cta">
-<div class="container">
-<h2>Make It Yours</h2>
-<button>Buy Now</button>
-</div>
-</section>
+            <div class="product-showcase reveal-text">
+                <div class="product-visual">
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=2670&auto=format&fit=crop" alt="The Eclipse Ring">
+                </div>
+                <div class="product-info">
+                    <span class="subtitle">No. 01 — The Eclipse</span>
+                    <h3>Embrace the Shadow</h3>
+                    <p>18k Recycled Gold, Onyx, VS1 Diamond. <br>Designed to remind the wearer that light cannot exist without the dark.</p>
+                    <a href="#" class="btn-link">Acquire this Piece</a>
+                </div>
+            </div>
 
+            <div class="product-showcase reverse reveal-text">
+                <div class="product-info">
+                    <span class="subtitle">No. 02 — The Meridian</span>
+                    <h3>The Center Point</h3>
+                    <p>Platinum, Sapphires. <br>A structural masterpiece representing balance in an asymmetric world.</p>
+                    <a href="#" class="btn-link">Acquire this Piece</a>
+                </div>
+                <div class="product-visual">
+                    <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2670&auto=format&fit=crop" alt="The Meridian Necklace">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="craft">
+        <div class="container">
+            <h2 class="reveal-text">Radical Transparency</h2>
+            <div class="craft-grid">
+                <div class="craft-item reveal-text" style="transition-delay: 0.1s;">
+                    <h4>Ethical Geology</h4>
+                    <p>Every stone is traced to its mine of origin. We prioritize stones with lower environmental footprints and conflict-free certification.</p>
+                </div>
+                <div class="craft-item reveal-text" style="transition-delay: 0.2s;">
+                    <h4>Hand-Forged in Milan</h4>
+                    <p>Our artisans spend 80+ hours on a single piece. Imperfection is not a flaw; it is the signature of the human hand.</p>
+                </div>
+                <div class="craft-item reveal-text" style="transition-delay: 0.3s;">
+                    <h4>The Unboxing</h4>
+                    <p>Packaging made from mycelium and recycled silk. A sensory experience that honors the earth as much as the jewelry.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="invitation">
+        <div class="invitation-content reveal-text">
+            <h2>Claim Your Identity.</h2>
+            <p style="margin-bottom: 2rem;">Join the AMEIO private client list for early access to limited runs.</p>
+            <a href="#" class="btn-hero" style="border-color: #000; color: #000;">Become a Member</a>
+        </div>
+    </section>
+
+    <footer style="padding: 4rem 5%; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #888; border-top: 1px solid #eee;">
+        <div class="container" style="display: flex; justify-content: space-between;">
+            <div>&copy; 2024 AMEIO Jewells.</div>
+            <div>
+                <a href="#" style="margin-left: 20px;">Legal</a>
+                <a href="#" style="margin-left: 20px;">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- ANIMATION OBSERVER ---
+        // Triggers the fade-up animations when elements enter the viewport
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Stop observing once visible to save performance
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-text').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- SIMPLE PARALLAX ---
+        // Adds a subtle scroll speed difference to the hero image
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.pageYOffset;
+            const heroBg = document.getElementById('parallax-bg');
+            // Move the background slower than the scroll speed
+            if (scrollPosition < window.innerHeight) {
+                heroBg.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+            }
+        });
+    </script>
 </body>
 </html>
