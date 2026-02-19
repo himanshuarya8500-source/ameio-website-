@@ -1,438 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AMEIO Jewells | The Art of Identity</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-
-    <style>
-        /* --- CORE VARIABLES --- */
-        :root {
-            --bg-color: #FDFBF7; /* Alabaster */
-            --text-color: #1A1A1A; /* Obsidian */
-            --accent-color: #8C7B63; /* Antique Bronze */
-            --subtle-gray: #E5E5E5;
-            --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Montserrat', sans-serif;
-            --spacing-unit: 8px;
-            --transition-slow: 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            --transition-med: 0.6s ease-out;
-        }
-
-        /* --- RESET & BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; }
-        img { display: block; width: 100%; height: auto; object-fit: cover; }
-        a { text-decoration: none; color: inherit; transition: opacity 0.3s; }
-
-        /* --- UTILITIES --- */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 5%;
-        }
-
-        .reveal-text {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: var(--transition-slow);
-        }
-
-        .reveal-text.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- NAVIGATION --- */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 2rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            mix-blend-mode: difference;
-            color: white;
-        }
-
-        .logo {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        .nav-links { display: flex; gap: 3rem; font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; }
-        
-        @media(max-width: 768px) { .nav-links { display: none; } }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 100vh;
-            width: 100%;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 110%; /* Parallax buffer */
-            background-image: url('https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2675&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            z-index: 0;
-            filter: brightness(0.7);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            color: white;
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 6vw, 6rem);
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            letter-spacing: -0.02em;
-        }
-
-        .hero h1 span { font-style: italic; font-weight: 400; }
-
-        .btn-hero {
-            display: inline-block;
-            padding: 1rem 3rem;
-            border: 1px solid rgba(255,255,255,0.4);
-            color: white;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            transition: all 0.4s ease;
-        }
-
-        .btn-hero:hover {
-            background: white;
-            color: black;
-            border-color: white;
-        }
-
-        /* --- MANIFESTO (Storytelling) --- */
-        .manifesto {
-            padding: 10rem 0;
-            position: relative;
-        }
-
-        .manifesto-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
-        }
-
-        .manifesto-text h2 {
-            font-size: clamp(2rem, 3vw, 3.5rem);
-            margin-bottom: 2rem;
-        }
-
-        .manifesto-text p {
-            font-size: 1.1rem;
-            color: #555;
-            margin-bottom: 2rem;
-            max-width: 400px;
-        }
-
-        .manifesto-image {
-            height: 70vh;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .manifesto-image img {
-            height: 100%;
-            width: 100%;
-            transition: transform 1.5s ease;
-        }
-
-        .manifesto-image:hover img { transform: scale(1.05); }
-
-        /* --- SIGNATURE COLLECTION --- */
-        .collection {
-            padding: 8rem 0;
-            background: #111;
-            color: white;
-        }
-
-        .collection-header {
-            text-align: center;
-            margin-bottom: 6rem;
-        }
-
-        .product-showcase {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 10rem;
-        }
-
-        .product-showcase.reverse { grid-template-columns: 1fr 1.5fr; }
-
-        .product-visual {
-            height: 80vh;
-            background-color: #1a1a1a;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-info h3 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-        
-        .product-info .subtitle {
-            font-family: var(--font-sans);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 0.75rem;
-            color: var(--accent-color);
-            margin-bottom: 2rem;
-            display: block;
-        }
-
-        .product-info p {
-            color: #aaa;
-            margin-bottom: 3rem;
-            max-width: 350px;
-        }
-
-        .btn-link {
-            border-bottom: 1px solid var(--accent-color);
-            padding-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-size: 0.75rem;
-        }
-
-        /* --- CRAFT & TRUST --- */
-        .craft {
-            padding: 10rem 0;
-            text-align: center;
-        }
-
-        .craft-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4rem;
-            margin-top: 5rem;
-        }
-
-        .craft-item h4 {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .craft-item p {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.8;
-        }
-
-        /* --- CONVERSION --- */
-        .invitation {
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #F5F3EF;
-            text-align: center;
-        }
-
-        .invitation-content { max-width: 600px; }
-
-        .invitation h2 { font-size: 4rem; margin-bottom: 2rem; }
-        
-        /* --- RESPONSIVE ADJUSTMENTS --- */
-        @media(max-width: 900px) {
-            .manifesto-grid, .product-showcase, .product-showcase.reverse, .craft-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMEIO Jewells | Modern Luxury</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ameio: {
+              gold: '#D4AF37', goldHover: '#C5A028', cream: '#F9F8F4', 
+              charcoal: '#1A1A1A', stone: '#666666', subtle: '#E5E5E5',
             }
-            .hero-content { padding: 0 20px; }
-            .product-visual { height: 50vh; }
-            .manifesto-image { height: 50vh; }
-            .craft-grid { gap: 4rem; }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Lato"', 'sans-serif'],
+          }
         }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #F9F8F4; color: #1A1A1A; margin: 0; padding: 0; }
+    .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; transform: translateY(20px); }
+    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+  </style>
+
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
+  <div id="root"></div>
 
-    <nav>
-        <div class="logo">Ameio.</div>
-        <div class="nav-links">
-            <a href="#">Collections</a>
-            <a href="#">Maison</a>
-            <a href="#">Bespoke</a>
-        </div>
-        <div class="nav-links">
-            <a href="#">Account</a>
-            <a href="#">Bag (0)</a>
-        </div>
-    </nav>
+  <script type="text/babel">
+    const { useState, useEffect } = React;
 
-    <header class="hero">
-        <div class="hero-bg" id="parallax-bg"></div>
-        <div class="hero-content">
-            <h1 class="reveal-text">More than adornment. <br> <span>A dialogue with the self.</span></h1>
-            <div class="reveal-text" style="transition-delay: 0.2s;">
-                <a href="#manifesto" class="btn-hero">Enter the Maison</a>
+    // SVG Icons
+    const MenuIcon = () => <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>;
+    const SearchIcon = () => <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>;
+    const UserIcon = () => <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>;
+    const BagIcon = () => <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 01-8 0"></path></svg>;
+
+    // 1. Navbar
+    const Navbar = () => {
+      const [isScrolled, setIsScrolled] = useState(false);
+      useEffect(() => {
+        const handleScroll = () => setIsScrolled(window.scrollY > 50);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      return (
+        <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
+          <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div className="flex items-center gap-6 w-1/3">
+              <button className="hidden md:flex items-center gap-2 text-sm uppercase tracking-widest hover:text-ameio-gold transition-colors">
+                <MenuIcon /> <span className="font-sans text-xs">Menu</span>
+              </button>
+              <button className="hover:text-ameio-gold transition-colors"><SearchIcon /></button>
             </div>
-        </div>
-    </header>
-
-    <section class="manifesto" id="manifesto">
-        <div class="container">
-            <div class="manifesto-grid">
-                <div class="manifesto-text reveal-text">
-                    <h2>Silence in a <br><em>Noisy World.</em></h2>
-                    <p>True luxury does not shout. It whispers. AMEIO is crafted for the individual who seeks meaning in the material. We strip away the unnecessary to reveal the essential structure of elegance.</p>
-                </div>
-                <div class="manifesto-image reveal-text" style="transition-delay: 0.2s;">
-                    <img src="https://images.unsplash.com/photo-1615655406736-b37c4fabf923?q=80&w=2670&auto=format&fit=crop" alt="AMEIO texture detail">
-                </div>
+            <div className="w-1/3 text-center">
+              <a href="#" className="font-serif text-3xl tracking-widest font-bold text-ameio-charcoal">AMEIO</a>
             </div>
-        </div>
-    </section>
-
-    <section class="collection">
-        <div class="container">
-            <div class="collection-header reveal-text">
-                <h2>The Signature Series</h2>
+            <div className="flex items-center justify-end gap-6 w-1/3">
+              <button className="hidden md:block hover:text-ameio-gold transition-colors"><UserIcon /></button>
+              <button className="relative group hover:text-ameio-gold transition-colors">
+                <BagIcon />
+                <span className="absolute -top-2 -right-2 bg-ameio-gold text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">2</span>
+              </button>
             </div>
+          </div>
+        </nav>
+      );
+    };
 
-            <div class="product-showcase reveal-text">
-                <div class="product-visual">
-                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=2670&auto=format&fit=crop" alt="The Eclipse Ring">
-                </div>
-                <div class="product-info">
-                    <span class="subtitle">No. 01 — The Eclipse</span>
-                    <h3>Embrace the Shadow</h3>
-                    <p>18k Recycled Gold, Onyx, VS1 Diamond. <br>Designed to remind the wearer that light cannot exist without the dark.</p>
-                    <a href="#" class="btn-link">Acquire this Piece</a>
-                </div>
-            </div>
-
-            <div class="product-showcase reverse reveal-text">
-                <div class="product-info">
-                    <span class="subtitle">No. 02 — The Meridian</span>
-                    <h3>The Center Point</h3>
-                    <p>Platinum, Sapphires. <br>A structural masterpiece representing balance in an asymmetric world.</p>
-                    <a href="#" class="btn-link">Acquire this Piece</a>
-                </div>
-                <div class="product-visual">
-                    <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=2670&auto=format&fit=crop" alt="The Meridian Necklace">
-                </div>
-            </div>
+    // 2. Product Card
+    const ProductCard = ({ imageMain, imageHover, title, price, tag }) => (
+      <div className="group cursor-pointer">
+        <div className="relative overflow-hidden aspect-[3/4] bg-ameio-subtle mb-4">
+          {tag && <span className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[10px] uppercase tracking-widest z-10">{tag}</span>}
+          <img src={imageMain} alt={title} className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700 group-hover:opacity-0" />
+          <img src={imageHover} alt={title} className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 group-hover:opacity-100 scale-105 group-hover:scale-100" />
+          <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-20">
+            <button className="w-full bg-white/95 text-ameio-charcoal py-3 text-xs uppercase tracking-widest hover:bg-ameio-gold hover:text-white transition-colors">
+              Quick Add
+            </button>
+          </div>
         </div>
-    </section>
+        <div className="text-center space-y-1">
+          <h3 className="font-serif text-lg text-ameio-charcoal">{title}</h3>
+          <p className="font-sans text-sm text-ameio-stone">{price}</p>
+        </div>
+      </div>
+    );
 
-    <section class="craft">
-        <div class="container">
-            <h2 class="reveal-text">Radical Transparency</h2>
-            <div class="craft-grid">
-                <div class="craft-item reveal-text" style="transition-delay: 0.1s;">
-                    <h4>Ethical Geology</h4>
-                    <p>Every stone is traced to its mine of origin. We prioritize stones with lower environmental footprints and conflict-free certification.</p>
-                </div>
-                <div class="craft-item reveal-text" style="transition-delay: 0.2s;">
-                    <h4>Hand-Forged in Milan</h4>
-                    <p>Our artisans spend 80+ hours on a single piece. Imperfection is not a flaw; it is the signature of the human hand.</p>
-                </div>
-                <div class="craft-item reveal-text" style="transition-delay: 0.3s;">
-                    <h4>The Unboxing</h4>
-                    <p>Packaging made from mycelium and recycled silk. A sensory experience that honors the earth as much as the jewelry.</p>
-                </div>
+    // 3. Bespoke Form
+    const BespokeForm = () => {
+      const [step, setStep] = useState(1);
+      return (
+        <section className="bg-ameio-cream py-24 px-6">
+          <div className="max-w-2xl mx-auto">
+            <div className="text-center mb-12">
+              <span className="text-xs font-sans tracking-[0.2em] text-ameio-gold uppercase">Atelier Service</span>
+              <h2 className="text-4xl font-serif mt-4 mb-2 text-ameio-charcoal">Design Your Legacy</h2>
+              <p className="text-ameio-stone font-sans font-light">Begin the journey of creating a one-of-a-kind piece.</p>
             </div>
-        </div>
-    </section>
-
-    <section class="invitation">
-        <div class="invitation-content reveal-text">
-            <h2>Claim Your Identity.</h2>
-            <p style="margin-bottom: 2rem;">Join the AMEIO private client list for early access to limited runs.</p>
-            <a href="#" class="btn-hero" style="border-color: #000; color: #000;">Become a Member</a>
-        </div>
-    </section>
-
-    <footer style="padding: 4rem 5%; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: #888; border-top: 1px solid #eee;">
-        <div class="container" style="display: flex; justify-content: space-between;">
-            <div>&copy; 2024 AMEIO Jewells.</div>
-            <div>
-                <a href="#" style="margin-left: 20px;">Legal</a>
-                <a href="#" style="margin-left: 20px;">Instagram</a>
+            <div className="flex justify-between mb-12 relative">
+              <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-10" />
+              {[1, 2, 3].map((num) => (
+                <div key={num} className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-serif transition-colors duration-500 ${step >= num ? 'bg-ameio-gold text-white' : 'bg-white border border-gray-200 text-gray-400'}`}>
+                  {num}
+                </div>
+              ))}
             </div>
-        </div>
-    </footer>
+            <div className="bg-white p-12 shadow-sm border border-ameio-subtle fade-in-up" style={{ animationDelay: '0.2s' }}>
+              {step === 1 && (
+                <div className="space-y-6">
+                  <h3 className="font-serif text-xl">The Basics</h3>
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="text-xs uppercase tracking-wider text-gray-500">First Name</label>
+                      <input type="text" className="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-ameio-gold bg-transparent transition-colors" placeholder="Jane" />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-xs uppercase tracking-wider text-gray-500">Last Name</label>
+                      <input type="text" className="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-ameio-gold bg-transparent transition-colors" placeholder="Doe" />
+                    </div>
+                  </div>
+                  <div className="space-y-2 pt-4">
+                    <label className="text-xs uppercase tracking-wider text-gray-500">Type of Jewellery</label>
+                    <select className="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-ameio-gold">
+                      <option>Engagement Ring</option>
+                      <option>Wedding Band</option>
+                      <option>Custom Necklace</option>
+                    </select>
+                  </div>
+                  <div className="pt-6">
+                    <button onClick={() => setStep(2)} className="w-full bg-ameio-charcoal text-white py-4 uppercase tracking-widest text-xs hover:bg-ameio-gold transition-colors duration-300">Next Step</button>
+                  </div>
+                </div>
+              )}
+              {step === 2 && (
+                <div className="text-center py-10 fade-in-up">
+                  <p className="font-serif italic text-lg text-gray-400">Step 2: Upload References...</p>
+                  <button onClick={() => setStep(1)} className="mt-6 text-xs underline text-ameio-stone hover:text-ameio-gold">Go Back</button>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+    };
 
-    <script>
-        // --- ANIMATION OBSERVER ---
-        // Triggers the fade-up animations when elements enter the viewport
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
+    // 4. Main App
+    const App = () => (
+      <main className="min-h-screen font-sans">
+        <Navbar />
+        
+        {/* Hero */}
+        <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-ameio-charcoal">
+          <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=2075&auto=format&fit=crop" alt="Luxury Jewelry" className="absolute inset-0 w-full h-full object-cover opacity-60" />
+          <div className="relative z-10 text-center text-white px-4 fade-in-up">
+            <p className="text-xs md:text-sm font-sans tracking-[0.3em] uppercase mb-6 text-ameio-gold">Est. 2026</p>
+            <h1 className="text-5xl md:text-7xl font-serif font-medium mb-8 leading-tight">Adorn Your <br /> Legacy.</h1>
+            <button className="bg-white text-ameio-charcoal px-10 py-4 uppercase tracking-widest text-xs font-bold hover:bg-ameio-gold hover:text-white transition-all duration-300">Shop The Collection</button>
+          </div>
+        </section>
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // Stop observing once visible to save performance
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
+        {/* Grid */}
+        <section className="max-w-7xl mx-auto px-6 py-24">
+          <div className="flex justify-between items-end mb-12">
+            <h2 className="text-3xl font-serif text-ameio-charcoal">New Arrivals</h2>
+            <a href="#" className="text-xs font-sans uppercase tracking-widest border-b border-ameio-charcoal pb-1 hover:text-ameio-gold transition-colors">View All</a>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <ProductCard title="The Soleil Ring" price="$2,400" tag="Best Seller" imageMain="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800" imageHover="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&q=80&w=800" />
+            <ProductCard title="Eternity Band" price="$1,850" imageMain="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800" imageHover="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800" />
+            <ProductCard title="Luna Pendant" price="$950" tag="New" imageMain="https://images.unsplash.com/photo-1599643478518-17488fbbcd75?auto=format&fit=crop&q=80&w=800" imageHover="https://images.unsplash.com/photo-1602751584552-8ba43d51e224?auto=format&fit=crop&q=80&w=800" />
+            <ProductCard title="The Classic Hoop" price="$550" imageMain="https://images.unsplash.com/photo-1635767798638-3e252348b3e1?auto=format&fit=crop&q=80&w=800" imageHover="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800" />
+          </div>
+        </section>
 
-        document.querySelectorAll('.reveal-text').forEach(el => {
-            observer.observe(el);
-        });
+        {/* Form */}
+        <BespokeForm />
+        
+        {/* Footer */}
+        <footer className="bg-ameio-charcoal text-white py-16 text-center">
+          <h2 className="font-serif text-2xl mb-8">AMEIO</h2>
+          <p className="text-gray-500 text-xs tracking-widest uppercase">© 2026 Ameio Jewells. All Rights Reserved.</p>
+        </footer>
+      </main>
+    );
 
-        // --- SIMPLE PARALLAX ---
-        // Adds a subtle scroll speed difference to the hero image
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset;
-            const heroBg = document.getElementById('parallax-bg');
-            // Move the background slower than the scroll speed
-            if (scrollPosition < window.innerHeight) {
-                heroBg.style.transform = `translateY(${scrollPosition * 0.4}px)`;
-            }
-        });
-    </script>
+    // Render
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
 </body>
 </html>
