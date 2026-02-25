@@ -1,211 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMEIO Jewells | Modern Indian Luxury</title>
-  
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ameio: {
-              gold: '#D4AF37', goldHover: '#C5A028', cream: '#F9F8F4', 
-              charcoal: '#1A1A1A', stone: '#666666', subtle: '#E5E5E5',
-              maroon: '#6B2024', /* Indian Bridal Touch */
-            }
-          },
-          fontFamily: {
-            serif: ['"Playfair Display"', 'serif'],
-            sans: ['"Lato"', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { background-color: #F9F8F4; color: #1A1A1A; margin: 0; padding: 0; }
-    .fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; opacity: 0; transform: translateY(20px); }
-    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AMEIO Jewells</title>
 
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background:#fff;
+  color:#111;
+}
+header{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 40px;
+  border-bottom:1px solid #eee;
+}
+.logo{
+  font-family:'Playfair Display',serif;
+  letter-spacing:6px;
+  font-size:22px;
+}
+nav a{
+  margin-left:25px;
+  text-decoration:none;
+  color:#333;
+}
+.hero{
+  height:70vh;
+  background:url('https://images.unsplash.com/photo-1603565816030-6b389eeb23cb?q=80&w=1600') center/cover;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:50px;
+  margin:0 0 10px;
+}
+.section{
+  padding:60px 40px;
+}
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:40px;
+}
+.card{
+  text-align:center;
+}
+.card img{
+  width:100%;
+  border-radius:14px;
+}
+.price{
+  color:#666;
+}
+button{
+  padding:12px 20px;
+  border:none;
+  background:black;
+  color:white;
+  border-radius:30px;
+  cursor:pointer;
+}
+footer{
+  text-align:center;
+  padding:40px;
+  border-top:1px solid #eee;
+  color:#666;
+}
+</style>
 </head>
+
 <body>
-  <div id="root"></div>
 
-  <script type="text/babel">
-    const { useState, useEffect } = React;
+<header>
+  <div class="logo">AMEIO</div>
+  <nav>
+    <a href="#">Shop</a>
+    <a href="#">Story</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
 
-    // SVG Icons
-    const MenuIcon = () => <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"></path></svg>;
-    const SearchIcon = () => <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>;
-    const UserIcon = () => <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>;
-    const BagIcon = () => <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path><path d="M3 6h18"></path><path d="M16 10a4 4 0 01-8 0"></path></svg>;
+<section class="hero">
+  <div>
+    <h1>Jewellery that tells your story</h1>
+    <p>Luxury crafted for everyday elegance</p>
+  </div>
+</section>
 
-    // 1. Navbar
-    const Navbar = () => {
-      const [isScrolled, setIsScrolled] = useState(false);
-      useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 50);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-      }, []);
+<section class="section">
+  <h2 style="text-align:center;font-family:'Playfair Display',serif;">Featured Pieces</h2>
 
-      return (
-        <nav className={`fixed w-full z-50 transition-all duration-500 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
-          <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <div className="flex items-center gap-6 w-1/3">
-              <button className="hidden md:flex items-center gap-2 text-sm uppercase tracking-widest hover:text-ameio-gold transition-colors">
-                <MenuIcon /> <span className="font-sans text-xs">Menu</span>
-              </button>
-              <button className="hover:text-ameio-gold transition-colors"><SearchIcon /></button>
-            </div>
-            <div className="w-1/3 text-center">
-              <a href="#" className="font-serif text-3xl tracking-widest font-bold text-ameio-charcoal">AMEIO</a>
-            </div>
-            <div className="flex items-center justify-end gap-6 w-1/3">
-              <button className="hidden md:block hover:text-ameio-gold transition-colors"><UserIcon /></button>
-              <button className="relative group hover:text-ameio-gold transition-colors">
-                <BagIcon />
-                <span className="absolute -top-2 -right-2 bg-ameio-maroon text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center">2</span>
-              </button>
-            </div>
-          </div>
-        </nav>
-      );
-    };
+  <div class="products">
 
-    // 2. Product Card
-    const ProductCard = ({ imageMain, title, price, tag }) => (
-      <div className="group cursor-pointer">
-        <div className="relative overflow-hidden aspect-[3/4] bg-ameio-subtle mb-4">
-          {tag && <span className="absolute top-4 left-4 bg-white/90 px-3 py-1 text-[10px] uppercase tracking-widest z-10">{tag}</span>}
-          <img src={imageMain} alt={title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-          <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out z-20">
-            <button className="w-full bg-white/95 text-ameio-charcoal py-3 text-xs uppercase tracking-widest hover:bg-ameio-gold hover:text-white transition-colors">
-              Quick Add
-            </button>
-          </div>
-        </div>
-        <div className="text-center space-y-1">
-          <h3 className="font-serif text-lg text-ameio-charcoal">{title}</h3>
-          <p className="font-sans text-sm text-ameio-stone">{price}</p>
-        </div>
-      </div>
-    );
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a6f4c?q=80&w=800">
+      <h3>Mini Sapphire Stud</h3>
+      <p class="price">₹1,450</p>
+      <button onclick="add('Mini Sapphire Stud',1450)">Add to Cart</button>
+    </div>
 
-    // 3. Bespoke Form (Indian Context)
-    const BespokeForm = () => {
-      const [step, setStep] = useState(1);
-      return (
-        <section className="bg-ameio-cream py-24 px-6">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-12">
-              <span className="text-xs font-sans tracking-[0.2em] text-ameio-gold uppercase">Bespoke Karigari</span>
-              <h2 className="text-4xl font-serif mt-4 mb-2 text-ameio-charcoal">Design Your Parampara</h2>
-              <p className="text-ameio-stone font-sans font-light">Work with our master karigars to create a masterpiece for your special day.</p>
-            </div>
-            <div className="flex justify-between mb-12 relative">
-              <div className="absolute top-1/2 left-0 w-full h-px bg-gray-200 -z-10" />
-              {[1, 2, 3].map((num) => (
-                <div key={num} className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-serif transition-colors duration-500 ${step >= num ? 'bg-ameio-maroon text-white' : 'bg-white border border-gray-200 text-gray-400'}`}>
-                  {num}
-                </div>
-              ))}
-            </div>
-            <div className="bg-white p-12 shadow-sm border border-ameio-subtle fade-in-up" style={{ animationDelay: '0.2s' }}>
-              {step === 1 && (
-                <div className="space-y-6">
-                  <h3 className="font-serif text-xl">The Details</h3>
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-wider text-gray-500">First Name</label>
-                      <input type="text" className="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-ameio-gold bg-transparent transition-colors" placeholder="Anjali" />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs uppercase tracking-wider text-gray-500">Last Name</label>
-                      <input type="text" className="w-full border-b border-gray-300 py-2 focus:outline-none focus:border-ameio-gold bg-transparent transition-colors" placeholder="Sharma" />
-                    </div>
-                  </div>
-                  <div className="space-y-2 pt-4">
-                    <label className="text-xs uppercase tracking-wider text-gray-500">What are we creating?</label>
-                    <select className="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-ameio-gold">
-                      <option>Bridal Polki Set</option>
-                      <option>Diamond Mangalsutra</option>
-                      <option>22K Gold Bangles (Kadas)</option>
-                      <option>Engagement Solitaire</option>
-                    </select>
-                  </div>
-                  <div className="pt-6">
-                    <button onClick={() => setStep(2)} className="w-full bg-ameio-charcoal text-white py-4 uppercase tracking-widest text-xs hover:bg-ameio-gold transition-colors duration-300">Proceed</button>
-                  </div>
-                </div>
-              )}
-              {step === 2 && (
-                <div className="text-center py-10 fade-in-up">
-                  <p className="font-serif italic text-lg text-gray-400">Step 2: Upload your inspiration photos...</p>
-                  <button onClick={() => setStep(1)} className="mt-6 text-xs underline text-ameio-stone hover:text-ameio-gold">Go Back</button>
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-      );
-    };
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1588444650700-6d0d4f0b66f9?q=80&w=800">
+      <h3>Classic Pearl Drop</h3>
+      <p class="price">₹1,999</p>
+      <button onclick="add('Classic Pearl Drop',1999)">Add to Cart</button>
+    </div>
 
-    // 4. Main App
-    const App = () => (
-      <main className="min-h-screen font-sans">
-        <Navbar />
-        
-        {/* Hero */}
-        <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-ameio-charcoal">
-          <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=2075&auto=format&fit=crop" alt="Indian Luxury Bridal Jewelry" className="absolute inset-0 w-full h-full object-cover opacity-60" />
-          <div className="absolute inset-0 bg-black/30"></div>
-          <div className="relative z-10 text-center text-white px-4 fade-in-up">
-            <p className="text-xs md:text-sm font-sans tracking-[0.3em] uppercase mb-6 text-ameio-gold">Est. 2026</p>
-            <h1 className="text-5xl md:text-7xl font-serif font-medium mb-8 leading-tight">Adorn Your <br /> Heritage.</h1>
-            <button className="bg-white text-ameio-charcoal px-10 py-4 uppercase tracking-widest text-xs font-bold hover:bg-ameio-gold hover:text-white transition-all duration-300">Explore The Shaadi Edit</button>
-          </div>
-        </section>
+  </div>
+</section>
 
-        {/* Grid */}
-        <section className="max-w-7xl mx-auto px-6 py-24">
-          <div className="flex justify-between items-end mb-12">
-            <h2 className="text-3xl font-serif text-ameio-charcoal">The Festive Edit</h2>
-            <a href="#" className="text-xs font-sans uppercase tracking-widest border-b border-ameio-charcoal pb-1 hover:text-ameio-gold transition-colors">View All</a>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <ProductCard title="The Rajwada Polki Set" price="₹ 3,50,000" tag="Bridal" imageMain="https://images.unsplash.com/photo-1599643478518-17488fbbcd75?auto=format&fit=crop&q=80&w=800" />
-            <ProductCard title="Diamond & Pearl Jhumkas" price="₹ 85,000" imageMain="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=800" />
-            <ProductCard title="22K Heritage Bangles" price="₹ 1,20,000" tag="Best Seller" imageMain="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=800" />
-            <ProductCard title="Modern Solitaire Mangalsutra" price="₹ 65,000" imageMain="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=800" />
-          </div>
-        </section>
+<section class="section" style="background:#f6f6f6;text-align:center;">
+  <h2 style="font-family:'Playfair Display',serif;">The AMEIO Story</h2>
+  <p style="max-width:600px;margin:auto;">
+    Every piece we create blends craftsmanship, emotion, and design.
+    Jewellery is not decoration — it is memory you can wear.
+  </p>
+</section>
 
-        {/* Form */}
-        <BespokeForm />
-        
-        {/* Footer */}
-        <footer className="bg-ameio-charcoal text-white py-16 text-center border-t-4 border-ameio-gold">
-          <h2 className="font-serif text-2xl mb-8 tracking-widest">AMEIO</h2>
-          <p className="text-gray-400 text-xs tracking-widest uppercase mb-4">Crafted in India, Loved Globally.</p>
-          <p className="text-gray-600 text-xs tracking-widest uppercase">© 2026 Ameio Jewells. All Rights Reserved.</p>
-        </footer>
-      </main>
-    );
+<section class="section" style="text-align:center;">
+  <h2 style="font-family:'Playfair Display',serif;">Your Cart</h2>
+  <div id="cart"></div>
+  <p id="total"></p>
+</section>
 
-    // Render
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
-  </script>
+<footer>
+  © 2026 AMEIO Jewells — All rights reserved
+</footer>
+
+<script>
+let cart=[];
+
+function add(name,price){
+  cart.push({name,price});
+  render();
+}
+
+function render(){
+  let html='';
+  let total=0;
+  cart.forEach(i=>{
+    html+=`<p>${i.name} - ₹${i.price}</p>`;
+    total+=i.price;
+  });
+  document.getElementById('cart').innerHTML=html;
+  document.getElementById('total').innerHTML='Total: ₹'+total;
+}
+</script>
+
 </body>
 </html>
